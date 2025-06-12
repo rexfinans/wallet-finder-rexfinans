@@ -128,11 +128,32 @@
     }
 
     @media (max-width: 480px) {
+      body {
+        padding: 0 0.5rem;
+      }
       h1 {
         font-size: 1.4rem;
       }
+      .packages {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
       .modal {
         padding: 1.2rem;
+        max-width: 95%;
+      }
+      .modal input[type="file"] {
+        font-size: 1rem;
+        padding: 0.7rem;
+      }
+      .modal button {
+        min-width: 140px;
+        padding: 0.8rem 1.5rem;
+        margin: 0.5rem 0.2rem;
+      }
+      .modal-bg {
+        padding: 0.5rem;
+        align-items: flex-start;
+        overflow-y: auto;
       }
     }
   </style>
@@ -169,13 +190,14 @@
     <p id="modalText"></p>
     <input type="file" id="receipt" accept=".jpg,.png,.pdf" />
     <button id="paymentDone">Ödemeyi Yaptım</button>
-<button onclick="window.location.href='dashboard.html'">Siteye Geri Dön</button>
+    <button onclick="window.location.href='dashboard.html'">Siteye Geri Dön</button>
+  </div>
+</div>
 
 <script>
   const modalBg = document.getElementById('modalBg');
   const modalText = document.getElementById('modalText');
   const paymentDone = document.getElementById('paymentDone');
-  const backSite = document.getElementById('backSite');
 
   document.querySelectorAll('.buy-btn').forEach(button => {
     button.addEventListener('click', () => {
@@ -209,7 +231,6 @@ Açıklama (Mutlaka Ekleyiniz):   904126059
     window.open('https://t.me/rexfinans', '_blank');
   };
 
-  backSite.onclick = () => modalBg.style.display = 'none';
   modalBg.onclick = (e) => {
     if (e.target === modalBg) modalBg.style.display = 'none';
   };
