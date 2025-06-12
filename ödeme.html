@@ -83,6 +83,7 @@
       align-items: center;
       z-index: 1000;
       padding: 1rem;
+      overflow-y: auto; /* EKLENDİ */
     }
     .modal {
       background: #2c2e4b;
@@ -92,6 +93,8 @@
       width: 100%;
       box-shadow: 0 8px 20px rgba(162, 119, 255, 0.6);
       text-align: center;
+      max-height: 90vh; /* EKLENDİ */
+      overflow-y: auto; /* EKLENDİ */
     }
     .modal h2 {
       color: #a277ff;
@@ -187,9 +190,7 @@
 <div class="modal-bg" id="modalBg">
   <div class="modal" id="modal">
     <h2>Satın Alma Bilgisi</h2>
-
-    <p id="modalPackageName" style="color:#a277ff; font-weight:bold; margin-bottom:0.3rem;"></p>
-    <p id="modalPackagePrice" style="color:#a277ff; font-weight:bold; margin-bottom:1rem;"></p>
+    <div id="packageInfo"></div>
 
     <label>IBAN:</label>
     <textarea readonly rows="1" onclick="this.select()">TR230001002271762072685090</textarea>
@@ -200,9 +201,7 @@
     <label>Açıklama (Mutlaka Ekleyiniz):</label>
     <textarea readonly rows="1" onclick="this.select()">904126059</textarea>
 
-    <p style="margin-top:1rem; white-space: pre-line;">
-      Ödemeyi Yaptıktan Sonra Dekontunuzu yükleyin.
-    </p>
+    <p style="margin-top:1rem;">Ödemeyi Yaptıktan Sonra Dekontunuzu yükleyin.</p>
 
     <input type="file" id="receipt" accept=".jpg,.png,.pdf" />
     <button id="paymentDone">Ödemeyi Yaptım</button>
@@ -212,8 +211,10 @@
 
 <script>
   const modalBg = document.getElementById('modalBg');
+  const modal = document.getElementById('modal');
   const paymentDone = document.getElementById('paymentDone');
   const backSite = document.getElementById('backSite');
+  const packageInfo = document.getElementById('packageInfo');
 
   document.querySelectorAll('.buy-btn').forEach(button => {
     button.addEventListener('click', () => {
@@ -221,12 +222,12 @@
       const packageName = card.getAttribute('data-package');
       const price = card.getAttribute('data-price');
 
-      // Eğer Telegram butonundaysa modal açma
       if (!packageName || !price) return;
 
-      document.getElementById('modalPackageName').textContent = `Paket Adı: ${packageName}`;
-      document.getElementById('modalPackagePrice').textContent = `Fiyat: ${price}`;
-
+      packageInfo.innerHTML = `
+        <p style="color:#d3b4ff;"><strong>Paket Adı:</strong> ${packageName}</p>
+        <p style="color:#d3b4ff;"><strong>Fiyat:</strong> ${price}</p>
+      `;
       modalBg.style.display = 'flex';
     });
   });
@@ -251,4 +252,3 @@
 
 </body>
 </html>
-
