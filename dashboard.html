@@ -514,8 +514,8 @@ historyBtn.onclick = async () => {
   </style>
 </head>
 <body>
-<!-- HTML içindeki Profil kısmı örneği -->
-<div id="userProfile" class="profile-container" style="display:none;">
+<!-- Profil HTML kısmı -->
+<div id="userProfile" class="profile-container" style="display:none; border:1px solid #ccc; padding:10px; max-width:400px;">
   <h2>Profil Bilgileri</h2>
   <p><strong>Email:</strong> <span id="profileEmail"></span></p>
   <p><strong>Kayıt Tarihi:</strong> <span id="profileJoinDate"></span></p>
@@ -534,7 +534,7 @@ historyBtn.onclick = async () => {
   import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
-  // Firebase config
+  // Firebase yapılandırman
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -553,7 +553,7 @@ historyBtn.onclick = async () => {
 
   let currentUserId = null;
 
-  // Kullanıcı oturumunu dinle
+  // Oturum durumunu dinle
   onAuthStateChanged(auth, user => {
     if (user) {
       currentUserId = user.uid;
@@ -564,7 +564,6 @@ historyBtn.onclick = async () => {
     }
   });
 
-  // Profil yükleme fonksiyonu
   async function loadUserProfile(userId) {
     try {
       const userDoc = await getDoc(doc(db, "users", userId));
@@ -574,23 +573,35 @@ historyBtn.onclick = async () => {
       }
       const userData = userDoc.data();
 
-      // Kayıt tarihini Firestore Timestamp objesinden stringe çevir
+      // Kayıt tarihini formatla
       const regDate = userData.registeredAt ? userData.registeredAt.toDate().toLocaleString() : "Bilinmiyor";
 
-      const withdrawalsQuery = query(collection(db, "withdrawals"), where("userId", "==", userId));
-      const withdrawalsSnapshot = await getDocs(withdrawalsQuery);
-
+      // Kullanıcı bilgilerini DOM'a yaz
       document.getElementById("profileEmail").textContent = userData.email || "Bilinmiyor";
       document.getElementById("profileJoinDate").textContent = regDate;
+
+      // Çekim geçmişini çek
+      const withdrawalsQuery = query(collection(db, "withdrawals"), where("userId", "==", userId));
+      const withdrawalsSnapshot = await getDocs(withdrawalsQuery);
 
       const withdrawalList = document.getElementById("withdrawalList");
       withdrawalList.innerHTML = "";
 
       withdrawalsSnapshot.forEach(docSnap => {
         const w = docSnap.data();
+        let dateStr = "Tarih yok";
+
+        if (w.time) {
+          if (w.time.seconds) {
+            dateStr = new Date(w.time.seconds * 1000).toLocaleString();
+          } else if (w.time.toDate) {
+            dateStr = w.time.toDate().toLocaleString();
+          }
+        }
+
+        const amountStr = w.amount ? w.amount.toFixed(4) : "0.0000";
         const item = document.createElement("li");
-        const dateStr = w.time ? new Date(w.time.seconds * 1000).toLocaleString() : "Tarih yok";
-        item.textContent = `${w.amount.toFixed(4)} USDT - ${dateStr}`;
+        item.textContent = `${amountStr} USDT - ${dateStr}`;
         withdrawalList.appendChild(item);
       });
 
@@ -601,7 +612,6 @@ historyBtn.onclick = async () => {
     }
   }
 
-  // Profil butonu tıklaması
   document.getElementById("profileBtn").addEventListener("click", () => {
     if (!currentUserId) {
       alert("Lütfen giriş yapınız.");
@@ -610,7 +620,6 @@ historyBtn.onclick = async () => {
     loadUserProfile(currentUserId);
   });
 
-  // Profil kapatma butonu tıklaması
   document.getElementById("closeProfileBtn").addEventListener("click", () => {
     document.getElementById("userProfile").style.display = "none";
   });
