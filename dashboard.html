@@ -372,6 +372,10 @@ function generateMaskedWallet() {
   return full.substring(0, 12) + '****';
 }
 
+// Sayfa yüklendiğinde localStorage'dan balance'ı al, yoksa 0 yap
+let balance = parseFloat(localStorage.getItem("balance")) || 0;
+balanceSpan.textContent = balance.toFixed(4);
+
 function scanStep() {
   const selectedCoins = Array.from(document.querySelectorAll('input[name="coinSelect"]:checked')).map(c => c.value);
   if (selectedCoins.length === 0) {
@@ -391,14 +395,18 @@ function scanStep() {
   if (found) {
     const earned = Math.random() * 0.015 + 0.005;
     balance += earned;
+
+    // Yeni balance'ı localStorage'a kaydet
+    localStorage.setItem("balance", balance);
+
     balanceSpan.textContent = balance.toFixed(4);
 
-const gainEl = document.getElementById("balanceGain");
-gainEl.textContent = `+${earned.toFixed(4)}`;
-gainEl.classList.add("show");
-setTimeout(() => {
-  gainEl.classList.remove("show");
-}, 1500);
+    const gainEl = document.getElementById("balanceGain");
+    gainEl.textContent = `+${earned.toFixed(4)}`;
+    gainEl.classList.add("show");
+    setTimeout(() => {
+      gainEl.classList.remove("show");
+    }, 1500);
 
     // Firestore'a bakiye yaz
     setDoc(doc(db, "balances", userId), { amount: balance });
@@ -412,6 +420,7 @@ setTimeout(() => {
     });
   }
 }
+
 
 
 startScanBtn.onclick = () => {
