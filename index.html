@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<script
- async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7880815739817256"
-     crossorigin="anonymous"></script>
-<!-- 🌐 Link Önizleme (Open Graph) -->
-<meta property="og:title" content="Wallet Finder | RexFinans">
-<meta property="og:description" content="Cüzdan Adreslerini Taramak ve Bakiye Görüntülemek İçin Akıllı Kripto Aracı">
-<meta property="og:image" content="https://walletfinderrex.site/width_800.jpg">
-<meta property="og:url" content="https://walletfinderrex.site">
-<meta property="og:type" content="website">
-
-<!-- 🐦 Twitter Kartı -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wallet Finder | RexFinans">
-<meta name="twitter:description" content="Kripto Cüzdan Tarayıcı Aracı – RexFinans altyapılı.">
-<meta name="twitter:image" content="https://walletfinderrex.site/width_800.jpg">
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>REXFINANS - Giriş</title>
+  <meta property="og:title" content="Wallet Finder | RexFinans">
+  <meta property="og:description" content="Cüzdan Adreslerini Taramak ve Bakiye Görüntülemek İçin Akıllı Kripto Aracı">
+  <meta property="og:image" content="https://walletfinderrex.site/width_800.jpg">
+  <meta property="og:url" content="https://walletfinderrex.site">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wallet Finder | RexFinans">
+  <meta name="twitter:description" content="Kripto Cüzdan Tarayıcı Aracı – RexFinans altyapılı.">
+  <meta name="twitter:image" content="https://walletfinderrex.site/width_800.jpg">
   <style>
     body {
       margin: 0;
@@ -33,44 +26,38 @@
       padding: 20px;
     }
 
-    /* Logo animasyonu için yanıp sönme (blink) */
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .header-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 40px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-
     .logo {
-      font-size: 2.4rem;
+      font-size: 2.8rem;
       font-weight: bold;
       color: #00e5ff;
-      text-shadow: 0 0 8px #00e5ff, 0 0 15px #00e5ff, 0 0 20px #00e5ff;
-      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
       animation: blink 1.5s infinite;
     }
 
-    .title {
-      font-size: 1.9rem;
-      font-weight: 700;
-      color: #00e5ff;
-      text-shadow: 0 0 6px #00e5ff;
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
     }
 
-    .description {
-      font-size: 1.1rem;
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .highlight-box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 10px;
       text-align: center;
       max-width: 600px;
-      margin-bottom: 30px;
-      padding: 0 10px;
+    }
+
+    .highlight-box p {
+      font-size: 1rem;
+      color: #ddd;
+      line-height: 1.5;
     }
 
     input, button {
@@ -82,17 +69,16 @@
       border-radius: 8px;
       font-size: 15px;
       outline: none;
-      box-sizing: border-box;
     }
 
     input {
-      border: 1px solid #ccc;
       background: #ffffff22;
+      border: 1px solid #ccc;
       color: white;
     }
 
     input::placeholder {
-      color: #ddd;
+      color: #ccc;
     }
 
     button {
@@ -101,7 +87,6 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s;
-      user-select: none;
     }
 
     button:hover {
@@ -113,9 +98,30 @@
       min-height: 24px;
       text-align: center;
       color: yellow;
-      padding: 0 10px;
-      word-break: break-word;
-      max-width: 90vw;
+    }
+
+    .feature-list {
+      margin-top: 30px;
+      max-width: 700px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .feature-list h3 {
+      color: #00e5ff;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-list ul {
+      padding-left: 20px;
+    }
+
+    .feature-list li {
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 6px;
     }
 
     .telegram-btn {
@@ -128,167 +134,228 @@
       border-radius: 8px;
       cursor: pointer;
       border: none;
-      transition: background 0.3s;
-      user-select: none;
     }
 
     .telegram-btn:hover {
       background: #006699;
     }
+  </style>
+</head>
+<body>
+  <div class="logo">REXFINANS</div>
+  <div class="title">WALLET FINDER</div>
 
-    nav {
-      margin-top: 30px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+  <div class="highlight-box">
+    <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br>
+    Gelişmiş tarama algoritmalarımızla yüzlerce blockchain ağında cüzdanları analiz ederek aktif bakiyeleri tespit ediyoruz. Size sadece çekmek kalıyor.</p>
+  </div>
+<div class="auth-container">
+  <div class="tabs">
+    <button id="loginTab" class="active" onclick="showForm('login')">Giriş Yap</button>
+    <button id="registerTab" onclick="showForm('register')">Kayıt Ol</button>
+  </div>
+
+  <form id="loginForm">
+    <input id="loginEmail" type="email" placeholder="E-posta adresiniz" required />
+    <input id="loginPassword" type="password" placeholder="Şifreniz" required />
+    <button type="button" onclick="login()">Giriş Yap</button>
+  </form>
+
+  <form id="registerForm" style="display:none;">
+    <input id="registerEmail" type="email" placeholder="E-posta adresiniz" required />
+    <input id="registerPassword" type="password" placeholder="Şifreniz" required />
+    <button type="button" onclick="register()">Kayıt Ol</button>
+  </form>
+
+  <div id="message"></div>
+</div>
+
+<script>
+  function showForm(form) {
+    if (form === 'login') {
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('loginTab').classList.add('active');
+      document.getElementById('registerTab').classList.remove('active');
+      document.getElementById('message').textContent = '';
+    } else {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
+      document.getElementById('loginTab').classList.remove('active');
+      document.getElementById('registerTab').classList.add('active');
+      document.getElementById('message').textContent = '';
+    }
+  }
+
+  // login() ve register() fonksiyonlarını burada çağırabilirsin (Firebase bağlantılı)
+</script>
+
+<style>
+  .auth-container {
+    max-width: 320px;
+    margin: auto;
+    text-align: center;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .tabs button {
+    flex: 1;
+    padding: 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+    background: #222;
+    color: #aaa;
+    border: none;
+    outline: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .tabs button.active {
+    background: #00bcd4;
+    color: white;
+    box-shadow: 0 0 8px #00bcd4;
+  }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+  }
+  button[type="button"] {
+    width: 100%;
+    background-color: #00bcd4;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button[type="button"]:hover {
+    background-color: #0097a7;
+  }
+  #message {
+    margin-top: 10px;
+    min-height: 24px;
+    color: yellow;
+  }
+</style>
+
+
+  <div class="feature-list">
+    <h3>🚀 Özellikler</h3>
+    <ul>
+      <li>🌐 Çoklu zincir desteği: BTC, ETH, BNB, TRX, SOL ve daha fazlası</li>
+      <li>🔐 Premium kullanıcılar için yüksek hızlı tarama</li>
+      <li>💼 Bakiye yönetimi ve cüzdandan doğrudan çekim</li>
+      <li>📈 Otomatik tarama ve geçmiş görüntüleme</li>
+      <li>🛡️ Gizlilik ve güvenlik odaklı sistem altyapısı</li>
+    </ul>
+  </div>
+
+  <button class="telegram-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">📲 Telegram Destek</button>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wallet Finder REXFİNANS - Bilgilendirme</title>
+  <style>
+    body {
+      background: #0f111a;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
-    nav a {
-      color: #00e5ff;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    section.accordion-section {
-      max-width: 800px;
-      width: 100%;
-      padding: 10px 20px;
-      margin: 20px auto;
+    .info-section {
       background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
+      padding: 30px 20px;
+      margin: 30px 0;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
       box-sizing: border-box;
     }
 
-    .accordion-header {
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
       color: #00e5ff;
-      font-size: 1.5rem;
-      font-weight: 700;
-      cursor: pointer;
-      user-select: none;
-      padding: 10px 0;
-      position: relative;
-      transition: color 0.3s;
+      border-left: 5px solid #00e5ff;
+      padding-left: 10px;
     }
 
-    .accordion-header::after {
-      content: '▼';
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1rem;
-      transition: transform 0.3s;
+    .info-list {
+      padding-left: 25px;
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.8;
     }
 
-    .accordion-header.active::after {
-      transform: translateY(-50%) rotate(180deg);
-    }
-
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-      padding: 0 0;
+    .info-text {
+      font-size: 1.1rem;
       color: #ccc;
-      font-size: 1rem;
-      line-height: 1.6;
-      user-select: text;
+      line-height: 1.7;
     }
 
-    .accordion-content.open {
-      padding: 10px 0;
-      max-height: 1000px; /* büyük bir değer, yeterli */
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .logo {
-        font-size: 2rem;
+    @media (max-width: 600px) {
+      .section-title {
+        font-size: 1.4rem;
       }
 
-      .title {
-        font-size: 1.5rem;
-      }
-
-      input, button, .telegram-btn {
-        width: 90vw;
-      }
-
-      nav {
-        gap: 15px;
-      }
-
-      .accordion-header {
-        font-size: 1.2rem;
+      .info-list,
+      .info-text {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- NASIL ÇALIŞIR -->
+    <section class="info-section">
+      <h2 class="section-title">🚀 NASIL ÇALIŞIR?</h2>
+      <ol class="info-list">
+        <li>🔐 Sisteme giriş yap veya şifre ile Premium erişim sağla.</li>
+        <li>🧠 Otomatik tarama başlatarak milyonlarca cüzdan ifadesini kontrol et.</li>
+        <li>💰 Bakiye bulunan cüzdanları şifreli ve güvenli şekilde görüntüle.</li>
+        <li>📤 USDT, TRX veya BNB olarak cüzdanına çekim talebinde bulun.</li>
+        <li>📊 Her tarama sayısı ve başarı oranı senin kontrolünde!</li>
+      </ol>
+    </section>
 
-  <div class="header-container">
-    <div class="logo">REXFINANS</div>
-    <div class="title">WALLET FINDER TARAMA</div>
-  </div>
-
-  <div class="description">Hemen Kayıt Ol Kayıp Kripto Cüzdanlarını Taramaya Başla Bulduğun Bakiyeleri Borsa Veya CÜZDAN Adresine Çek!</div>
-
-  <input id="email" type="email" placeholder="E-posta adresiniz" />
-  <input id="password" type="password" placeholder="Şifreniz" />
-  <button onclick="login()">Giriş Yap</button>
-  <button onclick="register()">Kayıt Ol</button>
-
-  <div id="message"></div>
-
-  <button class="telegram-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">📲 Telegram Destek</button>
-
-  <nav>
-    <a onclick="scrollToSection('how')">Nasıl Çalışır</a>
-    <a onclick="scrollToSection('about')">Hakkımızda</a>
-  </nav>
-
-  <section id="how" class="accordion-section">
-    <h2 class="accordion-header" onclick="toggleAccordion('how-content', this)">❓ NASIL ÇALIŞIYOR</h2>
-    <div id="how-content" class="accordion-content">
-      <p>
-        Uygulamamız unutulmuş, giriş yapılmayan anımsatıcı ifadeleri tarar. Daha sonra bu ifadeler farklı blok zincirlerde kontrol edilir ve size sunulur.
+    <!-- HAKKINDA -->
+    <section class="info-section">
+      <h2 class="section-title">ℹ️ HAKKINDA</h2>
+      <p class="info-text">
+        Wallet Finder REXFİNANS, blockchain üzerindeki açık cüzdan ifadelerini tarayarak kullanıcıların erişmediği bakiyeleri tespit eden bir teknolojik kripto analiz panelidir.
         <br><br>
-        Anımsatıcı bir ifadeyle, BTC, ETH, SOL, BNB, TRX gibi herhangi bir blockchain cüzdanına erişebilirsiniz. Örneğin: uygulama 1 BTC içeren bir anımsatıcı ifade buldu.
+        Gelişmiş sistemimiz, BNB, TRX, ETH, SOL gibi zincirlerde eşleşen mnemonic ifadeleri kontrol eder. Sistem yalnızca analiz yapar, hiçbir özel veri tutulmaz.
         <br><br>
-        Bu ifadeyi TRUST WALLET, MetaMask veya BitGet gibi cüzdanlarla çekebilirsiniz.
+        Firebase altyapısı ile %100 güvenli bir yapı sunar. Kayıtlar ve oturumlar şifrelenmiş şekilde saklanır. Premium kullanıcılar daha fazla cüzdan ve daha hızlı tarama imkanına sahiptir.
         <br><br>
-        Anımsatıcı ifade belirli bir cüzdanı değil, paraları içerir. 1 ifade birçok zincirde coin içerebilir. Tüm coinleri USDT’ye çevirip Binance gibi platformlara çekebilirsiniz.
+        Amacımız, kayıp veya unutulmuş varlıkların tekrar kullanıcıya kazandırılmasıdır. Kripto dünyasında fark yaratmak için buradayız.
       </p>
-    </div>
-  </section>
+    </section>
+  </div>
+</body>
+</html>
 
-  <section id="about" class="accordion-section">
-    <h2 class="accordion-header" onclick="toggleAccordion('about-content', this)">ℹ️ HAKKIMIZDA</h2>
-    <div id="about-content" class="accordion-content">
-      <p>REXFINANS olarak, kripto para dünyasındaki kullanıcı deneyimini en üst seviyeye taşımayı hedefleyen yenilikçi bir teknoloji firmasıyız. Blockchain teknolojilerinin sunduğu sonsuz fırsatları herkes için erişilebilir ve güvenilir hale getirmek için çalışıyoruz. Kripto varlıklarınızın değerini korumanız ve artırmanız için en gelişmiş tarama ve yönetim araçlarını geliştirmekteyiz.
-
-Unutulmuş veya erişimi zor olan kripto cüzdanlarını keşfetmek, bu varlıkları güvenle yönetmek ve hızlıca işlem yapabilmek, kripto ekosisteminde önemli bir ihtiyaçtır. İşte biz tam da bu noktada devreye giriyoruz. Geliştirdiğimiz Wallet Finder teknolojisi ile çeşitli blok zincirlerdeki anımsatıcı ifadeleri tarayarak kullanıcılarımıza, kaybolmuş varlıklarını yeniden kazandırıyoruz.
-
-Güvenlik ve gizlilik ilkelerimizden asla taviz vermeden, kullanıcılarımızın kişisel ve finansal bilgilerini korumayı en öncelikli görevimiz olarak görüyoruz. Aynı zamanda, platformumuzda sunduğumuz premium hizmetlerle daha kapsamlı ve hızlı tarama seçenekleri sağlıyor, kullanıcı deneyimini maksimum seviyeye çıkarmayı amaçlıyoruz.
-
-REXFINANS, sürekli gelişen kripto dünyasında kullanıcıların yanında olmayı ve onların finansal özgürlüklerini desteklemeyi misyon edinmiştir. Kripto yatırımlarınızı güvenle büyütmeniz için teknolojimizi ve hizmetlerimizi sürekli yeniliyor, alanında uzman ekibimizle size en iyi çözümleri sunuyoruz.
-
-Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.</p>
-    </div>
-  </section>
-
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
@@ -307,13 +374,11 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       const message = document.getElementById('message');
-
       if (!email || !password) {
         message.style.color = "yellow";
         message.textContent = "E-posta ve şifre giriniz.";
         return;
       }
-
       auth.signInWithEmailAndPassword(email, password)
         .then(() => {
           message.style.color = "lime";
@@ -330,18 +395,14 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       const message = document.getElementById('message');
-
       if (!email || !password) {
         message.style.color = "yellow";
         message.textContent = "E-posta ve şifre giriniz.";
         return;
       }
-
       try {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
-
-        // Firestore users koleksiyonuna kullanıcı bilgilerini ekle
         await db.collection("users").doc(user.uid).set({
           email: email,
           role: "user",
@@ -351,7 +412,6 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
           lastLogin: null,
           note: ""
         });
-
         message.style.color = "lime";
         message.textContent = "Kayıt başarılı! Giriş yapabilirsiniz.";
       } catch (err) {
@@ -359,31 +419,10 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
         message.textContent = err.message;
       }
     }
-
-    function scrollToSection(id) {
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-
-    function toggleAccordion(id, header) {
-      const content = document.getElementById(id);
-      if (!content) return;
-
-      const isOpen = content.classList.contains('open');
-      if (isOpen) {
-        content.classList.remove('open');
-        header.classList.remove('active');
-      } else {
-        content.classList.add('open');
-        header.classList.add('active');
-      }
-    }
   </script>
-
 </body>
 </html>
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
