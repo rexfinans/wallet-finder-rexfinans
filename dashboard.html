@@ -1,4 +1,4 @@
- </st<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7880815739817256"
@@ -37,7 +37,6 @@
   cursor: pointer;
 }
 
-
 #balanceContainer {
   position: relative;
   display: inline-block;
@@ -65,16 +64,16 @@
   transform: translateY(-20px);
 }
 
-  body {
-    background: #181a29;
-    color: #eee;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    text-align: center;
-  }
-  header {
-    margin-bottom: 30px;
-  }
+body {
+  background: #181a29;
+  color: #eee;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+header {
+  margin-bottom: 30px;
+}
 header h1.blinking-title {
   font-weight: 900;
   font-size: 3rem;
@@ -105,95 +104,153 @@ header h1.blinking-title {
   }
 }
 
+button, select, input {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+}
+button {
+  background: #7a5ef0;
+  color: white;
+  cursor: pointer;
+}
+button:disabled {
+  background: #444;
+  cursor: default;
+}
+#coinContainer {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+label {
+  user-select: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #444;
+  color: #ccc;
+}
+input[type=checkbox] {
+  display: none;
+}
+input[type=checkbox]:checked + label {
+  background: #1abc9c;
+  color: white;
+  box-shadow: 0 0 8px #1abc9c;
+}
+input.locked + label {
+  cursor: not-allowed;
+  background: #222 !important;
+  color: #666 !important;
+  position: relative;
+}
+input.locked + label::after {
+  content: "\1F512";
+  position: absolute;
+  right: 6px;
+  top: 6px;
+}
+#scanOutput {
+  background: #222;
+  color: #1abc9c;
+  margin: 15px auto;
+  max-width: 600px;
+  height: 180px;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: left;
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+#withdrawSection {
+  margin-top: 25px;
+}
+#withdrawMessage {
+  margin-top: 8px;
+  height: 40px;
+  font-weight: bold;
+  color: #ff5555;
+  white-space: pre-line;
+}
+#unlockSection {
+  margin-bottom: 20px;
+}
+#passwordInput {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  width: 180px;
+  margin-right: 8px;
+}
+#getPasswordBtn {
+  background: #16a085;
+  color: white;
+}
+
+/* --- Mobil uyumluluk için ek CSS --- */
+@media (max-width: 480px) {
+  .profile-container {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    width: 90% !important;
+    max-width: 350px !important;
+    padding: 15px !important;
+    box-sizing: border-box;
+  }
+
+  header h1.blinking-title {
+    font-size: 2rem !important;
+    padding: 0 10px;
+  }
+
   button, select, input {
-    padding: 10px;
-    margin: 8px;
-    border-radius: 5px;
-    border: none;
-    font-weight: bold;
+    width: 100% !important;
+    margin: 8px 0 !important;
+    font-size: 16px !important;
   }
-  button {
-    background: #7a5ef0;
-    color: white;
-    cursor: pointer;
-  }
-  button:disabled {
-    background: #444;
-    cursor: default;
-  }
+
   #coinContainer {
-    margin: 20px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 15px 0 !important;
   }
+
   label {
-    user-select: none;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #444;
-    color: #ccc;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
   }
-  input[type=checkbox] {
-    display: none;
-  }
-  input[type=checkbox]:checked + label {
-    background: #1abc9c;
-    color: white;
-    box-shadow: 0 0 8px #1abc9c;
-  }
-  input.locked + label {
-    cursor: not-allowed;
-    background: #222 !important;
-    color: #666 !important;
-    position: relative;
-  }
-  input.locked + label::after {
-    content: "\1F512";
-    position: absolute;
-    right: 6px;
-    top: 6px;
-  }
+
   #scanOutput {
-    background: #222;
-    color: #1abc9c;
-    margin: 15px auto;
-    max-width: 600px;
-    height: 180px;
-    overflow-y: auto;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: left;
-    white-space: pre-wrap;
-    font-family: monospace;
+    max-width: 100% !important;
+    height: 150px !important;
+    font-size: 14px !important;
+    padding: 10px !important;
   }
-  #withdrawSection {
-    margin-top: 25px;
-  }
-  #withdrawMessage {
-    margin-top: 8px;
-    height: 40px;
-    font-weight: bold;
-    color: #ff5555;
-    white-space: pre-line;
-  }
-  #unlockSection {
-    margin-bottom: 20px;
-  }
+
   #passwordInput {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    font-weight: bold;
-    width: 180px;
-    margin-right: 8px;
+    width: 100% !important;
+    margin: 0 0 12px 0 !important;
   }
+
   #getPasswordBtn {
-    background: #16a085;
-    color: white;
+    width: 100% !important;
+    padding: 12px 0 !important;
   }
+
+  #withdrawMessage {
+    font-size: 14px !important;
+  }
+}
 </style>
 
 </head>
@@ -202,6 +259,11 @@ header h1.blinking-title {
 <header>
   <h1 class="blinking-title">WALLET FİNDER REXFİNANS</h1>
 </header>
+
+<!-- Buraya sayfanın diğer içerikleri gelecek -->
+
+</body>
+</html>
 
 
 <div id="unlockSection">
@@ -514,19 +576,108 @@ historyBtn.onclick = async () => {
   </style>
 </head>
 <body>
-<!-- HTML içindeki Profil kısmı örneği -->
+
+<!-- Profil Kısmı HTML -->
 <div id="userProfile" class="profile-container" style="display:none;">
-  <h2>Profil Bilgileri</h2>
+  <h2>PROFİL BİLGİLERİ</h2>
   <p><strong>Email:</strong> <span id="profileEmail"></span></p>
   <p><strong>Kayıt Tarihi:</strong> <span id="profileJoinDate"></span></p>
 
-  <h3>Çekim Geçmişi</h3>
+  <h3>ÇEKİM GEÇMİŞİ</h3>
   <ul id="withdrawalList"></ul>
 
-  <button id="closeProfileBtn">Kapat</button>
+  <button id="closeProfileBtn" class="btn">Kapat</button>
 </div>
 
-<button id="profileBtn">Profilim</button>
+<button id="profileBtn" class="btn profile-btn">Profilim</button>
+
+<style>
+  /* Temel stil */
+  .profile-container {
+    max-width: 400px;
+    margin: 20px auto;
+    background: #1e1e2f;
+    color: #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .profile-container h2,
+  .profile-container h3 {
+    text-transform: uppercase;
+    border-bottom: 2px solid #00bfa6;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+
+  .profile-container p {
+    font-size: 16px;
+    margin: 8px 0;
+    word-wrap: break-word;
+  }
+
+  #withdrawalList {
+    list-style: none;
+    padding-left: 0;
+    max-height: 180px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+
+  #withdrawalList li {
+    background: #292a3a;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  /* Buton stili */
+  .btn {
+    background-color: #00bfa6;
+    border: none;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #008e75;
+  }
+
+  /* Profilim butonu */
+  .profile-btn {
+    display: block;
+    margin: 0 auto 30px auto;
+    font-size: 18px;
+    max-width: 140px;
+  }
+
+  /* Mobil uyumlu */
+  @media (max-width: 480px) {
+    .profile-container {
+      width: 90%;
+      padding: 15px;
+    }
+
+    .profile-container p, 
+    #withdrawalList li {
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      font-size: 16px;
+      padding: 12px 0;
+    }
+  }
+</style>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
@@ -534,7 +685,6 @@ historyBtn.onclick = async () => {
   import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
-  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -545,7 +695,6 @@ historyBtn.onclick = async () => {
     measurementId: "G-B8D9V0V9XE"
   };
 
-  // Firebase başlatma
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const db = getFirestore(app);
@@ -553,7 +702,6 @@ historyBtn.onclick = async () => {
 
   let currentUserId = null;
 
-  // Kullanıcı oturumunu dinle
   onAuthStateChanged(auth, user => {
     if (user) {
       currentUserId = user.uid;
@@ -564,7 +712,6 @@ historyBtn.onclick = async () => {
     }
   });
 
-  // Profil yükleme fonksiyonu
   async function loadUserProfile(userId) {
     try {
       const userDoc = await getDoc(doc(db, "users", userId));
@@ -598,7 +745,6 @@ historyBtn.onclick = async () => {
     }
   }
 
-  // Profil butonu tıklaması
   document.getElementById("profileBtn").addEventListener("click", () => {
     if (!currentUserId) {
       alert("Lütfen giriş yapınız.");
@@ -607,7 +753,6 @@ historyBtn.onclick = async () => {
     loadUserProfile(currentUserId);
   });
 
-  // Profil kapatma butonu
   document.getElementById("closeProfileBtn").addEventListener("click", () => {
     document.getElementById("userProfile").style.display = "none";
   });
