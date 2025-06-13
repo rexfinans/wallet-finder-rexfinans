@@ -389,31 +389,25 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mobil Uyumlu Küçük Çekim Bildirimleri & Kripto Analiz</title>
+<title>Anlık Çekim Bildirimleri</title>
 <style>
-  /* Genel body stili */
   body {
     margin: 0;
     background: #181a29;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #eee;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
-
-  /* Çekim bildirim kutusu */
   #withdrawal-notifier {
     position: fixed;
     bottom: 12px;
     right: 12px;
-    width: 280px;
+    width: 260px;
     max-width: 90vw;
-    background: rgba(24, 26, 41, 0.95);
-    border-radius: 12px;
+    background: rgba(24, 26, 41, 0.9);
+    border-radius: 10px;
     box-shadow: 0 0 10px #4c7efb;
-    padding: 10px 15px;
-    overflow: hidden;
-    height: 38px;
+    padding: 8px 15px;
+    height: 36px;
     display: flex;
     align-items: center;
     font-weight: 600;
@@ -421,212 +415,26 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
     color: #a0b9ff;
     user-select: none;
     z-index: 9999;
-    pointer-events: none; /* Tıklanamaz yap */
+    overflow: hidden;
   }
-
   .username {
     color: #7ea9ff;
     margin-right: 6px;
     font-weight: 700;
     white-space: nowrap;
   }
-
   .amount {
     color: #a4c8ff;
     margin-right: 6px;
     font-weight: 700;
-  }
-
-  .action {
-    color: #c4d7ff;
-  }
-
-  .fade-slide {
-    animation: fadeSlide 3s ease forwards;
-  }
-
-  @keyframes fadeSlide {
-    0% {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    10% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    90% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-  }
-
-  /* Kripto analiz bölümü */
-  #crypto-analysis {
-    max-width: 900px;
-    margin: 40px auto;
-    background: rgba(255 255 255 / 0.05);
-    border-radius: 10px;
-    padding: 20px;
-    color: #00e5ff;
-    font-family: monospace;
-    box-sizing: border-box;
-  }
-
-  #crypto-analysis h2 {
-    text-align: center;
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 1.6rem;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #00e5ff;
-    table-layout: fixed;
-  }
-
-  thead th {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #00e5ff;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  thead th:nth-child(n+2) {
-    text-align: right;
-  }
-
-  tbody td {
-    padding: 8px;
-    font-size: 0.85rem;
-    word-wrap: break-word;
-  }
-
-  tbody td:nth-child(n+2) {
-    text-align: right;
-  }
-
-  tbody td:last-child {
-    text-align: center;
-    padding: 8px 5px;
-  }
-
-  /* Sparkline canvas küçültüldü */
-  canvas {
-    max-width: 100%;
-    height: 30px !important;
-  }
-
-  /* Mobilde tabloyu yatay kaydırılabilir yap */
-  @media (max-width: 768px) {
-    #crypto-analysis {
-      margin: 20px 10px;
-      padding: 15px;
-      font-size: 0.85rem;
-    }
-    #crypto-analysis table {
-      display: block;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      white-space: nowrap;
-    }
-    thead, tbody, tr, th, td {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    thead tr {
-      display: block;
-    }
-    tbody tr {
-      display: inline-block;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.2);
-      margin-right: 10px;
-      white-space: normal;
-      vertical-align: top;
-    }
-    thead th {
-      padding: 6px 10px;
-      font-size: 0.8rem;
-    }
-    tbody td {
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      text-align: left !important;
-      display: block;
-    }
-    tbody td:last-child {
-      text-align: center !important;
-    }
-  }
-
-  /* Mobilde çekim bildirim kutusunu optimize et */
-  @media (max-width: 480px) {
-    #withdrawal-notifier {
-      width: 90vw;
-      font-size: 13px;
-      height: 35px;
-      bottom: 10px;
-      right: 5vw;
-      padding: 8px 12px;
-      box-shadow: 0 0 8px #4c7efb;
-    }
-  }
-</style>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mobil Uyumlu Küçük Çekim Bildirimleri</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #181a29;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #eee;
-  }
-  #withdrawal-notifier {
-    position: fixed;
-    bottom: 12px;
-    right: 12px;
-    width: 280px;
-    max-width: 90vw;
-    background: rgba(24, 26, 41, 0.95);
-    border-radius: 12px;
-    box-shadow: 0 0 10px #4c7efb;
-    padding: 10px 15px;
-    overflow: hidden;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    font-size: 14px;
-    color: #a0b9ff;
-    user-select: none;
-    z-index: 9999;
-  }
-  .username {
-    color: #7ea9ff;
-    margin-right: 6px;
-    font-weight: 700;
-  }
-  .amount {
-    color: #a4c8ff;
-    margin-right: 6px;
-    font-weight: 700;
+    white-space: nowrap;
   }
   .action {
     color: #c4d7ff;
+    white-space: nowrap;
   }
+
+  /* Animasyon */
   .fade-slide {
     animation: fadeSlide 3s ease forwards;
   }
@@ -654,77 +462,11 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
     #withdrawal-notifier {
       width: 90vw;
       font-size: 13px;
-      height: 35px;
+      height: 32px;
       bottom: 10px;
       right: 5vw;
-      padding: 8px 12px;
+      padding: 6px 12px;
       box-shadow: 0 0 8px #4c7efb;
-    }
-  }
-
-  /* Crypto Analiz Bölümü */
-  #crypto-analysis {
-    max-width: 900px;
-    margin: 40px auto;
-    background: rgba(255 255 255 / 0.05);
-    border-radius: 10px;
-    padding: 20px;
-    color: #00e5ff;
-    font-family: monospace;
-  }
-
-  #crypto-analysis h2 {
-    text-align: center;
-    margin-bottom: 15px;
-    font-weight: 700;
-  }
-
-  #crypto-analysis table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #00e5ff;
-    table-layout: fixed;
-  }
-
-  #crypto-analysis thead th {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #00e5ff;
-  }
-
-  #crypto-analysis tbody td {
-    padding: 8px;
-  }
-
-  #crypto-analysis thead th:nth-child(n+2),
-  #crypto-analysis tbody td:nth-child(n+2) {
-    text-align: right;
-  }
-
-  #crypto-analysis thead th:last-child,
-  #crypto-analysis tbody td:last-child {
-    text-align: center;
-  }
-
-  /* Mobilde tabloya yatay kaydırma ekle */
-  @media (max-width: 600px) {
-    #crypto-analysis {
-      padding: 10px;
-      margin: 20px 10px;
-    }
-    #crypto-analysis table {
-      display: block;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    #crypto-analysis thead, #crypto-analysis tbody, #crypto-analysis tr, #crypto-analysis th, #crypto-analysis td {
-      display: table;
-      width: auto;
-      min-width: 100px;
-    }
-    #crypto-analysis thead th, #crypto-analysis tbody td {
-      padding: 6px 8px;
-      font-size: 12px;
     }
   }
 </style>
@@ -759,7 +501,7 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
 
     const message = document.createElement('div');
     message.className = 'fade-slide';
-    message.innerHTML = `<span class="username">${username}</span><span class="amount">${amount} USDT</span><span class="action">çekim YAPTI</span>`;
+    message.innerHTML = `<span class="username">${username}</span><span class="amount">${amount} USDT</span><span class="action">çekim yaptı</span>`;
 
     container.appendChild(message);
 
@@ -770,110 +512,6 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
 
   setInterval(showMessage, 2500);
   showMessage();
-</script>
-
-<section id="crypto-analysis">
-  <h2>ANLIK KRİPTO ANALİZ EKRANI</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Coin</th>
-        <th>Fiyat (USD)</th>
-        <th>24s Değişim</th>
-        <th>Hacim</th>
-        <th>Son 7 Gün Grafik</th>
-      </tr>
-    </thead>
-    <tbody id="crypto-data">
-      <tr><td colspan="5" style="text-align:center;">Yükleniyor...</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<script>
-function drawSparkline(canvas, data, color) {
-  if (!canvas.getContext) return;
-  const ctx = canvas.getContext('2d');
-  const w = canvas.width;
-  const h = canvas.height;
-  ctx.clearRect(0, 0, w, h);
-
-  const max = Math.max(...data);
-  const min = Math.min(...data);
-  const len = data.length;
-
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-
-  data.forEach((val, i) => {
-    const x = (i / (len - 1)) * w;
-    const y = h - ((val - min) / (max - min || 1)) * h;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-
-  ctx.stroke();
-}
-
-async function fetchCryptoData() {
-  const coins = [
-    'bitcoin','ethereum','binancecoin','ripple','cardano',
-    'solana','polkadot','dogecoin','avalanche-2','tron',
-    'litecoin','chainlink','stellar','vechain','uniswap'
-  ];
-
-  const marketsUrl = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coins.join(',')}&order=market_cap_desc&per_page=15&page=1&sparkline=false`;
-
-  const tbody = document.getElementById('crypto-data');
-  tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Yükleniyor...</td></tr>`;
-
-  try {
-    const res = await fetch(marketsUrl);
-    const data = await res.json();
-
-    tbody.innerHTML = '';
-
-    for (const coin of data) {
-      const chartUrl = `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=usd&days=7&interval=daily`;
-      let chartData = [];
-      try {
-        const chartRes = await fetch(chartUrl);
-        const chartJson = await chartRes.json();
-        chartData = chartJson.prices.map(p => p[1]);
-      } catch {
-        chartData = [];
-      }
-
-      const price = coin.current_price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-      const change = coin.price_change_percentage_24h?.toFixed(2) ?? '0.00';
-      const volume = coin.total_volume.toLocaleString();
-      const color = change >= 0 ? '#4caf50' : '#f44336';
-
-      tbody.innerHTML += `
-        <tr>
-          <td>${coin.name} (${coin.symbol.toUpperCase()})</td>
-          <td style="text-align:right;">${price}</td>
-          <td style="text-align:right; color:${color};">${change}%</td>
-          <td style="text-align:right;">${volume}</td>
-          <td style="text-align:center;">
-            <canvas width="100" height="30" id="sparkline-${coin.id}"></canvas>
-          </td>
-        </tr>
-      `;
-
-      setTimeout(() => {
-        const canvas = document.getElementById(`sparkline-${coin.id}`);
-        if (canvas && chartData.length) drawSparkline(canvas, chartData, color);
-      }, 100);
-    }
-  } catch (error) {
-    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Veri alınamadı.</td></tr>`;
-  }
-}
-
-fetchCryptoData();
-setInterval(fetchCryptoData, 120000);
 </script>
 
 </body>
