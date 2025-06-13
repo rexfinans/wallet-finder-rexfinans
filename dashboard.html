@@ -514,14 +514,11 @@ historyBtn.onclick = async () => {
   </style>
 </head>
 <body>
-<!-- Profil HTML kısmı -->
-<div id="userProfile" class="profile-container" style="display:none; border:1px solid #ccc; padding:10px; max-width:400px;">
+<!-- Profil kısmı -->
+<div id="userProfile" style="display:none; border:1px solid #ccc; padding:10px; max-width:400px;">
   <h2>Profil Bilgileri</h2>
   <p><strong>Email:</strong> <span id="profileEmail"></span></p>
   <p><strong>Kayıt Tarihi:</strong> <span id="profileJoinDate"></span></p>
-
-  <h3>Çekim Geçmişi</h3>
-  <ul id="withdrawalList"></ul>
 
   <button id="closeProfileBtn">Kapat</button>
 </div>
@@ -530,10 +527,10 @@ historyBtn.onclick = async () => {
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
-  import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
+  // Firebase yapılandırma bilgilerin
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -544,68 +541,55 @@ historyBtn.onclick = async () => {
     measurementId: "G-B8D9V0V9XE"
   };
 
+  // Firebase başlat
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
   const db = getFirestore(app);
   const auth = getAuth(app);
 
   let currentUserId = null;
 
+  // Kullanıcı oturum durumunu dinle
   onAuthStateChanged(auth, user => {
     if (user) {
       currentUserId = user.uid;
-      console.log("Giriş yapan kullanıcı:", currentUserId);
+      console.log("Giriş yapan kullanıcı UID:", currentUserId);
     } else {
       currentUserId = null;
       console.log("Kullanıcı çıkış yaptı");
+      document.getElementById("userProfile").style.display = "none";
     }
   });
 
+  // Profil verisini Firestore'dan çek ve ekrana yaz
   async function loadUserProfile(userId) {
     try {
-      const userDoc = await getDoc(doc(db, "users", userId));
-      if (!userDoc.exists()) {
-        alert("Kullanıcı bilgisi bulunamadı.");
+      const userDocRef = doc(db, "users", userId);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) {
+        alert("Kullanıcı bulunamadı.");
         return;
       }
-      const userData = userDoc.data();
 
+      const userData = userDocSnap.data();
+
+      // Kayıt tarihini biçimlendir
       const regDate = userData.registeredAt ? userData.registeredAt.toDate().toLocaleString() : "Bilinmiyor";
 
+      // Profil bilgilerini DOM'a yaz
       document.getElementById("profileEmail").textContent = userData.email || "Bilinmiyor";
       document.getElementById("profileJoinDate").textContent = regDate;
 
-      const withdrawalsQuery = query(collection(db, "withdrawals"), where("userId", "==", userId));
-      const withdrawalsSnapshot = await getDocs(withdrawalsQuery);
-
-      const withdrawalList = document.getElementById("withdrawalList");
-      withdrawalList.innerHTML = "";
-
-      withdrawalsSnapshot.forEach(docSnap => {
-        const w = docSnap.data();
-        let dateStr = "Tarih yok";
-
-        if (w.time) {
-          if (w.time.seconds) {
-            dateStr = new Date(w.time.seconds * 1000).toLocaleString();
-          } else if (w.time.toDate) {
-            dateStr = w.time.toDate().toLocaleString();
-          }
-        }
-
-        const amountStr = w.amount ? w.amount.toFixed(4) : "0.0000";
-        const item = document.createElement("li");
-        item.textContent = `${amountStr} USDT - ${dateStr}`;
-        withdrawalList.appendChild(item);
-      });
-
+      // Profil bölümünü göster
       document.getElementById("userProfile").style.display = "block";
+
     } catch (error) {
-      console.error("Profil yükleme hatası:", error);
+      console.error("Profil yüklenirken hata:", error);
       alert("Profil yüklenirken hata oluştu.");
     }
   }
 
+  // Profil butonuna tıklandığında
   document.getElementById("profileBtn").addEventListener("click", () => {
     if (!currentUserId) {
       alert("Lütfen giriş yapınız.");
@@ -614,6 +598,7 @@ historyBtn.onclick = async () => {
     loadUserProfile(currentUserId);
   });
 
+  // Profil kapatma butonu
   document.getElementById("closeProfileBtn").addEventListener("click", () => {
     document.getElementById("userProfile").style.display = "none";
   });
