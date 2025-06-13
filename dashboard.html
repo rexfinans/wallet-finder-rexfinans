@@ -372,7 +372,6 @@ function generateMaskedWallet() {
   return full.substring(0, 12) + '****';
 }
 
-// Sayfa yüklendiğinde localStorage'dan balance'ı al, yoksa 0 yap
 let balance = parseFloat(localStorage.getItem("balance")) || 0;
 balanceSpan.textContent = balance.toFixed(4);
 
@@ -420,8 +419,6 @@ function scanStep() {
     });
   }
 }
-
-
 
 startScanBtn.onclick = () => {
   const speed = parseInt(speedSelect.value);
