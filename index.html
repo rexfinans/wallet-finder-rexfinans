@@ -472,6 +472,76 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
 </style>
 </head>
 <body>
+<style>
+  #withdrawal-notifier {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    width: 260px;
+    max-width: 90vw;
+    background: rgba(24, 26, 41, 0.95); /* Projenin koyu arka planı */
+    border-radius: 10px;
+    box-shadow: 0 0 12px #4c7efb; /* Projenin mavi vurgu rengi */
+    padding: 8px 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #a0b9ff; /* Projenin açık mavi yazı rengi */
+    display: flex;
+    align-items: center;
+    user-select: none;
+    overflow: hidden;
+    z-index: 9999;
+    pointer-events: none; /* Bildirimin üzerine tıklanmasını engeller */
+  }
+  #withdrawal-notifier div {
+    white-space: nowrap;
+    display: inline-block;
+    animation: slideFade 4s ease forwards;
+  }
+  .username {
+    color: #7ea9ff; /* Kullanıcı adı mavimsi */
+    margin-right: 6px;
+    font-weight: 700;
+  }
+  .amount {
+    color: #a4c8ff;
+    margin-right: 6px;
+    font-weight: 700;
+  }
+  .action {
+    color: #c4d7ff;
+  }
+  @keyframes slideFade {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    10% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    90% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+  /* Mobil uyumluluk */
+  @media (max-width: 480px) {
+    #withdrawal-notifier {
+      width: 90vw;
+      font-size: 12px;
+      bottom: 8px;
+      right: 5vw;
+      padding: 6px 10px;
+      box-shadow: 0 0 8px #4c7efb;
+    }
+  }
+</style>
 
 <div id="withdrawal-notifier" aria-live="polite" aria-atomic="true" role="alert" aria-label="Anlık Çekim Bildirimleri"></div>
 
@@ -500,19 +570,18 @@ Bizimle birlikte kripto dünyasında yeni fırsatları keşfetmeye hazır olun!.
     const amount = generateAmount();
 
     const message = document.createElement('div');
-    message.className = 'fade-slide';
+    message.textContent = '';
     message.innerHTML = `<span class="username">${username}</span><span class="amount">${amount} USDT</span><span class="action">çekim yaptı</span>`;
 
     container.appendChild(message);
 
+    // 4 saniye sonra sil
     setTimeout(() => {
       container.removeChild(message);
-    }, 3000);
+    }, 4000);
   }
 
-  setInterval(showMessage, 2500);
+  // 3 saniyede bir yeni mesaj göster
+  setInterval(showMessage, 3000);
   showMessage();
 </script>
-
-</body>
-</html>
