@@ -324,9 +324,11 @@
 </body>
 </html>
 
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
@@ -345,11 +347,13 @@
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       const message = document.getElementById('message');
+
       if (!email || !password) {
         message.style.color = "yellow";
         message.textContent = "E-posta ve şifre giriniz.";
         return;
       }
+
       auth.signInWithEmailAndPassword(email, password)
         .then(() => {
           message.style.color = "lime";
@@ -366,14 +370,18 @@
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       const message = document.getElementById('message');
+
       if (!email || !password) {
         message.style.color = "yellow";
         message.textContent = "E-posta ve şifre giriniz.";
         return;
       }
+
       try {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
+
+        // Firestore users koleksiyonuna kullanıcı bilgilerini ekle
         await db.collection("users").doc(user.uid).set({
           email: email,
           role: "user",
@@ -383,16 +391,14 @@
           lastLogin: null,
           note: ""
         });
+
         message.style.color = "lime";
         message.textContent = "Kayıt başarılı! Giriş yapabilirsiniz.";
-      } catch (err) {
+      } catch (err) {Add commentMore actions
         message.style.color = "red";
         message.textContent = err.message;
       }
     }
-  </script>
-</body>
-</html>
 
 <!DOCTYPE html>
 <html lang="tr">
