@@ -534,7 +534,6 @@ historyBtn.onclick = async () => {
   import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
-  // Firebase yapılandırman
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -545,7 +544,6 @@ historyBtn.onclick = async () => {
     measurementId: "G-B8D9V0V9XE"
   };
 
-  // Firebase başlatma
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const db = getFirestore(app);
@@ -553,7 +551,6 @@ historyBtn.onclick = async () => {
 
   let currentUserId = null;
 
-  // Oturum durumunu dinle
   onAuthStateChanged(auth, user => {
     if (user) {
       currentUserId = user.uid;
@@ -573,14 +570,11 @@ historyBtn.onclick = async () => {
       }
       const userData = userDoc.data();
 
-      // Kayıt tarihini formatla
       const regDate = userData.registeredAt ? userData.registeredAt.toDate().toLocaleString() : "Bilinmiyor";
 
-      // Kullanıcı bilgilerini DOM'a yaz
       document.getElementById("profileEmail").textContent = userData.email || "Bilinmiyor";
       document.getElementById("profileJoinDate").textContent = regDate;
 
-      // Çekim geçmişini çek
       const withdrawalsQuery = query(collection(db, "withdrawals"), where("userId", "==", userId));
       const withdrawalsSnapshot = await getDocs(withdrawalsQuery);
 
@@ -624,3 +618,4 @@ historyBtn.onclick = async () => {
     document.getElementById("userProfile").style.display = "none";
   });
 </script>
+
