@@ -574,11 +574,14 @@ historyBtn.onclick = async () => {
       }
       const userData = userDoc.data();
 
+      // Kayıt tarihini Firestore Timestamp objesinden stringe çevir
+      const regDate = userData.registeredAt ? userData.registeredAt.toDate().toLocaleString() : "Bilinmiyor";
+
       const withdrawalsQuery = query(collection(db, "withdrawals"), where("userId", "==", userId));
       const withdrawalsSnapshot = await getDocs(withdrawalsQuery);
 
       document.getElementById("profileEmail").textContent = userData.email || "Bilinmiyor";
-      document.getElementById("profileJoinDate").textContent = userData.registerDate || "Bilinmiyor";
+      document.getElementById("profileJoinDate").textContent = regDate;
 
       const withdrawalList = document.getElementById("withdrawalList");
       withdrawalList.innerHTML = "";
@@ -586,7 +589,7 @@ historyBtn.onclick = async () => {
       withdrawalsSnapshot.forEach(docSnap => {
         const w = docSnap.data();
         const item = document.createElement("li");
-        const dateStr = new Date(w.time).toLocaleString();
+        const dateStr = w.time ? new Date(w.time.seconds * 1000).toLocaleString() : "Tarih yok";
         item.textContent = `${w.amount.toFixed(4)} USDT - ${dateStr}`;
         withdrawalList.appendChild(item);
       });
@@ -607,7 +610,7 @@ historyBtn.onclick = async () => {
     loadUserProfile(currentUserId);
   });
 
-  // Profil kapatma butonu
+  // Profil kapatma butonu tıklaması
   document.getElementById("closeProfileBtn").addEventListener("click", () => {
     document.getElementById("userProfile").style.display = "none";
   });
