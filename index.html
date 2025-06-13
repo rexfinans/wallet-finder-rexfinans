@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>REXFINANS - Giriş</title>
-  <meta property="og:title" content="Wallet Finder | RexFinans">
-  <meta property="og:description" content="Cüzdan Adreslerini Taramak ve Bakiye Görüntülemek İçin Akıllı Kripto Aracı">
-  <meta property="og:image" content="https://walletfinderrex.site/width_800.jpg">
-  <meta property="og:url" content="https://walletfinderrex.site">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Wallet Finder | RexFinans">
-  <meta name="twitter:description" content="Kripto Cüzdan Tarayıcı Aracı – RexFinans altyapılı.">
-  <meta name="twitter:image" content="https://walletfinderrex.site/width_800.jpg">
+  <meta property="og:title" content="Wallet Finder | RexFinans" />
+  <meta property="og:description" content="Cüzdan Adreslerini Taramak ve Bakiye Görüntülemek İçin Akıllı Kripto Aracı" />
+  <meta property="og:image" content="https://walletfinderrex.site/width_800.jpg" />
+  <meta property="og:url" content="https://walletfinderrex.site" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wallet Finder | RexFinans" />
+  <meta name="twitter:description" content="Kripto Cüzdan Tarayıcı Aracı – RexFinans altyapılı." />
+  <meta name="twitter:image" content="https://walletfinderrex.site/width_800.jpg" />
   <style>
+    /* (Önceki CSS aynı şekilde buraya gelecek) */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -25,7 +26,6 @@
       min-height: 100vh;
       padding: 20px;
     }
-
     .logo {
       font-size: 2.8rem;
       font-weight: bold;
@@ -33,18 +33,15 @@
       text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
       animation: blink 1.5s infinite;
     }
-
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.6; }
     }
-
     .title {
       font-size: 2rem;
       font-weight: 600;
       margin-top: 10px;
     }
-
     .highlight-box {
       background: rgba(255, 255, 255, 0.05);
       padding: 15px;
@@ -53,13 +50,11 @@
       text-align: center;
       max-width: 600px;
     }
-
     .highlight-box p {
       font-size: 1rem;
       color: #ddd;
       line-height: 1.5;
     }
-
     input, button {
       margin: 8px;
       padding: 12px 16px;
@@ -70,17 +65,14 @@
       font-size: 15px;
       outline: none;
     }
-
     input {
       background: #ffffff22;
       border: 1px solid #ccc;
       color: white;
     }
-
     input::placeholder {
       color: #ccc;
     }
-
     button {
       background-color: #00bcd4;
       color: white;
@@ -88,18 +80,15 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
     button:hover {
       background-color: #0097a7;
     }
-
     #message {
       margin-top: 10px;
       min-height: 24px;
       text-align: center;
       color: yellow;
     }
-
     .feature-list {
       margin-top: 30px;
       max-width: 700px;
@@ -107,23 +96,19 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
     }
-
     .feature-list h3 {
       color: #00e5ff;
       font-size: 1.4rem;
       margin-bottom: 10px;
     }
-
     .feature-list ul {
       padding-left: 20px;
     }
-
     .feature-list li {
       line-height: 1.6;
       color: #ccc;
       margin-bottom: 6px;
     }
-
     .telegram-btn {
       margin-top: 15px;
       background: #0088cc;
@@ -135,9 +120,56 @@
       cursor: pointer;
       border: none;
     }
-
     .telegram-btn:hover {
       background: #006699;
+    }
+    .auth-container {
+      max-width: 320px;
+      margin: auto;
+      text-align: center;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+    .tabs button {
+      flex: 1;
+      padding: 10px 0;
+      font-weight: bold;
+      cursor: pointer;
+      background: #222;
+      color: #aaa;
+      border: none;
+      outline: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .tabs button.active {
+      background: #00bcd4;
+      color: white;
+      box-shadow: 0 0 8px #00bcd4;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+    button[type="button"] {
+      width: 100%;
+      background-color: #00bcd4;
+      color: white;
+      border-radius: 6px;
+      border: none;
+      padding: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button[type="button"]:hover {
+      background-color: #0097a7;
     }
   </style>
 </head>
@@ -146,106 +178,31 @@
   <div class="title">WALLET FINDER</div>
 
   <div class="highlight-box">
-    <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br>
-    Gelişmiş tarama algoritmalarımızla yüzlerce blockchain ağında cüzdanları analiz ederek aktif bakiyeleri tespit ediyoruz. Size sadece çekmek kalıyor.</p>
-  </div>
-<div class="auth-container">
-  <div class="tabs">
-    <button id="loginTab" class="active" onclick="showForm('login')">Giriş Yap</button>
-    <button id="registerTab" onclick="showForm('register')">Kayıt Ol</button>
+    <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br />
+      Gelişmiş tarama algoritmalarımızla yüzlerce blockchain ağında cüzdanları analiz ederek aktif bakiyeleri tespit ediyoruz. Size sadece çekmek kalıyor.
+    </p>
   </div>
 
-  <form id="loginForm">
-    <input id="loginEmail" type="email" placeholder="E-posta adresiniz" required />
-    <input id="loginPassword" type="password" placeholder="Şifreniz" required />
-    <button type="button" onclick="login()">Giriş Yap</button>
-  </form>
+  <div class="auth-container">
+    <div class="tabs">
+      <button id="loginTab" class="active" onclick="showForm('login')">Giriş Yap</button>
+      <button id="registerTab" onclick="showForm('register')">Kayıt Ol</button>
+    </div>
 
-  <form id="registerForm" style="display:none;">
-    <input id="registerEmail" type="email" placeholder="E-posta adresiniz" required />
-    <input id="registerPassword" type="password" placeholder="Şifreniz" required />
-    <button type="button" onclick="register()">Kayıt Ol</button>
-  </form>
+    <form id="loginForm">
+      <input id="loginEmail" type="email" placeholder="E-posta adresiniz" required />
+      <input id="loginPassword" type="password" placeholder="Şifreniz" required />
+      <button type="button" onclick="login()">Giriş Yap</button>
+    </form>
 
-  <div id="message"></div>
-</div>
+    <form id="registerForm" style="display:none;">
+      <input id="registerEmail" type="email" placeholder="E-posta adresiniz" required />
+      <input id="registerPassword" type="password" placeholder="Şifreniz" required />
+      <button type="button" onclick="register()">Kayıt Ol</button>
+    </form>
 
-<script>
-  function showForm(form) {
-    if (form === 'login') {
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('registerForm').style.display = 'none';
-      document.getElementById('loginTab').classList.add('active');
-      document.getElementById('registerTab').classList.remove('active');
-      document.getElementById('message').textContent = '';
-    } else {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('registerForm').style.display = 'block';
-      document.getElementById('loginTab').classList.remove('active');
-      document.getElementById('registerTab').classList.add('active');
-      document.getElementById('message').textContent = '';
-    }
-  }
-
-  // login() ve register() fonksiyonlarını burada çağırabilirsin (Firebase bağlantılı)
-</script>
-
-<style>
-  .auth-container {
-    max-width: 320px;
-    margin: auto;
-    text-align: center;
-  }
-  .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-  }
-  .tabs button {
-    flex: 1;
-    padding: 10px 0;
-    font-weight: bold;
-    cursor: pointer;
-    background: #222;
-    color: #aaa;
-    border: none;
-    outline: none;
-    transition: background 0.3s, color 0.3s;
-  }
-  .tabs button.active {
-    background: #00bcd4;
-    color: white;
-    box-shadow: 0 0 8px #00bcd4;
-  }
-  input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: none;
-    outline: none;
-  }
-  button[type="button"] {
-    width: 100%;
-    background-color: #00bcd4;
-    color: white;
-    border-radius: 6px;
-    border: none;
-    padding: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  button[type="button"]:hover {
-    background-color: #0097a7;
-  }
-  #message {
-    margin-top: 10px;
-    min-height: 24px;
-    color: yellow;
-  }
-</style>
-
+    <div id="message"></div>
+  </div>
 
   <div class="feature-list">
     <h3>🚀 Özellikler</h3>
@@ -259,70 +216,84 @@
   </div>
 
   <button class="telegram-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">📲 Telegram Destek</button>
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wallet Finder REXFİNANS - Bilgilendirme</title>
-  <style>
-    body {
-      background: #0f111a;
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-    .info-section {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 30px 20px;
-      margin: 30px 0;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
-      box-sizing: border-box;
-    }
+  <script>
+ const firebaseConfig = {
+  apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+  authDomain: "crypto-eccb4.firebaseapp.com",
+  projectId: "crypto-eccb4",
+  storageBucket: "crypto-eccb4.appspot.com",  // BURASI DEĞİŞTİ
+  messagingSenderId: "773649197313",
+  appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
+  measurementId: "G-B8D9V0V9XE"
+};
 
-    .section-title {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: #00e5ff;
-      border-left: 5px solid #00e5ff;
-      padding-left: 10px;
-    }
 
-    .info-list {
-      padding-left: 25px;
-      font-size: 1.1rem;
-      color: #ddd;
-      line-height: 1.8;
-    }
+    // Firebase başlat
+    firebase.initializeApp(firebaseConfig);
 
-    .info-text {
-      font-size: 1.1rem;
-      color: #ccc;
-      line-height: 1.7;
-    }
+    const auth = firebase.auth();
 
-    @media (max-width: 600px) {
-      .section-title {
-        font-size: 1.4rem;
-      }
-
-      .info-list,
-      .info-text {
-        font-size: 1rem;
+    function showForm(form) {
+      if (form === 'login') {
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginTab').classList.add('active');
+        document.getElementById('registerTab').classList.remove('active');
+        document.getElementById('message').textContent = '';
+      } else {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+        document.getElementById('loginTab').classList.remove('active');
+        document.getElementById('registerTab').classList.add('active');
+        document.getElementById('message').textContent = '';
       }
     }
-  </style>
-</head>
-<body>
+
+    // Giriş işlemi
+    function login() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      document.getElementById('message').textContent = 'Giriş yapılıyor...';
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          document.getElementById('message').style.color = 'lightgreen';
+          document.getElementById('message').textContent = 'Giriş başarılı! Yönlendiriliyorsunuz...';
+          // İstersen buraya giriş sonrası yönlendirme ekleyebilirsin:
+          // window.location.href = '/dashboard.html';
+        })
+        .catch((error) => {
+          document.getElementById('message').style.color = 'yellow';
+          document.getElementById('message').textContent = 'Hata: ' + error.message;
+        });
+    }
+
+    // Kayıt işlemi
+    function register() {
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      document.getElementById('message').textContent = 'Kayıt yapılıyor...';
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          document.getElementById('message').style.color = 'lightgreen';
+          document.getElementById('message').textContent = 'Kayıt başarılı! Giriş yapabilirsiniz.';
+          showForm('login');
+        })
+        .catch((error) => {
+          document.getElementById('message').style.color = 'yellow';
+          document.getElementById('message').textContent = 'Hata: ' + error.message;
+        });
+    }
+  </script>
+</body>
+</html>
+
   <div class="container">
     <!-- NASIL ÇALIŞIR -->
     <section class="info-section">
