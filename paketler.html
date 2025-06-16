@@ -5,6 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Premium Paketler - Satın Al</title>
 <style>
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.2rem;
+    max-width: 95%;
+    border-radius: 12px;
+  }
+
+  .modal h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal p {
+    font-size: 0.9rem;
+  }
+
+  .modal label {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .modal textarea,
+  .modal input[type="file"] {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    border-radius: 6px;
+  }
+
+  .modal button {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+    min-width: 100%;
+    margin: 0.4rem 0;
+    border-radius: 10px;
+  }
+
+  #packageInfo p {
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+  }
+}
+
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
   body {
@@ -116,18 +158,20 @@
     padding: 1rem;
     overflow-y: auto;
   }
-  .modal {
-    background: #2c3e50;
-    border-radius: 20px;
-    padding: 2rem 2.5rem;
-    max-width: 420px;
-    width: 100%;
-    box-shadow: 0 8px 25px rgba(26, 188, 156, 0.7);
-    text-align: center;
-    max-height: 90vh;
-    overflow-y: auto;
-    color: #f0f4f8;
-  }
+.modal {
+  background: #2c3e50;
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 25px rgba(26, 188, 156, 0.7);
+  text-align: center;
+  max-height: 95vh;
+  overflow-y: auto;
+  color: #f0f4f8;
+  box-sizing: border-box;
+}
+
   .modal h2 {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -293,6 +337,41 @@
     if (e.target === modalBg) modalBg.style.display = 'none';
   });
 </script>
+<style>
+  /* Diğer tüm CSS kodların burada olacak... */
+
+  /* BURAYA EKLE 👇 */
+  @media (max-width: 480px) {
+    .modal {
+      max-width: 100%;
+      height: auto;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .modal h2 {
+      font-size: 1.2rem;
+    }
+
+    .modal textarea,
+    .modal input {
+      font-size: 0.85rem;
+      padding: 0.5rem;
+    }
+
+    .modal button {
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      min-width: 100%;
+      margin-bottom: 0.6rem;
+    }
+
+    .modal label {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
 </body>
 </html>
 

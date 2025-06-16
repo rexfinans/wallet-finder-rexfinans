@@ -1,0 +1,70 @@
+<!-- bottom-menu.html -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+<style>
+  .bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #181a29;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+    z-index: 1000;
+  }
+
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.3s;
+  }
+
+  .menu-item i {
+    font-size: 20px;
+    background: #292c3e;
+    padding: 10px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    transition: 0.3s;
+  }
+
+  .menu-item:hover,
+  .menu-item.active {
+    color: #fff;
+  }
+
+  .menu-item:hover i,
+  .menu-item.active i {
+    background: #00c6ff;
+    color: #fff;
+  }
+
+  /* İçerik menünün üstüne gelmesin diye alt boşluk ekleniyor */
+  body {
+    padding-bottom: 100px; /* Menü yüksekliği kadar boşluk */
+  }
+</style>
+
+<div class="bottom-menu">
+  <a href="dashboard.html" class="menu-item" id="menu-home">
+    <i class="bi bi-house-door-fill"></i>
+    Ana Sayfa
+  </a>
+  <a href="paketler.html" class="menu-item" id="menu-paketler">
+    <i class="bi bi-box-seam"></i>
+    Paketler
+  </a>
+  <a href="para-cek.html" class="menu-item" id="menu-para">
+    <i class="bi bi-cash-stack"></i>
+    Para Çek
+  </a>
+  <a href="profilim.html" class="menu-item" id="menu-profil">
+    <i class="bi bi-person-circle"></i>
+    Profilim
+  </a>
+</div>
