@@ -1,274 +1,319 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Premium Paket Satın Al</title>
-  <style>
-    body {
-      background: #181a29;
-      color: #eee;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-    h1 {
-      text-align: center;
-      color: #a277ff;
-      margin-top: 2rem;
-      font-size: 1.8rem;
-    }
-    .packages {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-      width: 100%;
-      max-width: 1000px;
-      margin-top: 2rem;
-      margin-bottom: 4rem;
-    }
-    .package-card {
-      background: #22243d;
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-      transition: transform 0.2s ease;
-    }
-    .package-card:hover {
-      transform: translateY(-5px);
-    }
-    .package-title {
-      font-size: 1.2rem;
-      color: #d6b8ff;
-      margin-bottom: 0.5rem;
-    }
-    .package-desc {
-      font-size: 0.95rem;
-      color: #bbb;
-      margin-bottom: 1rem;
-    }
-    .package-price {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #a277ff;
-      margin-bottom: 1.2rem;
-    }
-    .buy-btn {
-      background: #7a5ef0;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .buy-btn:hover {
-      background: #945ef0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Premium Paketler - Satın Al</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-    /* Modal */
-    .modal-bg {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 1rem;
-      overflow-y: auto; /* EKLENDİ */
-    }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    color: #f0f4f8;
+  }
+
+  .container {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 0 10px #1abc9caa;
+    letter-spacing: 2px;
+  }
+
+  .packages {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .package-card {
+    background: #1f3a4ddd;
+    border-radius: 18px;
+    padding: 1.7rem 2rem;
+    box-shadow: 0 10px 25px rgba(28, 188, 156, 0.5);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    user-select: none;
+    transition: border-color 0.3s ease;
+  }
+  .package-card:hover {
+    border-color: #16a085;
+  }
+
+  .package-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1abc9c;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .package-title span.emoji {
+    font-size: 1.8rem;
+  }
+
+  .package-desc {
+    font-size: 1.05rem;
+    color: #a3d9ccdd;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .package-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #16a085;
+  }
+
+  button.buy-btn {
+    margin-top: 1.3rem;
+    width: 100%;
+    background: linear-gradient(135deg, #16a085, #1abc9c);
+    border: none;
+    padding: 0.95rem 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px #16a085bb;
+    user-select: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button.buy-btn:hover {
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+  }
+
+  /* Modal */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  .modal {
+    background: #2c3e50;
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 8px 25px rgba(26, 188, 156, 0.7);
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #f0f4f8;
+  }
+  .modal h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #1abc9c;
+  }
+  .modal p {
+    font-size: 1rem;
+    margin-bottom: 1.4rem;
+    white-space: pre-line;
+    color: #b0d7ce;
+  }
+  .modal textarea {
+    width: 100%;
+    background: #1f3a4d;
+    color: #a3d9cc;
+    border: 1px solid #16a085;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-family: monospace;
+    font-size: 1rem;
+    resize: none;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+  }
+  .modal textarea:focus {
+    outline: none;
+    border-color: #1abc9c;
+    background: #155a48;
+  }
+  .modal input[type="file"] {
+    margin-bottom: 1.4rem;
+    background: #1f3a4d;
+    color: #a3d9cc;
+    border: 1px solid #16a085;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .modal button {
+    background: #16a085;
+    border: none;
+    padding: 0.8rem 1.7rem;
+    border-radius: 14px;
+    color: white;
+    font-weight: 700;
+    margin: 0 0.3rem 0.6rem;
+    cursor: pointer;
+    min-width: 140px;
+    transition: background 0.3s ease;
+  }
+  .modal button:hover {
+    background: #1abc9c;
+  }
+  .modal label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #16a085;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 450px) {
     .modal {
-      background: #2c2e4b;
-      border-radius: 12px;
-      padding: 2rem;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 8px 20px rgba(162, 119, 255, 0.6);
-      text-align: center;
-      max-height: 90vh; /* EKLENDİ */
-      overflow-y: auto; /* EKLENDİ */
-    }
-    .modal h2 {
-      color: #a277ff;
-      margin-top: 0;
-    }
-    .modal p {
-      white-space: pre-line;
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-      color: #ddd;
-    }
-    .modal input[type="file"] {
-      margin-bottom: 1rem;
-      background: #181a29;
-      color: #ccc;
-      border: 1px solid #444;
-      padding: 0.5rem;
-      width: 100%;
-      border-radius: 8px;
+      padding: 1.5rem 1.8rem;
     }
     .modal button {
-      background: #7a5ef0;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 8px;
-      color: white;
-      font-weight: bold;
-      margin: 0.3rem;
-      cursor: pointer;
-      min-width: 120px;
+      min-width: 100%;
+      margin-bottom: 0.8rem;
     }
-    .modal button:hover {
-      background: #925ef0;
-    }
-    .modal textarea {
-      width: 100%;
-      background: #181a29;
-      color: #ccc;
-      border: 1px solid #444;
-      border-radius: 6px;
-      padding: 0.4rem 0.6rem;
-      font-family: monospace;
-      font-size: 1rem;
-      resize: none;
-      cursor: pointer;
-      margin-bottom: 0.7rem;
-    }
-    .modal label {
-      display: block;
-      text-align: left;
-      font-weight: 600;
-      margin-top: 1rem;
-      color: #a277ff;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.4rem;
-      }
-      .modal {
-        padding: 1.2rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-
-<h1>PREMIUM PAKETLER</h1>
-
-<div class="packages">
-  <div class="package-card" data-package="VIP1" data-price="600 TL">
-    <div class="package-title">VIP1</div>
-    <div class="package-desc">15 kat hızda, 8 farklı blockchain taraması</div>
-    <div class="package-price">600 TL</div>
-    <button class="buy-btn">Satın Al</button>
+  <div class="container">
+    <h1>PREMIUM PAKETLER</h1>
+    <div class="packages">
+      <div class="package-card" data-package="VIP1" data-price="600 TL">
+        <div class="package-title"><span class="emoji">⚡️</span> VIP1</div>
+        <div class="package-desc">15 kat hızda, 8 farklı blockchain taramasıyla fırsatı kaçırmayın! 🚀</div>
+        <div class="package-price">600 TL</div>
+        <button class="buy-btn">Satın Al</button>
+      </div>
+      <div class="package-card" data-package="VIP2" data-price="899 TL">
+        <div class="package-title"><span class="emoji">🔥</span> VIP2</div>
+        <div class="package-desc">30 kat hız, 12 blockchain ağında üst düzey tarama! 💎</div>
+        <div class="package-price">899 TL</div>
+        <button class="buy-btn">Satın Al</button>
+      </div>
+      <div class="package-card" data-package="CUSTOM" data-price="İletişime Geçiniz">
+        <div class="package-title"><span class="emoji">💬</span> İNDİRİMLİ FİYAT İÇİN</div>
+        <div class="package-desc">Size özel kampanyalar için hemen iletişim kurun! 📲</div>
+        <div class="package-price">İletişime Geçiniz</div>
+        <button class="buy-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">Telegram</button>
+      </div>
+    </div>
   </div>
-  <div class="package-card" data-package="VIP2" data-price="899 TL">
-    <div class="package-title">VIP2</div>
-    <div class="package-desc">30 kat hızda, 12 farklı blockchain taraması</div>
-    <div class="package-price">899 TL</div>
-    <button class="buy-btn">Satın Al</button>
+
+  <!-- Modal -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" id="modal">
+      <h2>Satın Alma Bilgisi</h2>
+      <div id="packageInfo"></div>
+
+      <label for="iban">IBAN:</label>
+      <textarea id="iban" readonly rows="1" onclick="this.select()">TR230001002271762072685090</textarea>
+
+      <label for="accountHolder">Hesap Sahibi:</label>
+      <textarea id="accountHolder" readonly rows="1" onclick="this.select()">Paladyum Elektronik Para ve Ödeme Hizmetleri A.Ş.</textarea>
+
+      <label for="desc">Açıklama (Mutlaka Ekleyiniz):</label>
+      <textarea id="desc" readonly rows="1" onclick="this.select()">904126059</textarea>
+
+      <p>Ödemeyi yaptıktan sonra dekontunuzu yükleyin.</p>
+
+      <input type="file" id="receipt" accept=".jpg,.png,.pdf" />
+      <button id="paymentDone">Ödemeyi Yaptım</button>
+      <button id="closeModal">Kapat</button>
+    </div>
   </div>
-  <div class="package-card">
-    <div class="package-title">İNDİRİMLİ FİYAT İÇİN</div>
-    <div class="package-desc">Size özel teklifler ve fiyatlar için</div>
-    <div class="package-price">İletişime Geçiniz</div>
-    <button class="buy-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">Telegram</button>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal" id="modal">
-    <h2>Satın Alma Bilgisi</h2>
-    <div id="packageInfo"></div>
-
-    <label>IBAN:</label>
-    <textarea readonly rows="1" onclick="this.select()">TR230001002271762072685090</textarea>
-
-    <label>Hesap Sahibi:</label>
-    <textarea readonly rows="1" onclick="this.select()">Paladyum Elektronik Para ve Ödeme Hizmetleri A.Ş.</textarea>
-
-    <label>Açıklama (Mutlaka Ekleyiniz):</label>
-    <textarea readonly rows="1" onclick="this.select()">904126059</textarea>
-
-    <p style="margin-top:1rem;">Ödemeyi Yaptıktan Sonra Dekontunuzu yükleyin.</p>
-
-    <input type="file" id="receipt" accept=".jpg,.png,.pdf" />
-    <button id="paymentDone">Ödemeyi Yaptım</button>
-    <button id="backSite">Siteye Geri Dön</button>
-  </div>
-</div>
 
 <script>
   const modalBg = document.getElementById('modalBg');
   const modal = document.getElementById('modal');
-  const paymentDone = document.getElementById('paymentDone');
-  const backSite = document.getElementById('backSite');
   const packageInfo = document.getElementById('packageInfo');
+  const paymentDone = document.getElementById('paymentDone');
+  const closeModal = document.getElementById('closeModal');
 
-  document.querySelectorAll('.buy-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const card = button.closest('.package-card');
-      const packageName = card.getAttribute('data-package');
+  document.querySelectorAll('.package-card .buy-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const card = e.target.closest('.package-card');
+      const pkg = card.getAttribute('data-package');
       const price = card.getAttribute('data-price');
-
-      if (!packageName || !price) return;
-
+      if (pkg === "CUSTOM") {
+        // Telegram paketi butonu dışa link açıyor, o yüzden modal açma
+        return;
+      }
       packageInfo.innerHTML = `
-        <p style="color:#d3b4ff;"><strong>Paket Adı:</strong> ${packageName}</p>
-        <p style="color:#d3b4ff;"><strong>Fiyat:</strong> ${price}</p>
+        <p><strong style="color:#1abc9c;">Paket Adı:</strong> ${pkg}</p>
+        <p><strong style="color:#1abc9c;">Fiyat:</strong> ${price}</p>
       `;
       modalBg.style.display = 'flex';
     });
   });
 
-  paymentDone.onclick = () => {
+  paymentDone.addEventListener('click', () => {
     const fileInput = document.getElementById('receipt');
     if (!fileInput.files.length) {
       alert('Lütfen dekont dosyanızı yükleyin!');
       return;
     }
-    window.open('https://t.me/rexfinans', '_blank');
-  };
-
-  backSite.onclick = () => {
+    // Buraya ödeme onayı sonrası işlem eklenebilir (örn: dosya yükleme)
+    alert('Ödemeniz için teşekkürler! Yetkililer en kısa sürede sizinle iletişime geçecektir.');
     modalBg.style.display = 'none';
-  };
+  });
 
-  modalBg.onclick = (e) => {
+  closeModal.addEventListener('click', () => {
+    modalBg.style.display = 'none';
+  });
+
+  modalBg.addEventListener('click', e => {
     if (e.target === modalBg) modalBg.style.display = 'none';
-  };
+  });
 </script>
-
 </body>
 </html>
 
-  <!-- Sayfa içeriği burada -->
 
-  <!-- Alt Menü -->
-  <div id="bottomMenu"></div>
+<!-- sayfa içeriğin buraya -->
 
-  <!-- Menü HTML'ini yükle -->
-  <script>
-    fetch("bottom-menu.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bottomMenu").innerHTML = html;
-      });
-  </script>
+<!-- Alt Menü -->
+<div id="bottomMenu"></div>
 
-  <!-- Menü.js en sonda -->
-  <script src="menü.js"></script>
+<!-- Menü HTML'ini yükle -->
+<script>
+  fetch("bottom-menu.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("bottomMenu").innerHTML = html;
+    });
+</script>
+
+<!-- Menü.js en sonda -->
+<script src="menü.js"></script>
+
 </body>
 </html>
 
