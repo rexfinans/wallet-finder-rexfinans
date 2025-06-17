@@ -634,6 +634,34 @@
   };
 
 </script>
+<script type="module">
+  // Firebase modüllerini yükle
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+    authDomain: "crypto-eccb4.firebaseapp.com",
+    projectId: "crypto-eccb4",
+    storageBucket: "crypto-eccb4.firebasestorage.app",
+    messagingSenderId: "773649197313",
+    appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
+    measurementId: "G-B8D9V0V9XE"
+  };
+
+  // Uygulamayı başlat
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Giriş kontrolü
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // Giriş yapılmamışsa giriş sayfasına yönlendir
+      window.location.href = "index.html";
+    }
+  });
+</script>
 
 </body>
 </html>
@@ -660,34 +688,6 @@
       document.getElementById("bottomMenu").innerHTML = html;
     });
 </script>
-
-<!-- Menü.js en sonda -->
-<script src="menü.js"></script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-    authDomain: "crypto-eccb4.firebaseapp.com",
-    projectId: "crypto-eccb4",
-    storageBucket: "crypto-eccb4.firebasestorage.app",
-    messagingSenderId: "773649197313",
-    appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-    measurementId: "G-B8D9V0V9XE"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      // Kullanıcı giriş yapmamışsa index.html'e yönlendir
-      window.location.href = "index.html";
-    }
-  });
-</script>
-
 </body>
 </html>
 
