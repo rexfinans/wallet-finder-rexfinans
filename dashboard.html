@@ -634,12 +634,11 @@
   };
 
 </script>
+
 <script type="module">
-  // Firebase modüllerini yükle
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -650,16 +649,16 @@
     measurementId: "G-B8D9V0V9XE"
   };
 
-  // Uygulamayı başlat
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  // Giriş kontrolü
+  // Kullanıcı kontrolü
   onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      // Giriş yapılmamışsa giriş sayfasına yönlendir
-      window.location.href = "index.html";
-    }
+    setTimeout(() => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    }, 500);
   });
 </script>
 
