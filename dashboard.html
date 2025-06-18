@@ -5,133 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Premium Kilitli Tarama Paneli</title>
   <style>
-
-/* Roket animasyonu kapsayıcısı */
-.rockets-wrapper {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 150px; /* Roketlerin görüneceği yükseklik */
-  pointer-events: none; /* Tıklamalara engel olmasın */
-  user-select: none;
-  z-index: 9999; /* Üstte gözüksün */
-}
-
-/* Tek bir roket için temel stil */
-.rocket {
-  position: absolute;
-  bottom: 0;
-  width: 40px;
-  animation: flyUp 7s linear infinite;
-  filter: drop-shadow(0 0 8px #00bfff);
-  text-align: center;
-}
-
-/* Roket üstündeki yazı */
-.rocket .rex-label {
-  font-weight: 900;
-  color: #00bfff;
-  font-size: 16px;
-  text-shadow: 0 0 8px #00bfff;
-  margin-bottom: 5px;
-}
-
-/* Roketin gövdesi */
-.rocket .rocket-body {
-  width: 18px;
-  height: 60px;
-  background: linear-gradient(135deg, #007acc 0%, #004a99 100%);
-  border-radius: 10px 10px 6px 6px;
-  box-shadow: 0 0 15px #007acc inset;
-  margin: 0 auto;
-  position: relative;
-}
-
-/* Roketin burnu */
-.rocket .rocket-nose {
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 25px solid #007acc;
-  border-radius: 6px;
-  filter: drop-shadow(0 0 5px #00bfff);
-}
-
-/* Pencere */
-.rocket .window {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  background: #8df0ff;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #8df0ff, inset 0 0 5px #66c6ff;
-}
-
-/* Kanatlar */
-.rocket .wing-left, .rocket .wing-right {
-  position: absolute;
-  bottom: 5px;
-  width: 10px;
-  height: 18px;
-  background: linear-gradient(135deg, #004a99 0%, #002f66 100%);
-  border-radius: 3px 0 0 6px;
-  box-shadow: 0 0 5px #003366 inset;
-}
-.rocket .wing-left {
-  left: -10px;
-  transform: rotate(-15deg);
-}
-.rocket .wing-right {
-  right: -10px;
-  border-radius: 0 3px 6px 0;
-  transform: rotate(15deg);
-}
-
-/* Alev efekti */
-.rocket .flame {
-  position: absolute;
-  bottom: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 30px;
-  background: radial-gradient(circle at center, #ff6600 30%, transparent 70%);
-  border-radius: 50% 50% 0 0;
-  filter: drop-shadow(0 0 15px #ff6600);
-  animation: flamePulse 0.4s infinite alternate;
-}
-
-/* Roket uçuş animasyonu */
-@keyframes flyUp {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-110vh) rotate(15deg);
-    opacity: 0;
-  }
-}
-
-@keyframes flamePulse {
-  0% {
-    transform: translateX(-50%) scaleY(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-50%) scaleY(1.4);
-    opacity: 0.7;
-  }
-}
+    @keyframes flamePulse {
+      0% {
+        transform: translateX(-50%) scaleY(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) scaleY(1.4);
+        opacity: 0.7;
+      }
+    }
 
     /* Genel reset ve temel stiller */
     body {
@@ -319,29 +202,6 @@
       text-align: center;
     }
 
-    /* Profil Kısmı */
-    #userProfile {
-      margin: 30px auto 50px;
-      padding: 15px 25px;
-      border-top: 2px solid #444;
-      background-color: #222;
-      color: #eee;
-      border-radius: 8px;
-      max-width: 400px;
-      text-align: left;
-      display: none;
-    }
-    #userProfile h2 {
-      text-transform: uppercase;
-      font-weight: bold;
-      margin-bottom: 15px;
-      color: #00bfff;
-    }
-    #userProfile p {
-      margin: 6px 0;
-      font-size: 1rem;
-    }
-
     /* Responsive input ve buttonlar */
     @media (max-width: 600px) {
       button, select, input[type="password"], input[type="text"], input[type="number"] {
@@ -356,7 +216,7 @@
       #walletCount {
         font-size: 16px;
       }
-      #unlockSection, #userProfile {
+      #unlockSection {
         max-width: 100%;
         padding: 15px;
       }
@@ -364,40 +224,6 @@
   </style>
 </head>
 <body>
-<div class="rockets-wrapper">
-  <div class="rocket" style="left: 10%; animation-delay: 0s;">
-    <div class="rex-label">REX</div>
-    <div class="rocket-nose"></div>
-    <div class="rocket-body">
-      <div class="window"></div>
-      <div class="wing-left"></div>
-      <div class="wing-right"></div>
-    </div>
-    <div class="flame"></div>
-  </div>
-
-  <div class="rocket" style="left: 40%; animation-delay: 2.5s;">
-    <div class="rex-label">REX</div>
-    <div class="rocket-nose"></div>
-    <div class="rocket-body">
-      <div class="window"></div>
-      <div class="wing-left"></div>
-      <div class="wing-right"></div>
-    </div>
-    <div class="flame"></div>
-  </div>
-
-  <div class="rocket" style="left: 70%; animation-delay: 5s;">
-    <div class="rex-label">REX</div>
-    <div class="rocket-nose"></div>
-    <div class="rocket-body">
-      <div class="window"></div>
-      <div class="wing-left"></div>
-      <div class="wing-right"></div>
-    </div>
-    <div class="flame"></div>
-  </div>
-</div>
 
 <header>
   <h1 class="blinking-title">wallet Finder REX🚀</h1>
@@ -437,20 +263,14 @@
   <span id="balanceGain"></span>
 </div>
 
-<!-- PROFİL KISMI -->
-<div id="userProfile">
-  <h2>Profil Bilgileri</h2>
-  <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-  <p><strong>Kayıt Tarihi:</strong> <span id="profileJoinDate"></span></p>
-</div>
-
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
   import {
-    getFirestore, doc, getDoc, updateDoc, serverTimestamp,
-    setDoc
-  } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    getFirestore, doc, getDoc, updateDoc, setDoc, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+  // Firebase yapılandırma
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -462,9 +282,12 @@
   };
 
   const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
   const db = getFirestore(app);
 
   const coins = ["TRX", "USDT", "BTC", "BNB", "ETH", "ADA", "SOL", "DOT", "DOGE", "XRP", "LTC", "AVAX"];
+  const freeCoinsCount = 5;
+
   const coinContainer = document.getElementById('coinContainer');
   const startScanBtn = document.getElementById('startScan');
   const stopScanBtn = document.getElementById('stopScan');
@@ -479,17 +302,10 @@
   let scanInterval = null;
   let balance = 0;
   let premiumUnlocked = false;
-  const freeCoinsCount = 5;
-  let scanCount = 0; // Toplam taranan cüzdan sayacı
+  let scanCount = 0;
+  let userId = null;
 
-  // Kullanıcı ID'si localStorage'dan ya da yeni oluştur
-  let userId = localStorage.getItem("userId");
-  if (!userId) {
-    userId = 'user_' + Math.random().toString(36).substring(2, 10);
-    localStorage.setItem("userId", userId);
-  }
-
-  // Coin checkboxlarını oluştur, premium kilitli coinleri kilitle
+  // Coin checkboxlarını oluştur
   function createCoinCheckboxes() {
     coinContainer.innerHTML = '';
     coins.forEach((coin, idx) => {
@@ -516,65 +332,14 @@
     });
   }
 
-  createCoinCheckboxes();
-
-  // Firebase'den kullanıcının mevcut bakiyesini çek
-  (async () => {
-    const ref = doc(db, "balances", userId);
-    const snap = await getDoc(ref);
-    if (snap.exists()) {
-      balance = snap.data().amount;
-      balanceBelowScan.textContent = balance.toFixed(4);
-    }
-  })();
-
-  unlockBtn.onclick = async () => {
-    const pass = passwordInput.value.trim();
-    if (!pass) return alert("Lütfen şifre girin.");
-
-    try {
-      const passRef = doc(db, "premiumPasswords", pass);
-      const docSnap = await getDoc(passRef);
-
-      if (!docSnap.exists()) {
-        alert("Şifre yanlış veya bulunamadı.");
-        return;
-      }
-
-      const data = docSnap.data();
-
-      if (data.usedBy && data.usedBy !== userId) {
-        alert("Bu şifre başka biri tarafından zaten kullanılmış.");
-        return;
-      }
-
-      if (!data.usedBy) {
-        await updateDoc(passRef, {
-          usedBy: userId,
-          usedAt: serverTimestamp()
-        });
-      }
-
-      premiumUnlocked = true;
-      alert("✅ Premium kilidi açıldı!");
-      speedSelect.disabled = false;
-      createCoinCheckboxes();
-      passwordInput.value = "";
-    } catch (err) {
-      alert("Hata: " + err.message);
-    }
-  };
-
-  getPasswordBtn.onclick = () => {
-    window.open("https://t.me/rexfinans", "_blank");
-  };
-
+  // Maskelenmiş cüzdan üret
   function generateMaskedWallet() {
     const full = crypto.randomUUID().replace(/-/g, '');
     return full.substring(0, 12) + '****';
   }
 
-  function scanStep() {
+  // Tarama adımı
+  async function scanStep() {
     const selectedCoins = Array.from(document.querySelectorAll('input[name="coinSelect"]:checked')).map(c => c.value);
     if (selectedCoins.length === 0) {
       scanOutput.textContent += "\nLütfen en az bir coin seçin.\n";
@@ -606,11 +371,11 @@
         balanceGainEl.textContent = "";
       }, 1500);
 
-      // Firestore'a bakiye yaz
-      setDoc(doc(db, "balances", userId), { amount: balance });
+      // Firestore'a bakiye güncelle
+      await setDoc(doc(db, "balances", userId), { amount: balance });
 
       // Firestore'a geçmişe yaz
-      setDoc(doc(db, "scanLogs", `${userId}_${Date.now()}`), {
+      await setDoc(doc(db, "scanLogs", `${userId}_${Date.now()}`), {
         userId,
         coin: randomCoin,
         amount: earned,
@@ -618,6 +383,77 @@
       });
     }
   }
+
+  // Premium şifre kontrolü
+  async function unlockPremium(password) {
+    if (!password) {
+      alert("Lütfen şifre girin.");
+      return false;
+    }
+    try {
+      const passRef = doc(db, "premiumPasswords", password);
+      const docSnap = await getDoc(passRef);
+      if (!docSnap.exists()) {
+        alert("Şifre yanlış veya bulunamadı.");
+        return false;
+      }
+
+      const data = docSnap.data();
+
+      if (data.usedBy && data.usedBy !== userId) {
+        alert("Bu şifre başka biri tarafından zaten kullanılmış.");
+        return false;
+      }
+
+      if (!data.usedBy) {
+        await updateDoc(passRef, {
+          usedBy: userId,
+          usedAt: serverTimestamp()
+        });
+      }
+
+      premiumUnlocked = true;
+      alert("✅ Premium kilidi açıldı!");
+      speedSelect.disabled = false;
+      createCoinCheckboxes();
+      return true;
+    } catch (err) {
+      alert("Hata: " + err.message);
+      return false;
+    }
+  }
+
+  // Başlangıçta
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      // Kullanıcı yoksa index.html ye yönlendir
+      window.location.href = "index.html";
+      return;
+    }
+
+    userId = user.uid;
+    createCoinCheckboxes();
+
+    // Kullanıcının bakiyesini al
+    const balanceRef = doc(db, "balances", user.uid);
+    const balanceSnap = await getDoc(balanceRef);
+    if (balanceSnap.exists()) {
+      balance = balanceSnap.data().amount || 0;
+      balanceBelowScan.textContent = balance.toFixed(4);
+    } else {
+      balanceBelowScan.textContent = "0.0000";
+    }
+  });
+
+  unlockBtn.onclick = async () => {
+    const pass = passwordInput.value.trim();
+    const success = await unlockPremium(pass);
+    if (success) passwordInput.value = "";
+  };
+
+  getPasswordBtn.onclick = () => {
+    window.open("https://t.me/rexfinans", "_blank");
+  };
 
   startScanBtn.onclick = () => {
     const speed = parseInt(speedSelect.value);
@@ -632,20 +468,10 @@
     startScanBtn.disabled = false;
     stopScanBtn.disabled = true;
   };
-
 </script>
+
 </body>
 </html>
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <title>Ana Sayfa</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
 <!-- sayfa içeriğin buraya -->
 
 <!-- Alt Menü -->
@@ -662,7 +488,6 @@
 
 <!-- Menü.js en sonda -->
 <script src="menü.js"></script>
-
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -687,6 +512,6 @@
   });
 </script>
 
+
 </body>
 </html>
-
