@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
@@ -14,7 +14,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      padding: 10px; /* Mobilde yanlarda boşluk */
+      padding: 10px;
       box-sizing: border-box;
     }
     #profileContainer {
@@ -35,7 +35,7 @@
     #profileContainer p {
       font-size: 16px;
       margin: 10px 0;
-      word-wrap: break-word; /* Uzun metin kırılır */
+      word-wrap: break-word;
     }
     #balanceInput {
       width: 100%;
@@ -49,7 +49,7 @@
       text-align: center;
       color: #222942;
       font-weight: 700;
-      background-color: #ccc; /* Gri arka plan readonly olduğunu belli eder */
+      background-color: #ccc;
       cursor: not-allowed;
     }
     button {
@@ -64,37 +64,20 @@
       font-size: 16px;
       transition: background 0.3s ease;
     }
-    #saveBalanceBtn {
-      background: #0a84ff;
-    }
-    #saveBalanceBtn:hover {
-      background: #086fcc;
-    }
-    #withdrawBtn {
-      background: #ff3b3b;
-    }
-    #withdrawBtn:hover {
-      background: #cc3232;
-    }
-    #closeBtn {
-      background: #666;
-    }
-    #closeBtn:hover {
-      background: #444;
-    }
-    #logoutBtn {
-      background: #f39c12;
-    }
-    #logoutBtn:hover {
-      background: #d78b0b;
-    }
+    #saveBalanceBtn { background: #0a84ff; }
+    #saveBalanceBtn:hover { background: #086fcc; }
+    #withdrawBtn { background: #ff3b3b; }
+    #withdrawBtn:hover { background: #cc3232; }
+    #closeBtn { background: #666; }
+    #closeBtn:hover { background: #444; }
+    #logoutBtn { background: #f39c12; }
+    #logoutBtn:hover { background: #d78b0b; }
 
-    /* Mobil uyumluluk için medya sorguları */
     @media (max-width: 400px) {
       body {
-        height: auto; /* Yükseklik otomatik */
+        height: auto;
         padding: 15px 10px;
-        align-items: flex-start; /* İçerik üstte başlar */
+        align-items: flex-start;
       }
       #profileContainer {
         padding: 20px 15px;
@@ -172,7 +155,7 @@
     const closeBtn = document.getElementById("closeBtn");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    let isPremium = false; // Premium durumu tutacak
+    let isPremium = false;
 
     async function loadUserProfile() {
       try {
@@ -184,25 +167,18 @@
           lastLoginEl.textContent = data.lastLogin ? new Date(data.lastLogin.seconds * 1000).toLocaleString() : "-";
           isPremium = data.premium === true;
           premiumEl.textContent = isPremium ? "Evet" : "Yok";
-        } else {
-          emailEl.textContent = "Bilgi bulunamadı";
-          joinDateEl.textContent = "-";
-          lastLoginEl.textContent = "-";
-          premiumEl.textContent = "Yok";
-          isPremium = false;
         }
 
         const balanceDoc = await getDoc(doc(db, "balances", userId));
         balanceInput.value = balanceDoc.exists() ? balanceDoc.data().amount.toFixed(4) : "0.0000";
       } catch (error) {
-        emailEl.textContent = "Hata oluştu";
         console.error("Profil yüklenirken hata:", error);
       }
     }
 
     saveBalanceBtn.addEventListener("click", async () => {
       if (!isPremium) {
-        alert("Bakiye kaydetme sadece premium kullanıcılar için geçerlidir.");
+        alert("⚠️ Bu özellik sadece premium kullanıcılar içindir. Lütfen premium şifre girin.");
         return;
       }
 
@@ -214,9 +190,9 @@
 
       try {
         await setDoc(doc(db, "balances", userId), { amount: newBalance });
-        alert("Bakiye başarıyla güncellendi.");
+        alert("✅ Bakiye başarıyla güncellendi.");
       } catch (error) {
-        alert("Bakiye güncellenirken hata oluştu.");
+        alert("❌ Bakiye güncellenirken bir hata oluştu.");
         console.error(error);
       }
     });
@@ -226,7 +202,7 @@
     });
 
     closeBtn.addEventListener("click", () => {
-      window.location.href = "dashboard.html"; // Anasayfa
+      window.location.href = "dashboard.html";
     });
 
     logoutBtn.addEventListener("click", () => {
@@ -236,10 +212,8 @@
     loadUserProfile();
   </script>
 
-  <!-- Alt Menü -->
+  <!-- Menü -->
   <div id="bottomMenu"></div>
-
-  <!-- Menü HTML'ini yükle -->
   <script>
     fetch("bottom-menu.html")
       .then(res => res.text())
@@ -247,33 +221,31 @@
         document.getElementById("bottomMenu").innerHTML = html;
       });
   </script>
-
-  <!-- Menü.js en sonda -->
   <script src="menü.js"></script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-    authDomain: "crypto-eccb4.firebaseapp.com",
-    projectId: "crypto-eccb4",
-    storageBucket: "crypto-eccb4.firebasestorage.app",
-    messagingSenderId: "773649197313",
-    appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-    measurementId: "G-B8D9V0V9XE"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+      authDomain: "crypto-eccb4.firebaseapp.com",
+      projectId: "crypto-eccb4",
+      storageBucket: "crypto-eccb4.firebasestorage.app",
+      messagingSenderId: "773649197313",
+      appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
+      measurementId: "G-B8D9V0V9XE"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "index.html";
-    }
-  });
-</script>
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
 
 </body>
 </html>
