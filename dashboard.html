@@ -201,6 +201,17 @@
       margin: 0 auto 20px;
       text-align: center;
     }
+    #premiumBadge {
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #00ff99;
+      background: linear-gradient(90deg, #00ff99, #006633);
+      padding: 5px 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ff99;
+      user-select: none;
+    }
 
     /* Responsive input ve buttonlar */
     @media (max-width: 600px) {
@@ -233,6 +244,7 @@
   <input type="password" id="passwordInput" placeholder="Premium Şifre Girin" />
   <button id="unlockPremiumBtn">Premium Kilidini Aç</button>
   <button id="getPasswordBtn">Şifre Al🔑</button>
+  <div id="premiumBadge">🚀 PREMIUM</div>
 </div>
 
 <div>
@@ -265,12 +277,11 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
   import {
     getFirestore, doc, getDoc, updateDoc, setDoc, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // Firebase yapılandırma
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -285,8 +296,8 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  const coins = ["TRX", "USDT", "BTC", "BNB", "ETH", "ADA", "SOL", "DOT", "DOGE", "XRP", "LTC", "AVAX"];
-  const freeCoinsCount = 5;
+  const coins = ["TRX", "USDT", "BTC", "BNB", "ETH", "TON", "SOL", "DOT", "DOGE", "XRP", "LTC", "AVAX"];
+  const freeCoinsCount = 4;
 
   const coinContainer = document.getElementById('coinContainer');
   const startScanBtn = document.getElementById('startScan');
@@ -298,6 +309,8 @@
   const passwordInput = document.getElementById("passwordInput");
   const getPasswordBtn = document.getElementById("getPasswordBtn");
   const balanceGainEl = document.getElementById("balanceGain");
+  const premiumBadge = document.getElementById("premiumBadge");
+  const unlockSection = document.getElementById("unlockSection");
 
   let scanInterval = null;
   let balance = 0;
@@ -352,7 +365,7 @@
     const randomCoin = selectedCoins[Math.floor(Math.random() * selectedCoins.length)];
     const found = Math.random() < 0.10;
     const maskedWallet = generateMaskedWallet();
-    const result = found ? "BULUNDU! 💰" : "bulunamadı";
+    const result = found ? "BULUNDU! 💰" : "Bulunamadı";
 
     const line = `+${randomCoin}: Cüzdan: ${maskedWallet} ${result}\n`;
     scanOutput.textContent += line;
@@ -387,7 +400,7 @@
     }
   }
 
-  // Premium şifre kontrolü
+  // Premium şifre kontrolü ve kilit açma
   async function unlockPremium(password) {
     if (!password) {
       alert("Lütfen şifre girin.");
@@ -416,6 +429,18 @@
       }
 
       premiumUnlocked = true;
+
+      // localStorage'a premium açma bilgisini kaydet
+      localStorage.setItem("premiumUnlocked", "true");
+
+      // Şifre alanı ve butonları gizle
+      passwordInput.style.display = "none";
+      unlockBtn.style.display = "none";
+      getPasswordBtn.style.display = "none";
+
+      // Premium rozeti göster
+      premiumBadge.style.display = "inline-block";
+
       alert("✅ Premium kilidi açıldı!");
       speedSelect.disabled = false;
       createCoinCheckboxes();
@@ -426,16 +451,30 @@
     }
   }
 
-  // Başlangıçta
+  // Sayfa yüklendiğinde localStorage'dan premium durumu kontrol et ve uygula
+  function checkPremiumStatusOnLoad() {
+    const premiumState = localStorage.getItem("premiumUnlocked");
+    if (premiumState === "true") {
+      premiumUnlocked = true;
+      passwordInput.style.display = "none";
+      unlockBtn.style.display = "none";
+      getPasswordBtn.style.display = "none";
+      premiumBadge.style.display = "inline-block";
+      speedSelect.disabled = false;
+      createCoinCheckboxes();
+    } else {
+      createCoinCheckboxes();
+    }
+  }
+
+  // Kullanıcı doğrulama ve başlangıç işlemleri
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
-      // Kullanıcı yoksa index.html ye yönlendir
       window.location.href = "index.html";
       return;
     }
 
     userId = user.uid;
-    createCoinCheckboxes();
 
     // Kullanıcının bakiyesini al
     const balanceRef = doc(db, "balances", user.uid);
@@ -447,7 +486,17 @@
       balanceBelowScan.textContent = "0.0000";
     }
 
-    // Taramaya izin ver
+    // Firestore’dan kullanıcı premium mu diye kontrol et
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      if (userData.premium === true) {
+        premiumUnlocked = true;
+        localStorage.setItem("premiumUnlocked", "true");
+      }
+    }
+
+    checkPremiumStatusOnLoad();
     balanceLoaded = true;
   });
 
@@ -476,15 +525,9 @@
   };
 </script>
 
-
-</body>
-</html>
-<!-- sayfa içeriğin buraya -->
-
 <!-- Alt Menü -->
 <div id="bottomMenu"></div>
 
-<!-- Menü HTML'ini yükle -->
 <script>
   fetch("bottom-menu.html")
     .then(res => res.text())
@@ -493,21 +536,21 @@
     });
 </script>
 
-<!-- Menü.js en sonda -->
 <script src="menü.js"></script>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-    authDomain: "crypto-eccb4.firebaseapp.com",
-    projectId: "crypto-eccb4",
-    storageBucket: "crypto-eccb4.firebasestorage.app",
-    messagingSenderId: "773649197313",
-    appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-    measurementId: "G-B8D9V0V9XE"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+  authDomain: "crypto-eccb4.firebaseapp.com",
+  projectId: "crypto-eccb4",
+  storageBucket: "crypto-eccb4.appspot.com",
+  messagingSenderId: "773649197313",
+  appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
+  measurementId: "G-B8D9V0V9XE"
+};
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -519,6 +562,6 @@
   });
 </script>
 
-
 </body>
 </html>
+
