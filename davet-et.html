@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Davet Sistemi - Wallet Finder</title>
+  <style>
+    body {
+      background: #181a29;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #222942;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #0a84ffaa;
+      max-width: 420px;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin: 20px 0 10px;
+      text-align: left;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background-color: #2f3a57;
+      color: #eee;
+      font-size: 0.95rem;
+    }
+    button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: white;
+      background-color: #5865F2;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .stats {
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+    .premium {
+      background: #00c853;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      display: none;
+    }
+    .info {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Davet Linkinle Kazan</h1>
+    <label for="referralLink">Davet Linkin:</label>
+    <input type="text" id="referralLink" readonly />
+    <button id="copyLink">📋 Linki Kopyala</button>
+
+    <div class="stats">
+      <p>👥 Davet Sayısı: <span id="inviteCount">0</span></p>
+      <p>🔥 Level: <span id="levelCount">0</span> / 100</p>
+      <p id="toGo">100 seviyeye ulaşmak için 0 davet kaldı</p>
+    </div>
+
+    <div class="premium" id="premiumSection">
+      🎉 Tebrikler! Premium üyelik kazandınız!
+      <button onclick="claimPremium()">🎁 Premium'u Al</button>
+    </div>
+
+    <div class="info">
+      📌 Her davet 3 level yükseltir.<br/>
+      💯 100 level olduğunuzda Premium özelliğin kilidi açılır.<br/>
+      ✅ Sistem sizi otomatik olarak takip eder.
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+      authDomain: "crypto-eccb4.firebaseapp.com",
+      projectId: "crypto-eccb4",
+      storageBucket: "crypto-eccb4.appspot.com",
+      messagingSenderId: "773649197313",
+      appId: "1:773649197313:web:18da6ed3ee63353c4e9300"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    let userId;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        userId = user.uid;
+        const userRef = doc(db, "users", userId);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          const invites = userData.invites || 0;
+          const level = userData.currentLevel || 0;
+
+        const referralLink = `https://walletfinderrex.site/index.html?ref=${userId}`;
+
+          document.getElementById("referralLink").value = referralLink;
+          document.getElementById("inviteCount").textContent = invites;
+          document.getElementById("levelCount").textContent = level;
+          const left = Math.max(0, Math.ceil((100 - level) / 3));
+          document.getElementById("toGo").textContent = `💡 100 seviyeye ulaşmak için ${left} davet kaldı`;
+
+          if (level >= 100) {
+            document.getElementById("premiumSection").style.display = "block";
+          }
+        }
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+
+    document.getElementById("copyLink").addEventListener("click", () => {
+      const input = document.getElementById("referralLink");
+      input.select();
+      document.execCommand("copy");
+      alert("📎 Davet linkin kopyalandı!");
+    });
+
+    window.claimPremium = async () => {
+      if (!userId) return;
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, {
+        isPremium: true
+      });
+      alert("🎉 Premium üyeliğiniz tanımlandı!");
+    };
+  </script>
+</body>
+</html>
+<!-- Menü -->
+  <div id="bottomMenu"></div>
+  <script>
+    fetch("bottom-menu.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bottomMenu").innerHTML = html;
+      });
+  </script>
+  <script src="menü.js"></script>
