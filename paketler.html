@@ -5,159 +5,144 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Premium Paketler - Satın Al</title>
 <style>
+/* ... (Senin verdiğin tüm CSS burada kalsın, özellikle modal ve responsive kısmı) */
 @media (max-width: 480px) {
   .modal {
     padding: 1.2rem;
     max-width: 95%;
     border-radius: 12px;
   }
-
-  .modal h2 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
-
-  .modal p {
-    font-size: 0.9rem;
-  }
-
-  .modal label {
-    font-size: 0.85rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .modal textarea,
-  .modal input[type="file"] {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-    border-radius: 6px;
-  }
-
-  .modal button {
-    font-size: 0.95rem;
-    padding: 0.7rem;
-    min-width: 100%;
-    margin: 0.4rem 0;
-    border-radius: 10px;
-  }
-
-  #packageInfo p {
-    margin: 0.4rem 0;
-    font-size: 0.95rem;
-  }
+  /* diğer responsive stiller... */
 }
-
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #2c3e50, #4ca1af);
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 2rem 1rem;
-    color: #f0f4f8;
-  }
-
-  .container {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  h1 {
-    font-weight: 700;
-    font-size: 2.4rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    text-shadow: 0 0 10px #1abc9caa;
-    letter-spacing: 2px;
-  }
-
-  .packages {
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-  }
-
-  .package-card {
-    background: #1f3a4ddd;
-    border-radius: 18px;
-    padding: 1.7rem 2rem;
-    box-shadow: 0 10px 25px rgba(28, 188, 156, 0.5);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid transparent;
-    user-select: none;
-    transition: border-color 0.3s ease;
-  }
-  .package-card:hover {
-    border-color: #16a085;
-  }
-
-  .package-title {
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: #1abc9c;
-    margin-bottom: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .package-title span.emoji {
-    font-size: 1.8rem;
-  }
-
-  .package-desc {
-    font-size: 1.05rem;
-    color: #a3d9ccdd;
-    margin-bottom: 1.2rem;
-    line-height: 1.4;
-    font-weight: 500;
-  }
-
-  .package-price {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #16a085;
-  }
-
-  button.buy-btn {
-    margin-top: 1.3rem;
-    width: 100%;
-    background: linear-gradient(135deg, #16a085, #1abc9c);
-    border: none;
-    padding: 0.95rem 0;
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 22px #16a085bb;
-    user-select: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  button.buy-btn:hover {
-    background: linear-gradient(135deg, #1abc9c, #16a085);
-  }
-
-  /* Modal */
-  .modal-bg {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 1rem;
-    overflow-y: auto;
-  }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+  color: #f0f4f8;
+}
+.container {
+  max-width: 400px;
+  width: 100%;
+}
+h1 {
+  font-weight: 700;
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 0 10px #1abc9caa;
+  letter-spacing: 2px;
+}
+.packages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.package-card {
+  background: #1f3a4ddd;
+  border-radius: 18px;
+  padding: 1.7rem 2rem;
+  box-shadow: 0 10px 25px rgba(28, 188, 156, 0.5);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  user-select: none;
+  transition: border-color 0.3s ease;
+}
+.package-card:hover {
+  border-color: #16a085;
+}
+.package-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #1abc9c;
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.package-title span.emoji {
+  font-size: 1.8rem;
+}
+.badge {
+  background: #e74c3c;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  user-select: none;
+  white-space: nowrap;
+  animation: pulse 1.5s infinite;
+  display: inline-block;
+  line-height: 1;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.package-desc {
+  font-size: 1.05rem;
+  color: #a3d9ccdd;
+  margin-bottom: 1.2rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.package-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #16a085;
+}
+.old-price {
+  text-decoration: line-through;
+  color: #e74c3c;
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.new-price {
+  font-weight: 700;
+  color: #16a085;
+  font-size: 1.4rem;
+}
+button.buy-btn {
+  margin-top: 1.3rem;
+  width: 100%;
+  background: linear-gradient(135deg, #16a085, #1abc9c);
+  border: none;
+  padding: 0.95rem 0;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px #16a085bb;
+  user-select: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+button.buy-btn:hover {
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+}
+.modal-bg {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
 .modal {
   background: #2c3e50;
   border-radius: 16px;
@@ -171,161 +156,221 @@
   color: #f0f4f8;
   box-sizing: border-box;
 }
-
-  .modal h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: #1abc9c;
-  }
-  .modal p {
-    font-size: 1rem;
-    margin-bottom: 1.4rem;
-    white-space: pre-line;
-    color: #b0d7ce;
-  }
-  .modal textarea {
-    width: 100%;
-    background: #1f3a4d;
-    color: #a3d9cc;
-    border: 1px solid #16a085;
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    font-family: monospace;
-    font-size: 1rem;
-    resize: none;
-    margin-bottom: 1.2rem;
-    cursor: pointer;
-  }
-  .modal textarea:focus {
-    outline: none;
-    border-color: #1abc9c;
-    background: #155a48;
-  }
-  .modal input[type="file"] {
-    margin-bottom: 1.4rem;
-    background: #1f3a4d;
-    color: #a3d9cc;
-    border: 1px solid #16a085;
-    padding: 0.5rem;
-    width: 100%;
-    border-radius: 8px;
-    cursor: pointer;
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #1abc9c;
+}
+.modal p {
+  font-size: 1rem;
+  margin-bottom: 1.4rem;
+  white-space: pre-line;
+  color: #b0d7ce;
+}
+.modal textarea {
+  width: 100%;
+  background: #1f3a4d;
+  color: #a3d9cc;
+  border: 1px solid #16a085;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-family: monospace;
+  font-size: 1rem;
+  resize: none;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+}
+.modal textarea:focus {
+  outline: none;
+  border-color: #1abc9c;
+  background: #155a48;
+}
+.modal input[type="file"] {
+  margin-bottom: 1.4rem;
+  background: #1f3a4d;
+  color: #a3d9cc;
+  border: 1px solid #16a085;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.modal button {
+  background: #16a085;
+  border: none;
+  padding: 0.8rem 1.7rem;
+  border-radius: 14px;
+  color: white;
+  font-weight: 700;
+  margin: 0 0.3rem 0.6rem;
+  cursor: pointer;
+  min-width: 140px;
+  transition: background 0.3s ease;
+}
+.modal button:hover {
+  background: #1abc9c;
+}
+.modal label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #16a085;
+  font-size: 0.9rem;
+}
+#paymentMethod {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #16a085;
+  background: #1f3a4d;
+  color: #a3d9cc;
+}
+#paymentDetails {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #b0d7ce;
+  background: #1f3a4d;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  white-space: pre-line;
+}
+@media (max-width: 450px) {
+  .modal {
+    padding: 1.5rem 1.8rem;
   }
   .modal button {
-    background: #16a085;
-    border: none;
-    padding: 0.8rem 1.7rem;
-    border-radius: 14px;
-    color: white;
-    font-weight: 700;
-    margin: 0 0.3rem 0.6rem;
-    cursor: pointer;
-    min-width: 140px;
-    transition: background 0.3s ease;
+    min-width: 100%;
+    margin-bottom: 0.8rem;
   }
-  .modal button:hover {
-    background: #1abc9c;
-  }
-  .modal label {
-    display: block;
-    text-align: left;
-    font-weight: 600;
-    margin-bottom: 0.4rem;
-    color: #16a085;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 450px) {
-    .modal {
-      padding: 1.5rem 1.8rem;
-    }
-    .modal button {
-      min-width: 100%;
-      margin-bottom: 0.8rem;
-    }
-  }
+}
 </style>
 </head>
 <body>
-  <div class="container">
-    <h1>PREMIUM PAKETLER</h1>
-    <div class="packages">
-      <div class="package-card" data-package="VIP1" data-price="600 TL">
-        <div class="package-title"><span class="emoji">⚡️</span> VIP1</div>
-        <div class="package-desc">15 kat hızda, 8 farklı blockchain taramasıyla fırsatı kaçırmayın! 🚀</div>
-        <div class="package-price">600 TL</div>
-        <button class="buy-btn">Satın Al</button>
+<div class="container">
+  <h1>PREMIUM PAKETLER</h1>
+  <div class="packages">
+
+    <div class="package-card" data-package="VIP1" data-oldprice="599 TL" data-newprice="299 TL" data-price="299 TL">
+      <div class="package-title">
+        <span class="emoji">⚡️</span> VIP1
+        <span class="badge">%50 İNDİRİM</span>
       </div>
-      <div class="package-card" data-package="VIP2" data-price="899 TL">
-        <div class="package-title"><span class="emoji">🔥</span> VIP2</div>
-        <div class="package-desc">30 kat hız, 12 blockchain ağında üst düzey tarama! 💎</div>
-        <div class="package-price">899 TL</div>
-        <button class="buy-btn">Satın Al</button>
+      <div class="package-desc">15 kat hızda, 8 farklı blockchain taramasıyla fırsatı kaçırmayın! para çekme ücreti yok🚀</div>
+      <div class="package-price">
+        <span class="old-price">650 TL</span><span class="new-price">299 TL</span>
       </div>
-      <div class="package-card" data-package="CUSTOM" data-price="İletişime Geçiniz">
-        <div class="package-title"><span class="emoji">💬</span> İNDİRİMLİ FİYAT İÇİN</div>
-        <div class="package-desc">Size özel kampanyalar için hemen iletişim kurun! 📲</div>
-        <div class="package-price">İletişime Geçiniz</div>
-        <button class="buy-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">Telegram</button>
-      </div>
+      <button class="buy-btn">Satın Al</button>
     </div>
+
+    <div class="package-card" data-package="VIP2" data-oldprice="1400TL" data-newprice="599 TL" data-price="599 TL">
+      <div class="package-title">
+        <span class="emoji">🔥</span> VIP2
+        <span class="badge">%30 İNDİRİM</span>
+      </div>
+      <div class="package-desc">30 kat hız, 12 blockchain ağında üst düzey tarama! 7/24 ücretsiz Sınırsız Para Çekme💎</div>
+      <div class="package-price">
+        <span class="old-price">1400 TL</span><span class="new-price">599 TL</span>
+      </div>
+      <button class="buy-btn">Satın Al</button>
+    </div>
+
+    <div class="package-card" data-package="CUSTOM" data-price="İletişime Geçiniz">
+      <div class="package-title"><span class="emoji">💬</span> İNDİRİMLİ FİYAT İÇİN</div>
+      <div class="package-desc">Size özel kampanyalar için hemen iletişim kurun! 📲</div>
+      <div class="package-price">İletişime Geçiniz</div>
+      <button class="buy-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">Telegram</button>
+    </div>
+
   </div>
+</div>
 
-  <!-- Modal -->
-  <div class="modal-bg" id="modalBg">
-    <div class="modal" id="modal">
-      <h2>Satın Alma Bilgisi</h2>
-      <div id="packageInfo"></div>
+<!-- Modal -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modal">
+    <h2>Satın Alma Bilgisi</h2>
+    <div id="packageInfo"></div>
 
-      <label for="iban">IBAN:</label>
-      <textarea id="iban" readonly rows="1" onclick="this.select()">TR230001002271762072685090</textarea>
+    <label for="paymentMethod">Ödeme Yöntemi Seçiniz:</label>
+    <select id="paymentMethod">
+      <option value="">-- Seçiniz --</option>
+      <option value="eft">Havale / EFT</option>
+      <option value="kripto">Kripto Ödeme</option>
+    </select>
 
-      <label for="accountHolder">Hesap Sahibi:</label>
-      <textarea id="accountHolder" readonly rows="1" onclick="this.select()">Paladyum Elektronik Para ve Ödeme Hizmetleri A.Ş.</textarea>
-
-      <label for="desc">Açıklama (Mutlaka Ekleyiniz):</label>
-      <textarea id="desc" readonly rows="1" onclick="this.select()">904126059</textarea>
-
-      <p>Ödemeyi yaptıktan sonra dekontunuzu yükleyin.</p>
-
+    <div id="paymentDetails" style="display:none;">
+      <div id="eftDetails" style="display:none;">
+<p><strong>IBAN:</strong> TR230001002271762072685090</p>
+        <p><strong>Hesap Sahibi:</strong> Paladyum Elektronik Para ve Ödeme Hizmetleri A.Ş.</p>
+        <p><strong>Açıklama:</strong> 904126059</p>
+      </div>
+      <div id="kriptoDetails" style="display:none;">
+        <p><strong>USDT (TRC20) Adresi:</strong> TPHNV2S6d5oFJarPVju2XV2xBkwDbbyjaH</p>
+      </div>
+      <label for="receipt">Dekont Yükle:</label>
       <input type="file" id="receipt" accept=".jpg,.png,.pdf" />
-      <button id="paymentDone">Ödemeyi Yaptım</button>
-      <button id="closeModal">Kapat</button>
     </div>
+    <button id="paymentDone">Ödemeyi Yaptım</button>
+    <button id="closeModal">Kapat</button>
   </div>
+</div>
 
 <script>
   const modalBg = document.getElementById('modalBg');
-  const modal = document.getElementById('modal');
   const packageInfo = document.getElementById('packageInfo');
+  const paymentMethod = document.getElementById('paymentMethod');
+  const paymentDetails = document.getElementById('paymentDetails');
+  const eftDetails = document.getElementById('eftDetails');
+  const kriptoDetails = document.getElementById('kriptoDetails');
+  const receipt = document.getElementById('receipt');
   const paymentDone = document.getElementById('paymentDone');
   const closeModal = document.getElementById('closeModal');
 
-  document.querySelectorAll('.package-card .buy-btn').forEach(btn => {
+  document.querySelectorAll('.buy-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       const card = e.target.closest('.package-card');
       const pkg = card.getAttribute('data-package');
       const price = card.getAttribute('data-price');
-      if (pkg === "CUSTOM") {
-        // Telegram paketi butonu dışa link açıyor, o yüzden modal açma
-        return;
-      }
-      packageInfo.innerHTML = `
-        <p><strong style="color:#1abc9c;">Paket Adı:</strong> ${pkg}</p>
-        <p><strong style="color:#1abc9c;">Fiyat:</strong> ${price}</p>
-      `;
+      packageInfo.innerHTML = `<p><strong>Paket:</strong> ${pkg}</p><p><strong>Fiyat:</strong> ${price}</p>`;
+      paymentMethod.value = "";
+      paymentDetails.style.display = "none";
+      eftDetails.style.display = "none";
+      kriptoDetails.style.display = "none";
+      receipt.value = "";
       modalBg.style.display = 'flex';
     });
   });
 
+  paymentMethod.addEventListener('change', () => {
+    if(paymentMethod.value === "eft"){
+      paymentDetails.style.display = "block";
+      eftDetails.style.display = "block";
+      kriptoDetails.style.display = "none";
+    }
+    else if(paymentMethod.value === "kripto"){
+      paymentDetails.style.display = "block";
+      kriptoDetails.style.display = "block";
+      eftDetails.style.display = "none";
+    } else {
+      paymentDetails.style.display = "none";
+      eftDetails.style.display = "none";
+      kriptoDetails.style.display = "none";
+    }
+  });
+
   paymentDone.addEventListener('click', () => {
-    const fileInput = document.getElementById('receipt');
-    if (!fileInput.files.length) {
-      alert('Lütfen dekont dosyanızı yükleyin!');
+    if(!paymentMethod.value){
+      alert("Lütfen ödeme yöntemi seçin!");
       return;
     }
-    // Buraya ödeme onayı sonrası işlem eklenebilir (örn: dosya yükleme)
-    alert('Ödemeniz için teşekkürler! Yetkililer en kısa sürede sizinle iletişime geçecektir.');
+    if(!receipt.files.length){
+      alert("Lütfen dekont dosyanızı yükleyin!");
+      return;
+    }
+    alert("Ödemeniz için teşekkürler! Yetkililer en kısa sürede sizinle iletişime geçecektir.");
     modalBg.style.display = 'none';
   });
 
@@ -333,44 +378,12 @@
     modalBg.style.display = 'none';
   });
 
-  modalBg.addEventListener('click', e => {
-    if (e.target === modalBg) modalBg.style.display = 'none';
+  modalBg.addEventListener('click', (e) => {
+    if(e.target === modalBg){
+      modalBg.style.display = 'none';
+    }
   });
 </script>
-<style>
-  /* Diğer tüm CSS kodların burada olacak... */
-
-  /* BURAYA EKLE 👇 */
-  @media (max-width: 480px) {
-    .modal {
-      max-width: 100%;
-      height: auto;
-      padding: 1rem;
-      font-size: 0.85rem;
-    }
-
-    .modal h2 {
-      font-size: 1.2rem;
-    }
-
-    .modal textarea,
-    .modal input {
-      font-size: 0.85rem;
-      padding: 0.5rem;
-    }
-
-    .modal button {
-      font-size: 0.9rem;
-      padding: 0.6rem 1rem;
-      min-width: 100%;
-      margin-bottom: 0.6rem;
-    }
-
-    .modal label {
-      font-size: 0.8rem;
-    }
-  }
-</style>
 
 </body>
 </html>
