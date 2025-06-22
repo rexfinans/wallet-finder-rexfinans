@@ -203,8 +203,8 @@
   </style>
 </head>
 <body>
-  <div class="logo">REXFINANS</div>
-  <div class="title">WALLET FINDER</div>
+  <div class="logo">WALLET FINDER</div>
+  <div class="logo">RexFinans</div>
 
   <div class="highlight-box">
     <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br />
@@ -334,44 +334,73 @@ auth.signInWithEmailAndPassword(email, password)
           message.textContent = "Hata: " + error.message;
         });
     }
+async function register() {
+  const email = document.getElementById('registerEmail').value.trim();
+  const password = document.getElementById('registerPassword').value.trim();
+  const message = document.getElementById('message');
 
-    async function register() {
-      const email = document.getElementById('registerEmail').value.trim();
-      const password = document.getElementById('registerPassword').value.trim();
-      const message = document.getElementById('message');
+  if (!email || !password) {
+    message.style.color = "yellow";
+    message.textContent = "E-posta ve şifre giriniz.";
+    return;
+  }
 
-      if (!email || !password) {
-        message.style.color = "yellow";
-        message.textContent = "E-posta ve şifre giriniz.";
-        return;
-      }
+  message.style.color = 'yellow';
+  message.textContent = 'Kayıt yapılıyor...';
 
-      message.style.color = 'yellow';
-      message.textContent = 'Kayıt yapılıyor...';
+  try {
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    const user = userCredential.user;
 
-      try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        const user = userCredential.user;
+    // ref alındıysa localStorage'tan çek
+    const ref = localStorage.getItem("referrer");
 
-        await db.collection("users").doc(user.uid).set({
-          email: email,
-          role: "user",
-          premium: false,
-          banned: false,
-          registeredAt: firebase.firestore.FieldValue.serverTimestamp(),
-          lastLogin: null,
-          note: ""
+    await db.collection("users").doc(user.uid).set({
+      email: email,
+      role: "user",
+      premium: false,
+      banned: false,
+      registeredAt: firebase.firestore.FieldValue.serverTimestamp(),
+      lastLogin: null,
+      note: "",
+      referredBy: ref || null,
+      invites: 0,
+      currentLevel: 0
+    });
+
+    // Davet eden kişiye 3 level ekle
+    if (ref) {
+      const refUserRef = db.collection("users").doc(ref);
+      const refUserSnap = await refUserRef.get();
+      if (refUserSnap.exists) {
+        const refData = refUserSnap.data();
+        const invites = refData.invites || 0;
+        const level = refData.currentLevel || 0;
+
+        await refUserRef.update({
+          invites: invites + 1,
+          currentLevel: level + 3
         });
-
-        message.style.color = "lightgreen";
-        message.textContent = "Kayıt başarılı! Giriş yapabilirsiniz.";
-        showForm('login');
-      } catch (error) {
-        message.style.color = "red";
-        message.textContent = "Hata: " + error.message;
       }
     }
-  </script>
+
+    message.style.color = "lightgreen";
+    message.textContent = "Kayıt başarılı! Giriş yapabilirsiniz.";
+    showForm('login');
+
+  } catch (error) {
+    message.style.color = "red";
+    message.textContent = "Hata: " + error.message;
+  }
+}
+
+  const params = new URLSearchParams(window.location.search);
+  const referrerId = params.get("ref");
+  if (referrerId) {
+    localStorage.setItem("referrer", referrerId);
+  }
+
+</script>
 </body>
 </html>
 
