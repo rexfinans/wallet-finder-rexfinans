@@ -3,481 +3,369 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WALLET FİNDER - Giriş</title>
-  <meta property="og:title" content="Wallet Finder | RexFinans" />
-  <meta property="og:description" content="Cüzdan Adreslerini Taramak ve Bakiye Görüntülemek İçin Akıllı Kripto Aracı" />
-  <meta property="og:image" content="https://walletfinderrex.site/width_800.jpg" />
-  <meta property="og:url" content="https://walletfinderrex.site" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Wallet Finder | RexFinans" />
-  <meta name="twitter:description" content="Kripto Cüzdan Tarayıcı Aracı – RexFinans altyapılı." />
-  <meta name="twitter:image" content="https://walletfinderrex.site/width_800.jpg" />
+  <title>RexFinans | Güvenli Giriş ve Kayıt</title>
+
+  <meta name="description" content="RexFinans Wallet Finder - Güvenli kripto cüzdan tarama ve yönetim platformu." />
+  <meta name="keywords" content="RexFinans, kripto, wallet finder, cüzdan, güvenli giriş, kripto bakiye" />
+  <meta name="author" content="RexFinans" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.gstatic.com https://www.googleapis.com https://*.firebaseio.com; script-src 'self' https://www.gstatic.com https://www.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*; connect-src 'self' https://*.firebaseio.com https://firestore.googleapis.com;">
+
   <style>
-.info-section {
-  background: rgba(0, 229, 255, 0.1);
-  border-radius: 15px;
-  max-width: 720px;
-  margin: 35px auto 15px;
-  padding: 25px 30px;
-  color: #e0f7fa;
-  box-shadow: 0 0 15px #00e5ffcc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.7;
-}
-
-.info-section h3 {
-  color: #00e5ff;
-  font-size: 1.7rem;
-  margin-bottom: 18px;
-  font-weight: 700;
-  text-shadow: 0 0 8px #00e5ff88;
-}
-
-.info-section p {
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-  letter-spacing: 0.03em;
-}
-
-.info-section strong {
-  color: #00ffffcc;
-}
-
-@media (max-width: 480px) {
-  .info-section {
-    padding: 18px 20px;
-    margin: 30px 12px 15px;
-  }
-  .info-section h3 {
-    font-size: 1.4rem;
-  }
-  .info-section p {
-    font-size: 1rem;
-  }
-}
-
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a2647, #144272);
+      color: #eef6f9;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
       padding: 20px;
     }
-    .logo {
-      font-size: 2.8rem;
-      font-weight: bold;
-      color: #00e5ff;
-      text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
-      animation: blink 1.5s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-    .title {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-    .highlight-box {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 15px;
-      margin: 20px 0;
-      border-radius: 10px;
+    header {
+      margin: 20px 0 40px;
       text-align: center;
+    }
+    header h1 {
+      font-size: 2.6rem;
+      color: #22d3ee;
+      text-shadow: 0 0 12px #0bc5ea;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #ade8f4;
       max-width: 600px;
-    }
-    .highlight-box p {
-      font-size: 1rem;
-      color: #ddd;
-      line-height: 1.5;
-    }
-    input, button {
-      margin: 8px 0;
-      padding: 12px 16px;
-      width: 100%;
-      max-width: 320px;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
-      box-sizing: border-box;
-    }
-    input {
-      background: #ffffff22;
-      border: 1px solid #ccc;
-      color: white;
-    }
-    input::placeholder {
-      color: #ccc;
-    }
-    button {
-      background-color: #00bcd4;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-      border: none;
-    }
-    button:hover {
-      background-color: #0097a7;
-    }
-    #message {
-      margin-top: 10px;
-      min-height: 24px;
-      text-align: center;
-      color: yellow;
-      max-width: 320px;
-      word-wrap: break-word;
-    }
-    .feature-list {
-      margin-top: 30px;
-      max-width: 700px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-    }
-    .feature-list h3 {
-      color: #00e5ff;
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-    .feature-list ul {
-      padding-left: 20px;
-    }
-    .feature-list li {
-      line-height: 1.6;
-      color: #ccc;
-      margin-bottom: 6px;
-    }
-    .telegram-btn {
-      margin-top: 15px;
-      background: #0088cc;
-      color: white;
-      font-weight: bold;
-      max-width: 320px;
-      width: 100%;
-      border-radius: 8px;
-      cursor: pointer;
-      border: none;
-      padding: 12px;
-    }
-    .telegram-btn:hover {
-      background: #006699;
-    }
-    .auth-container {
-      max-width: 320px;
       margin: auto;
-      text-align: center;
     }
-    .tabs {
+
+    main {
+      background: rgba(10, 66, 113, 0.85);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      max-width: 450px;
+      width: 100%;
+      padding: 30px 40px;
+    }
+
+    nav.tabs {
       display: flex;
       justify-content: center;
-      margin-bottom: 15px;
-      max-width: 320px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 30px;
     }
-    .tabs button {
+    nav.tabs button {
       flex: 1;
-      padding: 10px 0;
-      font-weight: bold;
-      cursor: pointer;
-      background: #222;
-      color: #aaa;
+      background: transparent;
       border: none;
-      outline: none;
-      transition: background 0.3s, color 0.3s;
-      max-width: 160px;
+      padding: 14px 0;
+      font-weight: 700;
+      color: #85d7f2;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s ease;
+      user-select: none;
     }
-    .tabs button.active {
-      background: #00bcd4;
-      color: white;
-      box-shadow: 0 0 8px #00bcd4;
+    nav.tabs button.active {
+      border-color: #22d3ee;
+      color: #22d3ee;
+      box-shadow: 0 0 10px #22d3ee;
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+    }
+    form.active {
+      display: flex;
+    }
+    label {
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #a5d8ff;
+    }
+    input[type="email"],
+    input[type="password"] {
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      background: #16537e;
+      color: #eef6f9;
+      transition: box-shadow 0.3s ease;
+    }
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      box-shadow: 0 0 8px #22d3ee;
+    }
+    button.submit-btn {
+      background-color: #22d3ee;
+      color: #044e70;
+      font-weight: 700;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    button.submit-btn:hover {
+      background-color: #0bc5ea;
+    }
+
+    #message {
+      margin: 12px 0 0;
+      font-weight: 600;
+      min-height: 24px;
+      text-align: center;
+      user-select: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #8ecae6;
+      line-height: 1.4;
+    }
+    footer a {
+      color: #22d3ee;
+      text-decoration: underline;
+      cursor: pointer;
+      user-select: text;
+    }
+    footer a:hover {
+      color: #0bc5ea;
+    }
+
+    section.info-section {
+      background: rgba(34, 211, 238, 0.15);
+      border-radius: 14px;
+      margin-top: 30px;
+      padding: 20px 25px;
+      color: #cffafe;
+      box-shadow: 0 0 20px #22d3eeaa;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    section.info-section h2 {
+      margin-top: 0;
+      color: #22d3ee;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    section.info-section p, section.info-section ul {
+      margin: 10px 0;
+      text-align: justify;
+    }
+    section.info-section ul {
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      main {
+        padding: 25px 20px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      nav.tabs button {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-   <div class="logo">REX FİNANS</div>
-  <div class="title">WALLET FINDER</div>
+  <header>
+    <h1>RexFinans Wallet Finder</h1>
+    <p>Unutulmuş kripto cüzdanlarınızı bulun, bakiyelerinizi güvenle yönetin.</p>
+  </header>
 
-  <div class="highlight-box">
-    <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br />
-      Gelişmiş tarama algoritmalarımızla yüzlerce blockchain ağında cüzdanları analiz ederek aktif bakiyeleri tespit ediyoruz. Size sadece çekmek kalıyor.
-    </p>
-  </div>
+  <main role="main" aria-label="Giriş ve Kayıt Formları">
+    <nav class="tabs" role="tablist" aria-label="Giriş ve Kayıt sekmeleri">
+      <button id="loginTab" role="tab" aria-selected="true" aria-controls="loginForm" class="active" tabindex="0">Giriş Yap</button>
+      <button id="registerTab" role="tab" aria-selected="false" aria-controls="registerForm" tabindex="-1">Kayıt Ol</button>
+    </nav>
 
-  <div class="auth-container">
-    <div class="tabs">
-      <button id="loginTab" class="active" onclick="showForm('login')">Giriş Yap</button>
-      <button id="registerTab" onclick="showForm('register')">Kayıt Ol</button>
-    </div>
-
-    <form id="loginForm">
-      <input id="loginEmail" type="email" placeholder="E-posta adresiniz" required />
-      <input id="loginPassword" type="password" placeholder="Şifreniz" required />
-      <button type="button" onclick="login()">Giriş Yap</button>
+    <form id="loginForm" class="active" role="tabpanel" aria-labelledby="loginTab" autocomplete="username" novalidate>
+      <label for="loginEmail">E-posta Adresiniz</label>
+      <input type="email" id="loginEmail" name="loginEmail" placeholder="ornek@domain.com" required autocomplete="email" aria-required="true" />
+      <label for="loginPassword">Şifreniz</label>
+      <input type="password" id="loginPassword" name="loginPassword" placeholder="Şifrenizi girin" required autocomplete="current-password" aria-required="true" />
+      <button type="submit" class="submit-btn">Giriş Yap</button>
     </form>
 
-    <form id="registerForm" style="display:none;">
-      <input id="registerEmail" type="email" placeholder="E-posta adresiniz" required />
-      <input id="registerPassword" type="password" placeholder="Şifreniz" required />
-      <button type="button" onclick="register()">Kayıt Ol</button>
+    <form id="registerForm" role="tabpanel" aria-labelledby="registerTab" autocomplete="new-password" novalidate>
+      <label for="registerEmail">E-posta Adresiniz</label>
+      <input type="email" id="registerEmail" name="registerEmail" placeholder="ornek@domain.com" required autocomplete="email" aria-required="true" />
+      <label for="registerPassword">Şifrenizi Oluşturun</label>
+      <input type="password" id="registerPassword" name="registerPassword" placeholder="Şifrenizi oluşturun" required autocomplete="new-password" aria-required="true" />
+      <button type="submit" class="submit-btn">Kayıt Ol</button>
     </form>
 
-    <div id="message"></div>
-  </div>
+    <div id="message" role="alert" aria-live="polite"></div>
+  </main>
 
-  <div class="feature-list">
-    <h3>🚀 Özellikler</h3>
+  <section class="info-section" aria-label="Nasıl Çalışır">
+    <h2>🚀 Nasıl Çalışır?</h2>
+    <p>RexFinans Wallet Finder ile blockchain ağlarında unutulmuş, kayıp veya erişimi zor kripto cüzdanlarınızı hızlıca bulun ve bakiyenizi görüntüleyin.</p>
     <ul>
-      <li>🌐 Çoklu zincir desteği: BTC, ETH, BNB, TRX, SOL ve daha fazlası</li>
-      <li>🔐 Premium kullanıcılar için yüksek hızlı tarama</li>
-      <li>💼 Bakiye yönetimi ve cüzdandan doğrudan çekim</li>
-      <li>📈 Otomatik tarama ve geçmiş görüntüleme</li>
-      <li>🛡️ Gizlilik ve güvenlik odaklı sistem altyapısı</li>
+      <li>Binlerce blockchain adresini otomatik tarama</li>
+      <li>Yüksek hızda ve güvenilir bakiye tespiti</li>
+      <li>Güvenli ve şeffaf bakiye yönetimi</li>
+      <li>Premium kullanıcılar için ekstra hız ve özellikler</li>
     </ul>
-  </div>
+  </section>
 
-  <button class="telegram-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">📲 Telegram Destek</button>
+  <section class="info-section" aria-label="Gizlilik Politikası">
+    <h2>🔐 Gizlilik Politikası</h2>
+    <p>Kullanıcı verileri, Firebase'in güvenli altyapısında korunur. E-posta ve şifre bilgileriniz sadece kimlik doğrulama amaçlı kullanılır. Hiçbir kişisel veri üçüncü taraflarla paylaşılmaz.</p>
+    <p>Detaylı bilgi için <a href="privacy.html" target="_blank" rel="noopener noreferrer">Gizlilik Politikamızı</a> inceleyebilirsiniz.</p>
+  </section>
 
-<section class="info-section" id="howItWorks">
-  <h3>🚀 NASIL ÇALIŞIR?</h3>
-  <p>1️⃣ Sistem, otomatik olarak blockchain ağlarını tarar ve <strong>binlerce cüzdanı hızlıca analiz eder.</strong></p>
-  <p>2️⃣ Siz sadece “Taramayı Başlat” düğmesine basarsınız, gerisini sistem sizin için halleder.</p>
-  <p>3️⃣ Tarama sonuçlarında, <strong>kazanılabilir bakiyeler, işlem geçmişi ve güncel durum</strong> size şeffaf şekilde sunulur.</p>
-  <p>💰 Kazandığınız bakiyeyi kolayca çekebilir, anlık olarak takip edebilirsiniz.</p>
-  <p>🔐 Tüm verileriniz <strong>gizli ve güvenli</strong> tutulur, hiçbir bilgi paylaşılmaz.</p>
-  <p>⭐ Premium kullanıcılar ise daha hızlı tarama, reklam yok ve ekstra özelliklerle kazançlarını maksimize eder.</p>
-</section>
+  <section class="info-section" aria-label="Kullanım Koşulları">
+    <h2>📜 Kullanım Koşulları</h2>
+    <p>Platformu kullanarak, RexFinans'ın <a href="terms.html" target="_blank" rel="noopener noreferrer">Kullanım Koşullarını</a> kabul etmiş sayılırsınız.</p>
+    <p>Hizmetlerimiz, yasalara uygun şekilde kullanılması şartıyla sağlanmaktadır. Herhangi bir kötüye kullanım durumunda erişiminiz engellenebilir.</p>
+  </section>
 
-<section class="info-section" id="about">
-  <h3>ℹ️ HAKKINDA ℹ️</h3>
-  <p>💎 <strong>RexFinans Wallet Finder</strong>, kripto dünyasında kayıp, unutulmuş veya erişimi zor cüzdanları bulmanızı sağlayan güçlü bir araçtır.</p>
-  <p>⚡️ Gelişmiş blockchain tarama algoritmaları sayesinde, milyonlarca işlem arasından hızlıca sonuç sunar.</p>
-  <p>🔧 Amacımız, dijital varlıklarınızı korumanıza destek olmak ve kripto dünyasında şeffaflığı artırmaktır.</p>
-  <p>🤝 Kullanıcı dostu arayüzü, hem yeni başlayanlar hem de profesyoneller için idealdir.</p>
-  <p>🌐 Sürekli güncellenen altyapımız ile her zaman en doğru ve güncel veriye erişebilirsiniz.</p>
-</section>
+  <footer>
+    <p>© 2025 RexFinans. Tüm hakları saklıdır.</p>
+    <p><a href="mailto:support@rexfinans.site">support@rexfinans.site</a></p>
+  </footer>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- Google reCAPTCHA (isteğe bağlı, yorum satırından açabilirsin) -->
+  <!-- 
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  -->
 
   <script>
+    // Firebase config: kendi projenin ayarlarını buraya koy
     const firebaseConfig = {
       apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
       authDomain: "crypto-eccb4.firebaseapp.com",
       projectId: "crypto-eccb4",
       storageBucket: "crypto-eccb4.appspot.com",
       messagingSenderId: "773649197313",
-      appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-      measurementId: "G-B8D9V0V9XE"
+      appId: "1:773649197313:web:18da6ed3ee63353c4e9300"
     };
+
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-
     const auth = firebase.auth();
-    const db = firebase.firestore();
 
-    function showForm(form) {
-      if (form === 'login') {
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('loginTab').classList.add('active');
-        document.getElementById('registerTab').classList.remove('active');
-        document.getElementById('message').textContent = '';
-        document.getElementById('message').style.color = 'yellow';
+    // Elementler
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const messageDiv = document.getElementById('message');
+
+    // Tab değişimi fonksiyonu
+    function setActiveTab(tab) {
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        loginTab.setAttribute('aria-selected', 'true');
+        loginTab.tabIndex = 0;
+
+        registerTab.classList.remove('active');
+        registerTab.setAttribute('aria-selected', 'false');
+        registerTab.tabIndex = -1;
+
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
       } else {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'block';
-        document.getElementById('loginTab').classList.remove('active');
-        document.getElementById('registerTab').classList.add('active');
-        document.getElementById('message').textContent = '';
-        document.getElementById('message').style.color = 'yellow';
+        registerTab.classList.add('active');
+        registerTab.setAttribute('aria-selected', 'true');
+        registerTab.tabIndex = 0;
+
+        loginTab.classList.remove('active');
+        loginTab.setAttribute('aria-selected', 'false');
+        loginTab.tabIndex = -1;
+
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
       }
+      messageDiv.textContent = '';
     }
 
-    function login() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
-      const message = document.getElementById('message');
+    loginTab.addEventListener('click', () => setActiveTab('login'));
+    registerTab.addEventListener('click', () => setActiveTab('register'));
+
+    // Mesaj gösterici
+    function showMessage(msg, type = 'info') {
+      messageDiv.textContent = msg;
+      const colors = {
+        success: '#4caf50',
+        error: '#f44336',
+        warning: '#ff9800',
+        info: '#eef6f9'
+      };
+      messageDiv.style.color = colors[type] || colors.info;
+    }
+
+    // Giriş işlemi
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = loginForm.loginEmail.value.trim();
+      const password = loginForm.loginPassword.value.trim();
 
       if (!email || !password) {
-        message.style.color = "yellow";
-        message.textContent = "E-posta ve şifre giriniz.";
+        showMessage('Lütfen e-posta ve şifre giriniz.', 'warning');
         return;
       }
 
-      message.style.color = 'yellow';
-      message.textContent = 'Giriş yapılıyor...';
+      showMessage('Giriş yapılıyor...', 'info');
 
-auth.signInWithEmailAndPassword(email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-
-    // localStorage'a kaydet
-    localStorage.setItem("userId", user.uid);
-
-    message.style.color = "lightgreen";
-    message.textContent = "Giriş başarılı! Yönlendiriliyorsunuz...";
-    setTimeout(() => window.location.href = "dashboard.html", 1500);
-  })
-
-        .catch((error) => {
-          message.style.color = "red";
-          message.textContent = "Hata: " + error.message;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          showMessage('Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
+          setTimeout(() => window.location.href = 'dashboard.html', 1500);
+        })
+        .catch(err => {
+          showMessage('Hata: ' + err.message, 'error');
         });
-    }
-async function register() {
-  const email = document.getElementById('registerEmail').value.trim();
-  const password = document.getElementById('registerPassword').value.trim();
-  const message = document.getElementById('message');
-
-  if (!email || !password) {
-    message.style.color = "yellow";
-    message.textContent = "E-posta ve şifre giriniz.";
-    return;
-  }
-
-  message.style.color = 'yellow';
-  message.textContent = 'Kayıt yapılıyor...';
-
-  try {
-    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-    const user = userCredential.user;
-
-    // ref alındıysa localStorage'tan çek
-    const ref = localStorage.getItem("referrer");
-
-    await db.collection("users").doc(user.uid).set({
-      email: email,
-      role: "user",
-      premium: false,
-      banned: false,
-      registeredAt: firebase.firestore.FieldValue.serverTimestamp(),
-      lastLogin: null,
-      note: "",
-      referredBy: ref || null,
-      invites: 0,
-      currentLevel: 0
     });
 
-    // Davet eden kişiye 3 level ekle
-    if (ref) {
-      const refUserRef = db.collection("users").doc(ref);
-      const refUserSnap = await refUserRef.get();
-      if (refUserSnap.exists) {
-        const refData = refUserSnap.data();
-        const invites = refData.invites || 0;
-        const level = refData.currentLevel || 0;
+    // Kayıt işlemi
+    registerForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = registerForm.registerEmail.value.trim();
+      const password = registerForm.registerPassword.value.trim();
 
-        await refUserRef.update({
-          invites: invites + 1,
-          currentLevel: level + 3
-        });
+      if (!email || !password) {
+        showMessage('Lütfen e-posta ve şifre giriniz.', 'warning');
+        return;
       }
-    }
 
-    message.style.color = "lightgreen";
-    message.textContent = "Kayıt başarılı! Giriş yapabilirsiniz.";
-    showForm('login');
+      showMessage('Kayıt yapılıyor...', 'info');
 
-  } catch (error) {
-    message.style.color = "red";
-    message.textContent = "Hata: " + error.message;
-  }
-}
-
-  const params = new URLSearchParams(window.location.search);
-  const referrerId = params.get("ref");
-  if (referrerId) {
-    localStorage.setItem("referrer", referrerId);
-  }
-
-</script>
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          showMessage('Kayıt başarılı! Giriş yapabilirsiniz.', 'success');
+          setActiveTab('login');
+          registerForm.reset();
+        })
+        .catch(err => {
+          showMessage('Hata: ' + err.message, 'error');
+        });
+    });
+  </script>
 </body>
 </html>
-
-
-
-<style>
-  #fakeNotifications {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    max-width: 320px;
-    z-index: 9999;
-    font-family: Arial, sans-serif;
-  }
-
-  .notif {
-    background: #222;
-    color: #fff;
-    padding: 12px 18px;
-    margin-top: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.6);
-    opacity: 0;
-    transform: translateX(-100%);
-    animation: slideInOut 5s forwards;
-  }
-
-  @keyframes slideInOut {
-    0% {opacity: 0; transform: translateX(-100%);}
-    20% {opacity: 1; transform: translateX(0);}
-    80% {opacity: 1; transform: translateX(0);}
-    100% {opacity: 0; transform: translateX(-100%);}
-  }
-</style>
-
-<div id="fakeNotifications"></div>
-
-<script>
-  const fullNames = ["Mehmet", "Ahmet", "Hasan", "Ali", "Fatma", "Zeynep", "Emin", "Can", "Deniz", "Emir"];
-  const amounts = [12, 13, 14, 11, 12, 8, 9, 19, 40, 39, 27, 35, 17, 33, 44, 48];
-
-  function randomElem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-
-  function maskName(name) {
-    if(name.length < 2) return name + "***";
-    return name.charAt(0) + "***";
-  }
-
-  function showFakeNotification() {
-    const notifContainer = document.getElementById("fakeNotifications");
-    const name = maskName(randomElem(fullNames));
-    const amount = randomElem(amounts);
-
-    const notif = document.createElement("div");
-    notif.classList.add("notif");
-    notif.textContent = `${name} ${amount} USDT çekim yaptı`;
-
-    notifContainer.appendChild(notif);
-
-    setTimeout(() => {
-      notif.remove();
-    }, 5000);
-  }
-
-  showFakeNotification();
-  setInterval(showFakeNotification, 50000);
-</script>
-<section id="footer" style="background: #181a29; color: #eee; padding: 30px 20px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <h2 style="font-weight: 700; font-size: 1.8rem; margin-bottom: 12px; color: #00bfff;">📢 Bizi Takip Edin!</h2>
-  <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 18px; line-height: 1.5; color: #ccc;">
-    En yeni kazanç fırsatları, özel ipuçları ve destek için Telegram kanalımıza hemen katılın.
-  </p>
-  <a href="https://t.me/parakazanrex" target="_blank" rel="noopener noreferrer"
-     style="display: inline-block; background: #ffcc00; color: #181a29; font-weight: 700; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: background-color 0.3s ease;">
-    Telegram Kanalı &rarr;
-  </a>
-</section>
-
