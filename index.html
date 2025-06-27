@@ -212,7 +212,6 @@
       Gelişmiş tarama algoritmalarımızla yüzlerce blockchain ağında cüzdanları analiz ederek aktif bakiyeleri tespit ediyoruz. Size sadece çekmek kalıyor.
     </p>
   </div>
-
   <div class="auth-container">
     <div class="tabs">
       <button id="loginTab" class="active" onclick="showForm('login')">Giriş Yap</button>
@@ -265,6 +264,8 @@
   <p>🤝 Kullanıcı dostu arayüzü, hem yeni başlayanlar hem de profesyoneller için idealdir.</p>
   <p>🌐 Sürekli güncellenen altyapımız ile her zaman en doğru ve güncel veriye erişebilirsiniz.</p>
 </section>
+</script>
+
 <!-- CAM İSTATİSTİK + YORUM ALANI -->
 <div style="margin: 60px auto; max-width: 900px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
   <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
@@ -341,7 +342,7 @@ const comments = [
 
   updateComment();
   setInterval(updateComment, 4500);
-
+</script>
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -480,6 +481,25 @@ async function register() {
 </script>
 </body>
 </html>
+<section id="footer" style="background: #181a29; color: #eee; padding: 30px 20px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h2 style="font-weight: 700; font-size: 1.8rem; margin-bottom: 12px; color: #00bfff;">📢 Bizi Takip Edin!</h2>
+  <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 18px; line-height: 1.5; color: #ccc;">
+    En yeni kazanç fırsatları, özel ipuçları ve destek için Telegram kanalımıza hemen katılın.
+  </p>
+  <a href="https://t.me/parakazanrex" target="_blank" rel="noopener noreferrer"
+     style="display: inline-block; background: #ffcc00; color: #181a29; font-weight: 700; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: background-color 0.3s ease;">
+    Telegram Kanalı &rarr;
+  </a>
+</section>
+
+<footer style="background:#121826; color:#aaa; padding: 20px 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align:center; font-size: 0.9rem;">
+  <div style="max-width: 720px; margin: auto;">
+    <a href="/gizlilik-politikasi.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Gizlilik Politikası</a> |
+    <a href="/kullanim-kosullari.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Kullanım Koşulları</a> |
+    <a href="/hakkimizda.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Hakkımızda</a>
+    <p style="margin-top: 12px; color: #666;">© 2025 RexFinans. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
 
 
 
@@ -547,23 +567,3 @@ async function register() {
   showFakeNotification();
   setInterval(showFakeNotification, 50000);
 </script>
-<section id="footer" style="background: #181a29; color: #eee; padding: 30px 20px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <h2 style="font-weight: 700; font-size: 1.8rem; margin-bottom: 12px; color: #00bfff;">📢 Bizi Takip Edin!</h2>
-  <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 18px; line-height: 1.5; color: #ccc;">
-    En yeni kazanç fırsatları, özel ipuçları ve destek için Telegram kanalımıza hemen katılın.
-  </p>
-  <a href="https://t.me/parakazanrex" target="_blank" rel="noopener noreferrer"
-     style="display: inline-block; background: #ffcc00; color: #181a29; font-weight: 700; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: background-color 0.3s ease;">
-    Telegram Kanalı &rarr;
-  </a>
-</section>
-<!-- Sayfa sonuna, </body> kapanmadan önce ekle -->
-
-<footer style="background:#121826; color:#aaa; padding: 20px 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align:center; font-size: 0.9rem;">
-  <div style="max-width: 720px; margin: auto;">
-    <a href="/gizlilik-politikasi.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Gizlilik Politikası</a> |
-    <a href="/kullanim-kosullari.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Kullanım Koşulları</a> |
-    <a href="/hakkimizda.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Hakkımızda</a>
-    <p style="margin-top: 12px; color: #666;">© 2025 RexFinans. Tüm hakları saklıdır.</p>
-  </div>
-</footer>
