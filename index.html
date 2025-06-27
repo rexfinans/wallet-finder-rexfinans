@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>RexFinans - Wallet Finder | Kripto Cüzdan Tarama Aracı</title>
-<link rel="icon" href="https://raw.githubusercontent.com/Sahibim/wallet-finder-rexfinans/main/tasarim1.jpg" type="image/jpeg" />
+  <title>REXFINANS - Giriş</title>
   <meta property="og:title" content="Wallet Finder | RexFinans" />
   <meta property="og:description" content="Cüzdan Adreslerini Taramak ve Bakiye Görüntülemek İçin Akıllı Kripto Aracı" />
   <meta property="og:image" content="https://walletfinderrex.site/width_800.jpg" />
@@ -204,8 +203,8 @@
   </style>
 </head>
 <body>
-   <div class="logo">REX FİNANS</div>
-  <div class="title">WALLET FINDER</div>
+  <div class="logo">WALLET FINDER</div>
+  <div class="logo">RexFinans</div>
 
   <div class="highlight-box">
     <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br />
@@ -265,7 +264,85 @@
   <p>🤝 Kullanıcı dostu arayüzü, hem yeni başlayanlar hem de profesyoneller için idealdir.</p>
   <p>🌐 Sürekli güncellenen altyapımız ile her zaman en doğru ve güncel veriye erişebilirsiniz.</p>
 </section>
+</script>
 
+<!-- CAM İSTATİSTİK + YORUM ALANI -->
+<div style="margin: 60px auto; max-width: 900px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+  <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
+    <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Bugünkü Ziyaretçi</h3>
+    <div id="visitorCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+  </div>
+  <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
+    <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Toplam Çekim</h3>
+    <div id="withdrawCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+  </div>
+  <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
+    <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Aktif Kullanıcı</h3>
+    <div id="activeUserCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+  </div>
+</div>
+
+<div style="max-width: 800px; margin: 0 auto 70px; background: rgba(255,255,255,0.06); border-radius: 10px; padding: 20px 30px; text-align: center; box-shadow: 0 0 12px #00e5ff55;">
+  <div id="commentBox" style="font-size: 1.1rem; color: #ddd; font-style: italic; min-height: 40px;"></div>
+</div>
+
+<script>
+  function animateNumber(id, target, duration) {
+    const el = document.getElementById(id);
+    let start = 0;
+    const step = Math.ceil(duration / target);
+    const interval = setInterval(() => {
+      start++;
+      el.textContent = start.toLocaleString("tr-TR");
+      if (start >= target) clearInterval(interval);
+    }, step);
+  }
+
+  // Sahte istatistik verileri (her yenilemede farklı)
+  const visitorCount = Math.floor(Math.random() * 40 + 170); // 1700-210
+  const withdrawCount = Math.floor(Math.random() * 70 + 100);  // 100-170
+  const activeUsers = Math.floor(Math.random() * 90 + 220);    // 220-310
+
+  animateNumber("visitorCount", visitorCount, 120);
+  animateNumber("withdrawCount", withdrawCount, 120);
+  animateNumber("activeUserCount", activeUsers, 120);
+
+  // Dönen yorumlar
+const comments = [
+  "💬 İlk günümde çekim yaptım, teşekkürler!",
+  "🚀 Premium alınca kazancım arttı, mükemmel sistem.",
+  "🛡️ Giriş kolay, çekim hızlı ve güvenli.",
+  "💸 Kazançlarım anlık yansıyor, şaka gibi!",
+  "🔥 Her gün tarama yapıyorum, harika sonuçlar çıkıyor.",
+  "✅ Telegram destek hızlı ve yardımcı oldular.",
+  "🎯 kesinlikle tavsiye ederim!",
+  "💎 Kullanımı çok basit, herkes anlayabilir.",
+  "⚡ Site çok hızlı, beklemek yok!",
+  "🎉 İlk çekimim 15 dakikada onaylandı, müthiş!",
+  "🌟 Premium üyelik fiyatına kesinlikle değer.",
+  "🔒 Güvenlik konusunda hiç endişem yok.",
+  "📱 Mobilde de mükemmel çalışıyor, kolay erişim sağlıyor.",
+  "💡 Referans sistemi ile ek gelir elde ettim, teşekkürler!",
+  "🌐 Çoklu zincir desteği gerçekten çok işime yaradı.",
+  "💰 Kazandıklarımı kolayca çekebiliyorum, süper!",
+  "🙌 Kullanıcı deneyimi harika, çok sade tasarım.",
+  "📊 İstatistikler gerçek zamanlı ve çok faydalı.",
+  "👨‍💻 Destek ekibi her soruma hızlı dönüş yaptı.",
+  "✨ Her gün yeni cüzdanlar ekleniyor, heyecan verici!"
+];
+
+
+  let commentIndex = 0;
+  const commentBox = document.getElementById("commentBox");
+
+  function updateComment() {
+    commentBox.textContent = comments[commentIndex];
+    commentIndex = (commentIndex + 1) % comments.length;
+  }
+
+  updateComment();
+  setInterval(updateComment, 4500);
+</script>
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -404,6 +481,25 @@ async function register() {
 </script>
 </body>
 </html>
+<section id="footer" style="background: #181a29; color: #eee; padding: 30px 20px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h2 style="font-weight: 700; font-size: 1.8rem; margin-bottom: 12px; color: #00bfff;">📢 Bizi Takip Edin!</h2>
+  <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 18px; line-height: 1.5; color: #ccc;">
+    En yeni kazanç fırsatları, özel ipuçları ve destek için Telegram kanalımıza hemen katılın.
+  </p>
+  <a href="https://t.me/parakazanrex" target="_blank" rel="noopener noreferrer"
+     style="display: inline-block; background: #ffcc00; color: #181a29; font-weight: 700; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: background-color 0.3s ease;">
+    Telegram Kanalı &rarr;
+  </a>
+</section>
+
+<footer style="background:#121826; color:#aaa; padding: 20px 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align:center; font-size: 0.9rem;">
+  <div style="max-width: 720px; margin: auto;">
+    <a href="/gizlilik-politikasi.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Gizlilik Politikası</a> |
+    <a href="/kullanim-kosullari.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Kullanım Koşulları</a> |
+    <a href="/hakkimizda.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Hakkımızda</a>
+    <p style="margin-top: 12px; color: #666;">© 2025 RexFinans. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
 
 
 
@@ -471,23 +567,3 @@ async function register() {
   showFakeNotification();
   setInterval(showFakeNotification, 50000);
 </script>
-<section id="footer" style="background: #181a29; color: #eee; padding: 30px 20px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <h2 style="font-weight: 700; font-size: 1.8rem; margin-bottom: 12px; color: #00bfff;">📢 Bizi Takip Edin!</h2>
-  <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 18px; line-height: 1.5; color: #ccc;">
-    En yeni kazanç fırsatları, özel ipuçları ve destek için Telegram kanalımıza hemen katılın.
-  </p>
-  <a href="https://t.me/parakazanrex" target="_blank" rel="noopener noreferrer"
-     style="display: inline-block; background: #ffcc00; color: #181a29; font-weight: 700; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: background-color 0.3s ease;">
-    Telegram Kanalı &rarr;
-  </a>
-</section>
-<!-- Sayfa sonuna, </body> kapanmadan önce ekle -->
-
-<footer style="background:#121826; color:#aaa; padding: 20px 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align:center; font-size: 0.9rem;">
-  <div style="max-width: 720px; margin: auto;">
-    <a href="/gizlilik-politikasi.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Gizlilik Politikası</a> |
-    <a href="/kullanim-kosullari.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Kullanım Koşulları</a> |
-    <a href="/hakkimizda.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Hakkımızda</a>
-    <p style="margin-top: 12px; color: #666;">© 2025 RexFinans. Tüm hakları saklıdır.</p>
-  </div>
-</footer>
