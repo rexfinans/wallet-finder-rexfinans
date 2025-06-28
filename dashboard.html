@@ -244,7 +244,7 @@
   <input type="password" id="passwordInput" placeholder="Premium Şifre Girin" />
   <button id="unlockPremiumBtn">Premium Kilidini Aç</button>
   <button id="getPasswordBtn">Şifre Al🔑</button>
-  <div id="premiumBadge">🚀 PREMIUM</div>
+  <div id="premiumBadge">⭐ PREMIUM</div>
 </div>
 
 <div>
@@ -426,6 +426,8 @@
           usedBy: userId,
           usedAt: serverTimestamp()
         });
+        // Firestore'da kullanıcıya premium özelliğini ver
+        await setDoc(doc(db, "users", userId), { premium: true }, { merge: true });
       }
 
       premiumUnlocked = true;
@@ -542,15 +544,15 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-  authDomain: "crypto-eccb4.firebaseapp.com",
-  projectId: "crypto-eccb4",
-  storageBucket: "crypto-eccb4.appspot.com",
-  messagingSenderId: "773649197313",
-  appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-  measurementId: "G-B8D9V0V9XE"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+    authDomain: "crypto-eccb4.firebaseapp.com",
+    projectId: "crypto-eccb4",
+    storageBucket: "crypto-eccb4.appspot.com",
+    messagingSenderId: "773649197313",
+    appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
+    measurementId: "G-B8D9V0V9XE"
+  };
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -564,4 +566,3 @@ const firebaseConfig = {
 
 </body>
 </html>
-
