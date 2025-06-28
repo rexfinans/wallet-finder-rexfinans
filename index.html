@@ -39,6 +39,7 @@
   <meta name="twitter:image" content="https://walletfinderrex.site/width_800.jpg" />
 
   <style>
+    /* Aynı stil kodları... */
     .info-section {
       background: rgba(0, 229, 255, 0.1);
       border-radius: 15px;
@@ -50,7 +51,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.7;
     }
-
     .info-section h3 {
       color: #00e5ff;
       font-size: 1.7rem;
@@ -58,17 +58,14 @@
       font-weight: 700;
       text-shadow: 0 0 8px #00e5ff88;
     }
-
     .info-section p {
       font-size: 1.1rem;
       margin-bottom: 15px;
       letter-spacing: 0.03em;
     }
-
     .info-section strong {
       color: #00ffffcc;
     }
-
     @media (max-width: 480px) {
       .info-section {
         padding: 18px 20px;
@@ -81,7 +78,6 @@
         font-size: 1rem;
       }
     }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -93,7 +89,6 @@
       min-height: 100vh;
       padding: 20px;
     }
-
     .logo {
       font-size: 2.8rem;
       font-weight: bold;
@@ -101,23 +96,15 @@
       text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
       animation: blink 1.5s infinite;
     }
-
     @keyframes blink {
-      0%, 100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.6;
-      }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
     }
-
     .title {
       font-size: 2rem;
       font-weight: 600;
       margin-top: 10px;
     }
-
     .highlight-box {
       background: rgba(255, 255, 255, 0.05);
       padding: 15px;
@@ -126,15 +113,12 @@
       text-align: center;
       max-width: 600px;
     }
-
     .highlight-box p {
       font-size: 1rem;
       color: #ddd;
       line-height: 1.5;
     }
-
-    input,
-    button {
+    input, button {
       margin: 8px 0;
       padding: 12px 16px;
       width: 100%;
@@ -145,17 +129,14 @@
       outline: none;
       box-sizing: border-box;
     }
-
     input {
       background: #ffffff22;
       border: 1px solid #ccc;
       color: white;
     }
-
     input::placeholder {
       color: #ccc;
     }
-
     button {
       background-color: #00bcd4;
       color: white;
@@ -164,11 +145,9 @@
       transition: background 0.3s;
       border: none;
     }
-
     button:hover {
       background-color: #0097a7;
     }
-
     #message {
       margin-top: 10px;
       min-height: 24px;
@@ -177,7 +156,6 @@
       max-width: 320px;
       word-wrap: break-word;
     }
-
     .feature-list {
       margin-top: 30px;
       max-width: 700px;
@@ -185,23 +163,19 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
     }
-
     .feature-list h3 {
       color: #00e5ff;
       font-size: 1.4rem;
       margin-bottom: 10px;
     }
-
     .feature-list ul {
       padding-left: 20px;
     }
-
     .feature-list li {
       line-height: 1.6;
       color: #ccc;
       margin-bottom: 6px;
     }
-
     .telegram-btn {
       margin-top: 15px;
       background: #0088cc;
@@ -214,17 +188,14 @@
       border: none;
       padding: 12px;
     }
-
     .telegram-btn:hover {
       background: #006699;
     }
-
     .auth-container {
       max-width: 320px;
       margin: auto;
       text-align: center;
     }
-
     .tabs {
       display: flex;
       justify-content: center;
@@ -233,7 +204,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     .tabs button {
       flex: 1;
       padding: 10px 0;
@@ -246,54 +216,24 @@
       transition: background 0.3s, color 0.3s;
       max-width: 160px;
     }
-
     .tabs button.active {
       background: #00bcd4;
       color: white;
       box-shadow: 0 0 8px #00bcd4;
     }
 
-    #fakeNotifications {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
+    /* Yeni bakiye alanı */
+    .balance-box {
+      background: rgba(0,0,0,0.3);
       max-width: 320px;
-      z-index: 9999;
-      font-family: Arial, sans-serif;
-    }
-
-    .notif {
-      background: #222;
-      color: #fff;
-      padding: 12px 18px;
-      margin-top: 10px;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-      opacity: 0;
-      transform: translateX(-100%);
-      animation: slideInOut 5s forwards;
-    }
-
-    @keyframes slideInOut {
-      0% {
-        opacity: 0;
-        transform: translateX(-100%);
-      }
-
-      20% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      80% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateX(-100%);
-      }
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #00e5ff;
+      text-align: center;
+      box-shadow: 0 0 10px #00e5ffaa;
     }
   </style>
 </head>
@@ -306,6 +246,7 @@
       Gelişmiş tarama algoritmalarımızla yüzlerce blockchain ağında cüzdanları analiz ederek aktif bakiyeleri tespit ediyoruz. Size sadece çekmek kalıyor.
     </p>
   </div>
+
   <div class="auth-container">
     <div class="tabs">
       <button id="loginTab" class="active" onclick="showForm('login')">Giriş Yap</button>
@@ -325,6 +266,11 @@
     </form>
 
     <div id="message"></div>
+  </div>
+
+  <!-- Bakiye gösterimi -->
+  <div id="balanceBox" class="balance-box" style="display:none;">
+    Bakiyeniz: <span id="balanceAmount">0</span> USDT
   </div>
 
   <div class="feature-list">
@@ -353,106 +299,50 @@
   <section class="info-section" id="about">
     <h3>ℹ️ HAKKINDA ℹ️</h3>
     <p>💎 <strong>RexFinans Wallet Finder</strong>, kripto dünyasında kayıp, unutulmuş veya erişimi zor cüzdanları bulmanızı sağlayan güçlü bir araçtır.</p>
-    <p>🌍 Binlerce kullanıcı tarafından güvenle kullanılan sistem, blockchain verilerini hızlıca analiz ederek size kazanç fırsatları sunar.</p>
-    <p>🔧 Gelişmiş teknoloji ile tasarlanmış olup, kullanıcı dostu arayüzü sayesinde herkes kolayca kullanabilir.</p>
-    <p>📢 Destek için Telegram kanalımıza katılabilir, güncellemelerden anında haberdar olabilirsiniz.</p>
+    <p>⚡️ Gelişmiş blockchain tarama algoritmaları sayesinde, milyonlarca işlem arasından hızlıca sonuç sunar.</p>
+    <p>🔧 Amacımız, dijital varlıklarınızı korumanıza destek olmak ve kripto dünyasında şeffaflığı artırmaktır.</p>
+    <p>🤝 Kullanıcı dostu arayüzü, hem yeni başlayanlar hem de profesyoneller için idealdir.</p>
+    <p>🌐 Sürekli güncellenen altyapımız ile her zaman en doğru ve güncel veriye erişebilirsiniz.</p>
   </section>
-<!-- CAM İSTATİSTİK + YORUM ALANI -->
-<div style="margin: 60px auto; max-width: 900px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
-  <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
-    <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Bugünkü Ziyaretçi</h3>
-    <div id="visitorCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+
+  <!-- İstatistik ve yorum alanı -->
+  <div style="margin: 60px auto; max-width: 900px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+    <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
+      <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Bugünkü Ziyaretçi</h3>
+      <div id="visitorCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+    </div>
+    <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
+      <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Toplam Çekim</h3>
+      <div id="withdrawCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+    </div>
+    <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
+      <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Aktif Kullanıcı</h3>
+      <div id="activeUserCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+    </div>
   </div>
-  <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
-    <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Toplam Çekim</h3>
-    <div id="withdrawCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
+
+  <div style="max-width: 800px; margin: 0 auto 70px; background: rgba(255,255,255,0.06); border-radius: 10px; padding: 20px 30px; text-align: center; box-shadow: 0 0 12px #00e5ff55;">
+    <div id="commentBox" style="font-size: 1.1rem; color: #ddd; font-style: italic; min-height: 40px;"></div>
   </div>
-  <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
-    <h3 style="color: #00e5ff; font-size: 1.2rem; margin-bottom: 10px;">Aktif Kullanıcı</h3>
-    <div id="activeUserCount" style="font-size: 2.4rem; font-weight: bold; color: #fff;">0</div>
-  </div>
-</div>
 
-<div style="max-width: 800px; margin: 0 auto 70px; background: rgba(255,255,255,0.06); border-radius: 10px; padding: 20px 30px; text-align: center; box-shadow: 0 0 12px #00e5ff55;">
-  <div id="commentBox" style="font-size: 1.1rem; color: #ddd; font-style: italic; min-height: 40px;"></div>
-</div>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-<script>
-  function animateNumber(id, target, duration) {
-    const el = document.getElementById(id);
-    let start = 0;
-    const step = Math.ceil(duration / target);
-    const interval = setInterval(() => {
-      start++;
-      el.textContent = start.toLocaleString("tr-TR");
-      if (start >= target) clearInterval(interval);
-    }, step);
-  }
-
-  // Sahte istatistik verileri (her yenilemede farklı)
-  const visitorCount = Math.floor(Math.random() * 40 + 170); // 1700-210
-  const withdrawCount = Math.floor(Math.random() * 70 + 100);  // 100-170
-  const activeUsers = Math.floor(Math.random() * 90 + 220);    // 220-310
-
-  animateNumber("visitorCount", visitorCount, 120);
-  animateNumber("withdrawCount", withdrawCount, 120);
-  animateNumber("activeUserCount", activeUsers, 120);
-
-  // Dönen yorumlar
-const comments = [
-  "💬 İlk günümde çekim yaptım, teşekkürler!",
-  "🚀 Premium alınca kazancım arttı, mükemmel sistem.",
-  "🛡️ Giriş kolay, çekim hızlı ve güvenli.",
-  "💸 Kazançlarım anlık yansıyor, şaka gibi!",
-  "🔥 Her gün tarama yapıyorum, harika sonuçlar çıkıyor.",
-  "✅ Telegram destek hızlı ve yardımcı oldular.",
-  "🎯 kesinlikle tavsiye ederim!",
-  "💎 Kullanımı çok basit, herkes anlayabilir.",
-  "⚡ Site çok hızlı, beklemek yok!",
-  "🎉 İlk çekimim 15 dakikada onaylandı, müthiş!",
-  "🌟 Premium üyelik fiyatına kesinlikle değer.",
-  "🔒 Güvenlik konusunda hiç endişem yok.",
-  "📱 Mobilde de mükemmel çalışıyor, kolay erişim sağlıyor.",
-  "💡 Referans sistemi ile ek gelir elde ettim, teşekkürler!",
-  "🌐 Çoklu zincir desteği gerçekten çok işime yaradı.",
-  "💰 Kazandıklarımı kolayca çekebiliyorum, süper!",
-  "🙌 Kullanıcı deneyimi harika, çok sade tasarım.",
-  "📊 İstatistikler gerçek zamanlı ve çok faydalı.",
-  "👨‍💻 Destek ekibi her soruma hızlı dönüş yaptı.",
-  "✨ Her gün yeni cüzdanlar ekleniyor, heyecan verici!"
-];
-
-
-  let commentIndex = 0;
-  const commentBox = document.getElementById("commentBox");
-
-  function updateComment() {
-    commentBox.textContent = comments[commentIndex];
-    commentIndex = (commentIndex + 1) % comments.length;
-  }
-
-  updateComment();
-  setInterval(updateComment, 4500);
-</script>
-  <div id="fakeNotifications"></div>
-
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
   <script>
-    // Firebase yapılandırma
+    // Firebase config ve init
     const firebaseConfig = {
-      apiKey: "AIzaSyDgihA67NgXbEvfWmlKNVWW-31lM13A6fI",
-      authDomain: "wallet-finder-rexfinans.firebaseapp.com",
-      projectId: "wallet-finder-rexfinans",
-      storageBucket: "wallet-finder-rexfinans.appspot.com",
-      messagingSenderId: "314508607511",
-      appId: "1:314508607511:web:18b6ea2dfd38718e87e279",
-      measurementId: "G-RRCKQZXDC5"
+      apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
+      authDomain: "crypto-eccb4.firebaseapp.com",
+      projectId: "crypto-eccb4",
+      storageBucket: "crypto-eccb4.appspot.com",
+      messagingSenderId: "773649197313",
+      appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
+      measurementId: "G-B8D9V0V9XE"
     };
-
-    // Firebase başlat
     firebase.initializeApp(firebaseConfig);
+
     const auth = firebase.auth();
     const db = firebase.firestore();
 
@@ -463,214 +353,264 @@ const comments = [
         document.getElementById('registerForm').style.display = 'none';
         document.getElementById('loginTab').classList.add('active');
         document.getElementById('registerTab').classList.remove('active');
-        clearMessage();
+        document.getElementById('message').textContent = '';
+        document.getElementById('message').style.color = 'yellow';
       } else {
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('registerForm').style.display = 'block';
         document.getElementById('loginTab').classList.remove('active');
         document.getElementById('registerTab').classList.add('active');
-        clearMessage();
+        document.getElementById('message').textContent = '';
+        document.getElementById('message').style.color = 'yellow';
       }
     }
 
-    // Mesaj göster
-    function showMessage(msg, color = 'yellow') {
-      const messageDiv = document.getElementById('message');
-      messageDiv.style.color = color;
-      messageDiv.textContent = msg;
+    // Kullanıcı giriş fonksiyonu
+    function login() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const message = document.getElementById('message');
+
+      if (!email || !password) {
+        message.style.color = "yellow";
+        message.textContent = "E-posta ve şifre giriniz.";
+        return;
+      }
+
+      message.style.color = 'yellow';
+      message.textContent = 'Giriş yapılıyor...';
+
+      auth.signInWithEmailAndPassword(email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+
+        // localStorage'a kaydet
+        localStorage.setItem("userId", user.uid);
+
+        // Bakiye çek ve göster
+        await loadUserBalance(user.uid);
+
+        message.style.color = "lightgreen";
+        message.textContent = "Giriş başarılı! Yönlendiriliyorsunuz...";
+        setTimeout(() => window.location.href = "dashboard.html", 1500);
+      })
+      .catch((error) => {
+        message.style.color = "red";
+        message.textContent = "Hata: " + error.message;
+      });
     }
 
-    function clearMessage() {
-      document.getElementById('message').textContent = '';
-    }
-
-    // Kayıt ol
+    // Kayıt fonksiyonu
     async function register() {
       const email = document.getElementById('registerEmail').value.trim();
       const password = document.getElementById('registerPassword').value.trim();
+      const message = document.getElementById('message');
 
       if (!email || !password) {
-        showMessage('Lütfen e-posta ve şifrenizi girin!', 'red');
+        message.style.color = "yellow";
+        message.textContent = "E-posta ve şifre giriniz.";
         return;
       }
+
+      message.style.color = 'yellow';
+      message.textContent = 'Kayıt yapılıyor...';
 
       try {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
 
-        // Kullanıcı bilgilerini Firestore'a kaydet
-        await db.collection('users').doc(user.uid).set({
+        // Referrer varsa al
+        const ref = localStorage.getItem("referrer");
+
+        await db.collection("users").doc(user.uid).set({
           email: email,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          role: "user",
           premium: false,
-          balance: 0,
-          notes: '',
           banned: false,
+          registeredAt: firebase.firestore.FieldValue.serverTimestamp(),
           lastLogin: null,
-          isAdmin: false
+          note: "",
+          referredBy: ref || null,
+          invites: 0,
+          currentLevel: 0,
+          balance: 0  // Yeni eklenen bakiye alanı
         });
 
-        showMessage('Kayıt başarılı! Lütfen giriş yapın.', 'lightgreen');
+        // Davet eden kişiye 3 level ekle
+        if (ref) {
+          const refUserRef = db.collection("users").doc(ref);
+          const refUserSnap = await refUserRef.get();
+          if (refUserSnap.exists) {
+            const refData = refUserSnap.data();
+            const invites = refData.invites || 0;
+            const level = refData.currentLevel || 0;
+
+            await refUserRef.update({
+              invites: invites + 1,
+              currentLevel: level + 3
+            });
+          }
+        }
+
+        message.style.color = "lightgreen";
+        message.textContent = "Kayıt başarılı! Giriş yapabilirsiniz.";
         showForm('login');
+
       } catch (error) {
-        showMessage('Kayıt hatası: ' + error.message, 'red');
+        message.style.color = "red";
+        message.textContent = "Hata: " + error.message;
       }
     }
 
-    // Giriş yap
-    async function login() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
+    // Referrer query param kontrolü
+    const params = new URLSearchParams(window.location.search);
+    const referrerId = params.get("ref");
+    if (referrerId) {
+      localStorage.setItem("referrer", referrerId);
+    }
 
-      if (!email || !password) {
-        showMessage('Lütfen e-posta ve şifrenizi girin!', 'red');
-        return;
-      }
-
+    // Kullanıcı giriş yaptığında bakiye gösterimi için
+    async function loadUserBalance(uid) {
+      const balanceBox = document.getElementById("balanceBox");
+      const balanceAmount = document.getElementById("balanceAmount");
       try {
-        const userCredential = await auth.signInWithEmailAndPassword(email, password);
-        const user = userCredential.user;
-
-        // Kullanıcının ban durumu kontrolü
-        const userDoc = await db.collection('users').doc(user.uid).get();
+        const userDoc = await db.collection("users").doc(uid).get();
         if (userDoc.exists) {
-          const userData = userDoc.data();
-
-          if (userData.banned) {
-            showMessage('Hesabınız engellenmiş.', 'red');
-            await auth.signOut();
-            return;
-          }
-
-          // Last login tarihini güncelle
-          await db.collection('users').doc(user.uid).update({
-            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-          });
-
-          // Başarılı giriş mesajı ve yönlendirme
-          showMessage('Giriş başarılı! Yönlendiriliyorsunuz...', 'lightgreen');
-          // Örnek yönlendirme:
-          setTimeout(() => {
-            window.location.href = 'panel.html'; // Panel sayfan varsa buraya yönlendir
-          }, 1500);
+          const data = userDoc.data();
+          const balance = data.balance || 0;
+          balanceAmount.textContent = balance.toFixed(2);
+          balanceBox.style.display = "block";
         } else {
-          showMessage('Kullanıcı bulunamadı.', 'red');
-          await auth.signOut();
+          balanceBox.style.display = "none";
         }
       } catch (error) {
-        showMessage('Giriş hatası: ' + error.message, 'red');
+        console.error("Bakiye yüklenirken hata:", error);
       }
     }
 
-    // Sahte bildirim göstermek için
-    const fakeNotifications = document.getElementById('fakeNotifications');
-    const messages = [
-      "Yeni kullanıcı kayıt oldu!",
-      "10 USDT çekim talebi onaylandı.",
-      "Premium abonelik aktif edildi.",
-      "Sistem güncellemesi tamamlandı.",
-      "Görev tamamlandı, ödül hesabınıza yüklendi."
+    // Sahte istatistik ve yorum animasyonları (orijinal kodun aynısı)
+    function animateNumber(id, target, duration) {
+      const el = document.getElementById(id);
+      let start = 0;
+      const step = Math.ceil(duration / target);
+      const interval = setInterval(() => {
+        start++;
+        el.textContent = start.toLocaleString("tr-TR");
+        if (start >= target) clearInterval(interval);
+      }, step);
+    }
+
+    const visitorCount = Math.floor(Math.random() * 40 + 170);
+    const withdrawCount = Math.floor(Math.random() * 70 + 100);
+    const activeUsers = Math.floor(Math.random() * 90 + 220);
+
+    animateNumber("visitorCount", visitorCount, 120);
+    animateNumber("withdrawCount", withdrawCount, 120);
+    animateNumber("activeUserCount", activeUsers, 120);
+
+    const comments = [
+      "💬 İlk günümde çekim yaptım, teşekkürler!",
+      "🚀 Premium alınca kazancım arttı, mükemmel sistem.",
+      "🛡️ Giriş kolay, çekim hızlı ve güvenli.",
+      "💸 Kazançlarım anlık yansıyor, şaka gibi!",
+      "🔥 Her gün tarama yapıyorum, harika sonuçlar çıkıyor.",
+      "✅ Telegram destek hızlı ve yardımcı oldular.",
+      "🎯 kesinlikle tavsiye ederim!",
+      "💎 Kullanımı çok basit, herkes anlayabilir.",
+      "⚡ Site çok hızlı, beklemek yok!",
+      "🎉 İlk çekimim 15 dakikada onaylandı, müthiş!",
+      "🌟 Premium üyelik fiyatına kesinlikle değer.",
+      "🔒 Güvenlik konusunda hiç endişem yok.",
+      "📱 Mobilde de mükemmel çalışıyor, kolay erişim sağlıyor.",
+      "💡 Referans sistemi ile ek gelir elde ettim, teşekkürler!",
+      "🌐 Çoklu zincir desteği gerçekten çok işime yaradı.",
+      "💰 Kazandıklarımı kolayca çekebiliyorum, süper!",
+      "🙌 Kullanıcı deneyimi harika, çok sade tasarım.",
+      "📊 İstatistikler gerçek zamanlı ve çok faydalı.",
+      "👨‍💻 Destek ekibi her soruma hızlı dönüş yaptı.",
+      "✨ Her gün yeni cüzdanlar ekleniyor, heyecan verici!"
     ];
 
+    let commentIndex = 0;
+    const commentBox = document.getElementById("commentBox");
+
+    function updateComment() {
+      commentBox.textContent = comments[commentIndex];
+      commentIndex = (commentIndex + 1) % comments.length;
+    }
+
+    updateComment();
+    setInterval(updateComment, 4500);
+
+    // Sahte bildirimler
+    const fullNames = ["Mehmet", "Ahmet", "Hasan", "Ali", "Fatma", "Zeynep", "Emin", "Can", "Deniz", "Emir"];
+    const amounts = [12, 13, 14, 11, 12, 8, 9, 19, 40, 39, 27, 35, 17, 33, 44, 48];
+
+    function randomElem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function maskName(name) {
+      if(name.length < 2) return name + "***";
+      return name.charAt(0) + "***";
+    }
+
     function showFakeNotification() {
-      const notif = document.createElement('div');
-      notif.className = 'notif';
-      notif.textContent = messages[Math.floor(Math.random() * messages.length)];
-      fakeNotifications.appendChild(notif);
+      const notifContainer = document.getElementById("fakeNotifications");
+      const name = maskName(randomElem(fullNames));
+      const amount = randomElem(amounts);
+
+      const notif = document.createElement("div");
+      notif.classList.add("notif");
+      notif.textContent = `${name} ${amount} USDT çekim yaptı`;
+
+      notifContainer.appendChild(notif);
 
       setTimeout(() => {
         notif.remove();
       }, 5000);
     }
 
-    setInterval(showFakeNotification, 10000);
+    showFakeNotification();
+    setInterval(showFakeNotification, 50000);
   </script>
+
+  <style>
+    #fakeNotifications {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      max-width: 320px;
+      z-index: 9999;
+      font-family: Arial, sans-serif;
+    }
+
+    .notif {
+      background: #222;
+      color: #fff;
+      padding: 12px 18px;
+      margin-top: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.
+      0.6);
+      opacity: 0.9;
+      animation: slideIn 0.5s forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 0.9;
+      }
+    }
+  </style>
+
+  <div id="fakeNotifications"></div>
+
 </body>
 </html>
 
-<section id="footer" style="background: #181a29; color: #eee; padding: 30px 20px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <h2 style="font-weight: 700; font-size: 1.8rem; margin-bottom: 12px; color: #00bfff;">📢 Bizi Takip Edin!</h2>
-  <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 18px; line-height: 1.5; color: #ccc;">
-    En yeni kazanç fırsatları, özel ipuçları ve destek için Telegram kanalımıza hemen katılın.
-  </p>
-  <a href="https://t.me/parakazanrex" target="_blank" rel="noopener noreferrer"
-     style="display: inline-block; background: #ffcc00; color: #181a29; font-weight: 700; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: background-color 0.3s ease;">
-    Telegram Kanalı &rarr;
-  </a>
-</section>
-
-<footer style="background:#121826; color:#aaa; padding: 20px 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align:center; font-size: 0.9rem;">
-  <div style="max-width: 720px; margin: auto;">
-    <a href="/gizlilik-politikasi.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Gizlilik Politikası</a> |
-    <a href="/kullanim-kosullari.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Kullanım Koşulları</a> |
-    <a href="/hakkimizda.html" style="color:#00bcd4; text-decoration:none; margin: 0 10px;" target="_blank" rel="noopener noreferrer">Hakkımızda</a>
-    <p style="margin-top: 12px; color: #666;">© 2025 RexFinans. Tüm hakları saklıdır.</p>
-  </div>
-</footer>
-
-
-
-<style>
-  #fakeNotifications {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    max-width: 320px;
-    z-index: 9999;
-    font-family: Arial, sans-serif;
-  }
-
-  .notif {
-    background: #222;
-    color: #fff;
-    padding: 12px 18px;
-    margin-top: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.6);
-    opacity: 0;
-    transform: translateX(-100%);
-    animation: slideInOut 5s forwards;
-  }
-
-  @keyframes slideInOut {
-    0% {opacity: 0; transform: translateX(-100%);}
-    20% {opacity: 1; transform: translateX(0);}
-    80% {opacity: 1; transform: translateX(0);}
-    100% {opacity: 0; transform: translateX(-100%);}
-  }
-</style>
-
-<div id="fakeNotifications"></div>
-
-<script>
-  const fullNames = ["Mehmet", "Ahmet", "Hasan", "Ali", "Fatma", "Zeynep", "Emin", "Can", "Deniz", "Emir"];
-  const amounts = [12, 13, 14, 11, 12, 8, 9, 19, 40, 39, 27, 35, 17, 33, 44, 48];
-
-  function randomElem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-
-  function maskName(name) {
-    if(name.length < 2) return name + "***";
-    return name.charAt(0) + "***";
-  }
-
-  function showFakeNotification() {
-    const notifContainer = document.getElementById("fakeNotifications");
-    const name = maskName(randomElem(fullNames));
-    const amount = randomElem(amounts);
-
-    const notif = document.createElement("div");
-    notif.classList.add("notif");
-    notif.textContent = `${name} ${amount} USDT çekim yaptı`;
-
-    notifContainer.appendChild(notif);
-
-    setTimeout(() => {
-      notif.remove();
-    }, 5000);
-  }
-
-  showFakeNotification();
-  setInterval(showFakeNotification, 50000);
-</script>
