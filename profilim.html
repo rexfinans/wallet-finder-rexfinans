@@ -155,8 +155,16 @@
         if (userDoc.exists()) {
           const data = userDoc.data();
           emailEl.textContent = data.email || "Bilinmiyor";
-          joinDateEl.textContent = data.joinDate ? new Date(data.joinDate.seconds * 1000).toLocaleDateString() : "-";
-          lastLoginEl.textContent = data.lastLogin ? new Date(data.lastLogin.seconds * 1000).toLocaleString() : "-";
+
+          // Tarih alanları registeredAt ya da joinDate olabilir, kontrol ediyoruz
+          const regDate = data.registeredAt || data.joinDate;
+          joinDateEl.textContent = regDate
+            ? new Date(regDate.seconds * 1000).toLocaleDateString()
+            : "-";
+
+          lastLoginEl.textContent = data.lastLogin
+            ? new Date(data.lastLogin.seconds * 1000).toLocaleString()
+            : "-";
         } else {
           emailEl.textContent = "-";
           joinDateEl.textContent = "-";
@@ -182,11 +190,11 @@
     }
 
     function listenBalance(userId) {
-      const balanceRef = doc(db, "balances", userId);
-      return onSnapshot(balanceRef, (docSnap) => {
+      const userRef = doc(db, "users", userId);
+      return onSnapshot(userRef, (docSnap) => {
         if (docSnap.exists()) {
           const data = docSnap.data();
-          balanceInput.value = data.amount?.toFixed(4) || "0.0000";
+          balanceInput.value = (data.balance ?? 0).toFixed(4);
         } else {
           balanceInput.value = "0.0000";
         }
@@ -198,10 +206,10 @@
 
     refreshBalanceBtn.addEventListener("click", async () => {
       try {
-        const balanceDoc = await getDoc(doc(db, "balances", userId));
-        if (balanceDoc.exists()) {
-          const data = balanceDoc.data();
-          balanceInput.value = data.amount?.toFixed(4) || "0.0000";
+        const userDoc = await getDoc(doc(db, "users", userId));
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          balanceInput.value = (data.balance ?? 0).toFixed(4);
           alert("Bakiye yenilendi!");
         } else {
           balanceInput.value = "0.0000";
@@ -231,16 +239,17 @@
       });
     });
   </script>
+
 <!-- Menü -->
-  <div id="bottomMenu"></div>
-  <script>
-    fetch("bottom-menu.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bottomMenu").innerHTML = html;
-      });
-  </script>
-  <script src="menü.js"></script>
+<div id="bottomMenu"></div>
+<script>
+  fetch("bottom-menu.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("bottomMenu").innerHTML = html;
+    });
+</script>
+<script src="menü.js"></script>
 
 </body>
 </html>
