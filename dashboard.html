@@ -388,7 +388,7 @@
       }, 1500);
 
       // Firestore'a bakiye güncelle
-      await updateDoc(doc(db, "balances", userId), { amount: balance });
+     await updateDoc(doc(db, "users", userId), { balance: balance });
 
       // Firestore'a geçmişe yaz
       await setDoc(doc(db, "scanLogs", `${userId}_${Date.now()}`), {
@@ -477,16 +477,14 @@
     }
 
     userId = user.uid;
-
-    // Kullanıcının bakiyesini al
-    const balanceRef = doc(db, "balances", user.uid);
-    const balanceSnap = await getDoc(balanceRef);
-    if (balanceSnap.exists()) {
-      balance = balanceSnap.data().amount || 0;
-      balanceBelowScan.textContent = balance.toFixed(4);
-    } else {
-      balanceBelowScan.textContent = "0.0000";
-    }
+const userRef = doc(db, "users", user.uid);
+const userSnap = await getDoc(userRef);
+if (userSnap.exists()) {
+  balance = userSnap.data().balance || 0;
+  balanceBelowScan.textContent = balance.toFixed(4);
+} else {
+  balanceBelowScan.textContent = "0.0000";
+}
 
     // Firestore’dan kullanıcı premium mu diye kontrol et
     const userDoc = await getDoc(doc(db, "users", user.uid));
