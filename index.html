@@ -1,4 +1,6 @@
- <head>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -35,51 +37,50 @@
   <meta name="twitter:title" content="💸 RexFinans Wallet Finder ile Ücretsiz Kazanç" />
   <meta name="twitter:description" content="USDT ve coin kazanmanın en kolay yolu! Görev yap, referans kazan, cüzdan tara. RexFinans kazandırır!" />
   <meta name="twitter:image" content="https://walletfinderrex.site/width_800.jpg" />
-</head>
 
- <style>
-.info-section {
-  background: rgba(0, 229, 255, 0.1);
-  border-radius: 15px;
-  max-width: 720px;
-  margin: 35px auto 15px;
-  padding: 25px 30px;
-  color: #e0f7fa;
-  box-shadow: 0 0 15px #00e5ffcc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.7;
-}
+  <style>
+    .info-section {
+      background: rgba(0, 229, 255, 0.1);
+      border-radius: 15px;
+      max-width: 720px;
+      margin: 35px auto 15px;
+      padding: 25px 30px;
+      color: #e0f7fa;
+      box-shadow: 0 0 15px #00e5ffcc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+    }
 
-.info-section h3 {
-  color: #00e5ff;
-  font-size: 1.7rem;
-  margin-bottom: 18px;
-  font-weight: 700;
-  text-shadow: 0 0 8px #00e5ff88;
-}
+    .info-section h3 {
+      color: #00e5ff;
+      font-size: 1.7rem;
+      margin-bottom: 18px;
+      font-weight: 700;
+      text-shadow: 0 0 8px #00e5ff88;
+    }
 
-.info-section p {
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-  letter-spacing: 0.03em;
-}
+    .info-section p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      letter-spacing: 0.03em;
+    }
 
-.info-section strong {
-  color: #00ffffcc;
-}
+    .info-section strong {
+      color: #00ffffcc;
+    }
 
-@media (max-width: 480px) {
-  .info-section {
-    padding: 18px 20px;
-    margin: 30px 12px 15px;
-  }
-  .info-section h3 {
-    font-size: 1.4rem;
-  }
-  .info-section p {
-    font-size: 1rem;
-  }
-}
+    @media (max-width: 480px) {
+      .info-section {
+        padding: 18px 20px;
+        margin: 30px 12px 15px;
+      }
+      .info-section h3 {
+        font-size: 1.4rem;
+      }
+      .info-section p {
+        font-size: 1rem;
+      }
+    }
 
     body {
       margin: 0;
@@ -92,6 +93,7 @@
       min-height: 100vh;
       padding: 20px;
     }
+
     .logo {
       font-size: 2.8rem;
       font-weight: bold;
@@ -99,15 +101,23 @@
       text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
       animation: blink 1.5s infinite;
     }
+
     @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+      0%, 100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
     }
+
     .title {
       font-size: 2rem;
       font-weight: 600;
       margin-top: 10px;
     }
+
     .highlight-box {
       background: rgba(255, 255, 255, 0.05);
       padding: 15px;
@@ -116,12 +126,15 @@
       text-align: center;
       max-width: 600px;
     }
+
     .highlight-box p {
       font-size: 1rem;
       color: #ddd;
       line-height: 1.5;
     }
-    input, button {
+
+    input,
+    button {
       margin: 8px 0;
       padding: 12px 16px;
       width: 100%;
@@ -132,14 +145,17 @@
       outline: none;
       box-sizing: border-box;
     }
+
     input {
       background: #ffffff22;
       border: 1px solid #ccc;
       color: white;
     }
+
     input::placeholder {
       color: #ccc;
     }
+
     button {
       background-color: #00bcd4;
       color: white;
@@ -148,9 +164,11 @@
       transition: background 0.3s;
       border: none;
     }
+
     button:hover {
       background-color: #0097a7;
     }
+
     #message {
       margin-top: 10px;
       min-height: 24px;
@@ -159,6 +177,7 @@
       max-width: 320px;
       word-wrap: break-word;
     }
+
     .feature-list {
       margin-top: 30px;
       max-width: 700px;
@@ -166,19 +185,23 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
     }
+
     .feature-list h3 {
       color: #00e5ff;
       font-size: 1.4rem;
       margin-bottom: 10px;
     }
+
     .feature-list ul {
       padding-left: 20px;
     }
+
     .feature-list li {
       line-height: 1.6;
       color: #ccc;
       margin-bottom: 6px;
     }
+
     .telegram-btn {
       margin-top: 15px;
       background: #0088cc;
@@ -191,14 +214,17 @@
       border: none;
       padding: 12px;
     }
+
     .telegram-btn:hover {
       background: #006699;
     }
+
     .auth-container {
       max-width: 320px;
       margin: auto;
       text-align: center;
     }
+
     .tabs {
       display: flex;
       justify-content: center;
@@ -207,6 +233,7 @@
       margin-left: auto;
       margin-right: auto;
     }
+
     .tabs button {
       flex: 1;
       padding: 10px 0;
@@ -219,15 +246,59 @@
       transition: background 0.3s, color 0.3s;
       max-width: 160px;
     }
+
     .tabs button.active {
       background: #00bcd4;
       color: white;
       box-shadow: 0 0 8px #00bcd4;
     }
+
+    #fakeNotifications {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      max-width: 320px;
+      z-index: 9999;
+      font-family: Arial, sans-serif;
+    }
+
+    .notif {
+      background: #222;
+      color: #fff;
+      padding: 12px 18px;
+      margin-top: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slideInOut 5s forwards;
+    }
+
+    @keyframes slideInOut {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      20% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      80% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
   </style>
 </head>
 <body>
-   <div class="logo">REX FİNANS</div>
+  <div class="logo">REX FİNANS</div>
   <div class="title">WALLET FINDER</div>
 
   <div class="highlight-box">
@@ -269,26 +340,23 @@
 
   <button class="telegram-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">📲 Telegram Destek</button>
 
-<section class="info-section" id="howItWorks">
-  <h3>🚀 NASIL ÇALIŞIR?</h3>
-  <p>1️⃣ Sistem, otomatik olarak blockchain ağlarını tarar ve <strong>binlerce cüzdanı hızlıca analiz eder.</strong></p>
-  <p>2️⃣ Siz sadece “Taramayı Başlat” düğmesine basarsınız, gerisini sistem sizin için halleder.</p>
-  <p>3️⃣ Tarama sonuçlarında, <strong>kazanılabilir bakiyeler, işlem geçmişi ve güncel durum</strong> size şeffaf şekilde sunulur.</p>
-  <p>💰 Kazandığınız bakiyeyi kolayca çekebilir, anlık olarak takip edebilirsiniz.</p>
-  <p>🔐 Tüm verileriniz <strong>gizli ve güvenli</strong> tutulur, hiçbir bilgi paylaşılmaz.</p>
-  <p>⭐ Premium kullanıcılar ise daha hızlı tarama, reklam yok ve ekstra özelliklerle kazançlarını maksimize eder.</p>
-</section>
+  <section class="info-section" id="howItWorks">
+    <h3>🚀 NASIL ÇALIŞIR?</h3>
+    <p>1️⃣ Sistem, otomatik olarak blockchain ağlarını tarar ve <strong>binlerce cüzdanı hızlıca analiz eder.</strong></p>
+    <p>2️⃣ Siz sadece “Taramayı Başlat” düğmesine basarsınız, gerisini sistem sizin için halleder.</p>
+    <p>3️⃣ Tarama sonuçlarında, <strong>kazanılabilir bakiyeler, işlem geçmişi ve güncel durum</strong> size şeffaf şekilde sunulur.</p>
+    <p>💰 Kazandığınız bakiyeyi kolayca çekebilir, anlık olarak takip edebilirsiniz.</p>
+    <p>🔐 Tüm verileriniz <strong>gizli ve güvenli</strong> tutulur, hiçbir bilgi paylaşılmaz.</p>
+    <p>⭐ Premium kullanıcılar ise daha hızlı tarama, reklam yok ve ekstra özelliklerle kazançlarını maksimize eder.</p>
+  </section>
 
-<section class="info-section" id="about">
-  <h3>ℹ️ HAKKINDA ℹ️</h3>
-  <p>💎 <strong>RexFinans Wallet Finder</strong>, kripto dünyasında kayıp, unutulmuş veya erişimi zor cüzdanları bulmanızı sağlayan güçlü bir araçtır.</p>
-  <p>⚡️ Gelişmiş blockchain tarama algoritmaları sayesinde, milyonlarca işlem arasından hızlıca sonuç sunar.</p>
-  <p>🔧 Amacımız, dijital varlıklarınızı korumanıza destek olmak ve kripto dünyasında şeffaflığı artırmaktır.</p>
-  <p>🤝 Kullanıcı dostu arayüzü, hem yeni başlayanlar hem de profesyoneller için idealdir.</p>
-  <p>🌐 Sürekli güncellenen altyapımız ile her zaman en doğru ve güncel veriye erişebilirsiniz.</p>
-</section>
-</script>
-
+  <section class="info-section" id="about">
+    <h3>ℹ️ HAKKINDA ℹ️</h3>
+    <p>💎 <strong>RexFinans Wallet Finder</strong>, kripto dünyasında kayıp, unutulmuş veya erişimi zor cüzdanları bulmanızı sağlayan güçlü bir araçtır.</p>
+    <p>🌍 Binlerce kullanıcı tarafından güvenle kullanılan sistem, blockchain verilerini hızlıca analiz ederek size kazanç fırsatları sunar.</p>
+    <p>🔧 Gelişmiş teknoloji ile tasarlanmış olup, kullanıcı dostu arayüzü sayesinde herkes kolayca kullanabilir.</p>
+    <p>📢 Destek için Telegram kanalımıza katılabilir, güncellemelerden anında haberdar olabilirsiniz.</p>
+  </section>
 <!-- CAM İSTATİSTİK + YORUM ALANI -->
 <div style="margin: 60px auto; max-width: 900px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
   <div style="flex: 1 1 260px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 10px #00e5ff66;">
@@ -366,163 +434,160 @@ const comments = [
   updateComment();
   setInterval(updateComment, 4500);
 </script>
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <div id="fakeNotifications"></div>
 
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
   <script>
+    // Firebase yapılandırma
     const firebaseConfig = {
-      apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-      authDomain: "crypto-eccb4.firebaseapp.com",
-      projectId: "crypto-eccb4",
-      storageBucket: "crypto-eccb4.appspot.com",
-      messagingSenderId: "773649197313",
-      appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-      measurementId: "G-B8D9V0V9XE"
+      apiKey: "AIzaSyDgihA67NgXbEvfWmlKNVWW-31lM13A6fI",
+      authDomain: "wallet-finder-rexfinans.firebaseapp.com",
+      projectId: "wallet-finder-rexfinans",
+      storageBucket: "wallet-finder-rexfinans.appspot.com",
+      messagingSenderId: "314508607511",
+      appId: "1:314508607511:web:18b6ea2dfd38718e87e279",
+      measurementId: "G-RRCKQZXDC5"
     };
-    firebase.initializeApp(firebaseConfig);
 
+    // Firebase başlat
+    firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-   function login() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value.trim();
-  const message = document.getElementById('message');
-
-  if (!email || !password) {
-    message.style.color = "yellow";
-    message.textContent = "E-posta ve şifre giriniz.";
-    return;
-  }
-
-  message.style.color = 'yellow';
-  message.textContent = 'Giriş yapılıyor...';
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then(async (userCredential) => {
-      const user = userCredential.user;
-
-      // localStorage'a kaydet
-      localStorage.setItem("userId", user.uid);
-
-      // Firestore'da kullanıcı dokümanını kontrol et ve güncelle
-      const userRef = db.collection("users").doc(user.uid);
-      const doc = await userRef.get();
-
-      if (!doc.exists) {
-        // Kullanıcı yoksa yeni kullanıcı oluştur
-        await userRef.set({
-          email: email,
-          role: "user",
-          premium: false,
-          banned: false,
-          registeredAt: firebase.firestore.FieldValue.serverTimestamp(),
-          lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
-          note: "",
-          referredBy: null,
-          invites: 0,
-          currentLevel: 0,
-          balance: 0
-        });
+    // Formlar arası geçiş
+    function showForm(form) {
+      if (form === 'login') {
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginTab').classList.add('active');
+        document.getElementById('registerTab').classList.remove('active');
+        clearMessage();
       } else {
-        // Kullanıcı varsa lastLogin ve eksik alanları güncelle
-        const data = doc.data();
-        const updates = {
-          lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-        };
-        if (data.balance === undefined) updates.balance = 0;
-        if (data.note === undefined) updates.note = "";
-        if (data.role === undefined) updates.role = "user";
-        if (data.banned === undefined) updates.banned = false;
-        if (data.premium === undefined) updates.premium = false;
-        if (data.invites === undefined) updates.invites = 0;
-        if (data.currentLevel === undefined) updates.currentLevel = 0;
-
-        await userRef.update(updates);
-      }
-
-      message.style.color = "lightgreen";
-      message.textContent = "Giriş başarılı! Yönlendiriliyorsunuz...";
-      setTimeout(() => window.location.href = "dashboard.html", 1500);
-    })
-
-    .catch((error) => {
-      message.style.color = "red";
-      message.textContent = "Hata: " + error.message;
-    });
-}
-
-async function register() {
-  const email = document.getElementById('registerEmail').value.trim();
-  const password = document.getElementById('registerPassword').value.trim();
-  const message = document.getElementById('message');
-
-  if (!email || !password) {
-    message.style.color = "yellow";
-    message.textContent = "E-posta ve şifre giriniz.";
-    return;
-  }
-
-  message.style.color = 'yellow';
-  message.textContent = 'Kayıt yapılıyor...';
-
-  try {
-    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-    const user = userCredential.user;
-
-    // ref alındıysa localStorage'tan çek
-    const ref = localStorage.getItem("referrer");
-
-    await db.collection("users").doc(user.uid).set({
-      email: email,
-      role: "user",
-      premium: false,
-      banned: false,
-      registeredAt: firebase.firestore.FieldValue.serverTimestamp(),
-      lastLogin: null,
-      note: "",
-      referredBy: ref || null,
-      invites: 0,
-      currentLevel: 0
-    });
-
-    // Davet eden kişiye 3 level ekle
-    if (ref) {
-      const refUserRef = db.collection("users").doc(ref);
-      const refUserSnap = await refUserRef.get();
-      if (refUserSnap.exists) {
-        const refData = refUserSnap.data();
-        const invites = refData.invites || 0;
-        const level = refData.currentLevel || 0;
-
-        await refUserRef.update({
-          invites: invites + 1,
-          currentLevel: level + 3
-        });
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+        document.getElementById('loginTab').classList.remove('active');
+        document.getElementById('registerTab').classList.add('active');
+        clearMessage();
       }
     }
 
-    message.style.color = "lightgreen";
-    message.textContent = "Kayıt başarılı! Giriş yapabilirsiniz.";
-    showForm('login');
+    // Mesaj göster
+    function showMessage(msg, color = 'yellow') {
+      const messageDiv = document.getElementById('message');
+      messageDiv.style.color = color;
+      messageDiv.textContent = msg;
+    }
 
-  } catch (error) {
-    message.style.color = "red";
-    message.textContent = "Hata: " + error.message;
-  }
-}
+    function clearMessage() {
+      document.getElementById('message').textContent = '';
+    }
 
-  const params = new URLSearchParams(window.location.search);
-  const referrerId = params.get("ref");
-  if (referrerId) {
-    localStorage.setItem("referrer", referrerId);
-  }
+    // Kayıt ol
+    async function register() {
+      const email = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value.trim();
 
-</script>
+      if (!email || !password) {
+        showMessage('Lütfen e-posta ve şifrenizi girin!', 'red');
+        return;
+      }
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Kullanıcı bilgilerini Firestore'a kaydet
+        await db.collection('users').doc(user.uid).set({
+          email: email,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          premium: false,
+          balance: 0,
+          notes: '',
+          banned: false,
+          lastLogin: null,
+          isAdmin: false
+        });
+
+        showMessage('Kayıt başarılı! Lütfen giriş yapın.', 'lightgreen');
+        showForm('login');
+      } catch (error) {
+        showMessage('Kayıt hatası: ' + error.message, 'red');
+      }
+    }
+
+    // Giriş yap
+    async function login() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      if (!email || !password) {
+        showMessage('Lütfen e-posta ve şifrenizi girin!', 'red');
+        return;
+      }
+
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Kullanıcının ban durumu kontrolü
+        const userDoc = await db.collection('users').doc(user.uid).get();
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+
+          if (userData.banned) {
+            showMessage('Hesabınız engellenmiş.', 'red');
+            await auth.signOut();
+            return;
+          }
+
+          // Last login tarihini güncelle
+          await db.collection('users').doc(user.uid).update({
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+          });
+
+          // Başarılı giriş mesajı ve yönlendirme
+          showMessage('Giriş başarılı! Yönlendiriliyorsunuz...', 'lightgreen');
+          // Örnek yönlendirme:
+          setTimeout(() => {
+            window.location.href = 'panel.html'; // Panel sayfan varsa buraya yönlendir
+          }, 1500);
+        } else {
+          showMessage('Kullanıcı bulunamadı.', 'red');
+          await auth.signOut();
+        }
+      } catch (error) {
+        showMessage('Giriş hatası: ' + error.message, 'red');
+      }
+    }
+
+    // Sahte bildirim göstermek için
+    const fakeNotifications = document.getElementById('fakeNotifications');
+    const messages = [
+      "Yeni kullanıcı kayıt oldu!",
+      "10 USDT çekim talebi onaylandı.",
+      "Premium abonelik aktif edildi.",
+      "Sistem güncellemesi tamamlandı.",
+      "Görev tamamlandı, ödül hesabınıza yüklendi."
+    ];
+
+    function showFakeNotification() {
+      const notif = document.createElement('div');
+      notif.className = 'notif';
+      notif.textContent = messages[Math.floor(Math.random() * messages.length)];
+      fakeNotifications.appendChild(notif);
+
+      setTimeout(() => {
+        notif.remove();
+      }, 5000);
+    }
+
+    setInterval(showFakeNotification, 10000);
+  </script>
 </body>
 </html>
+
 <section id="footer" style="background: #181a29; color: #eee; padding: 30px 20px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <h2 style="font-weight: 700; font-size: 1.8rem; margin-bottom: 12px; color: #00bfff;">📢 Bizi Takip Edin!</h2>
   <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 18px; line-height: 1.5; color: #ccc;">
