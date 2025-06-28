@@ -26,22 +26,23 @@
       width: 100%;
       text-align: center;
       box-sizing: border-box;
+      position: relative;
     }
     #profileContainer h2 {
       margin-bottom: 20px;
       font-weight: 700;
       letter-spacing: 1.5px;
     }
-    #profileContainer p {
-      font-size: 16px;
-      margin: 10px 0;
-      word-wrap: break-word;
+    #premiumStatus {
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #ffcc00;
     }
     #balanceInput {
       width: 100%;
       padding: 10px;
       font-size: 16px;
-      margin: 15px 0 25px 0;
+      margin: 15px 0 10px 0;
       border-radius: 8px;
       border: none;
       outline: none;
@@ -72,35 +73,13 @@
     #closeBtn:hover { background: #444; }
     #logoutBtn { background: #f39c12; }
     #logoutBtn:hover { background: #d78b0b; }
-
-    @media (max-width: 400px) {
-      body {
-        height: auto;
-        padding: 15px 10px;
-        align-items: flex-start;
-      }
-      #profileContainer {
-        padding: 20px 15px;
-        max-width: 100%;
-      }
-      #profileContainer h2 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-      }
-      #profileContainer p {
-        font-size: 14px;
-        margin: 8px 0;
-      }
-      #balanceInput {
-        font-size: 14px;
-        padding: 8px;
-        margin: 10px 0 20px 0;
-      }
-      button {
-        font-size: 14px;
-        padding: 10px 0;
-        margin-bottom: 12px;
-      }
+    #refreshBalanceBtn {
+      background: #1abc9c;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+    #refreshBalanceBtn:hover {
+      background: #159a81;
     }
   </style>
 </head>
@@ -108,14 +87,18 @@
 
   <div id="profileContainer">
     <h2>Profil Bilgileri</h2>
+
+    <div id="premiumStatus"></div>
+
     <p><strong>Email:</strong> <span id="email">Yükleniyor...</span></p>
     <p><strong>Kayıt Tarihi:</strong> <span id="joinDate">Yükleniyor...</span></p>
     <p><strong>Son Giriş:</strong> <span id="lastLogin">Yükleniyor...</span></p>
 
     <label for="balanceInput"><strong>Bakiye (USDT):</strong></label>
     <input type="number" id="balanceInput" step="0.0001" min="0" readonly />
+    <button id="refreshBalanceBtn" title="Bakiyeyi yenile">Bakiyeyi Yenile 🔄</button>
 
-    <!-- Destek Butonu -->
+    <!-- Butonlar -->
     <button id="supportBtn">Destek</button>
     <button id="withdrawBtn">Para Çek</button>
     <button id="closeBtn">Kapat</button>
@@ -123,8 +106,9 @@
   </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getFirestore, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
@@ -138,12 +122,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
-    let userId = localStorage.getItem("userId");
-    if (!userId) {
-      userId = 'user_' + Math.random().toString(36).substring(2, 10);
-      localStorage.setItem("userId", userId);
-    }
+    const auth = getAuth(app);
 
     const emailEl = document.getElementById("email");
     const joinDateEl = document.getElementById("joinDate");
@@ -153,38 +132,89 @@
     const withdrawBtn = document.getElementById("withdrawBtn");
     const closeBtn = document.getElementById("closeBtn");
     const logoutBtn = document.getElementById("logoutBtn");
+    const refreshBalanceBtn = document.getElementById("refreshBalanceBtn");
+    const premiumStatusEl = document.getElementById("premiumStatus");
 
-    async function loadUserProfile() {
+    let userId = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+        return;
+      }
+      userId = user.uid;
+
+      await loadUserProfile(userId);
+      listenBalance(userId);
+    });
+
+    async function loadUserProfile(userId) {
       try {
+        // Kullanıcı bilgisi (email, joinDate, lastLogin)
         const userDoc = await getDoc(doc(db, "users", userId));
         if (userDoc.exists()) {
           const data = userDoc.data();
           emailEl.textContent = data.email || "Bilinmiyor";
           joinDateEl.textContent = data.joinDate ? new Date(data.joinDate.seconds * 1000).toLocaleDateString() : "-";
           lastLoginEl.textContent = data.lastLogin ? new Date(data.lastLogin.seconds * 1000).toLocaleString() : "-";
+        } else {
+          emailEl.textContent = "-";
+          joinDateEl.textContent = "-";
+          lastLoginEl.textContent = "-";
         }
+
+        // Premium durumu kontrolü premiumPasswords koleksiyonundan
+        const premiumDoc = await getDoc(doc(db, "premiumPasswords", userId));
+        if (premiumDoc.exists()) {
+          premiumStatusEl.textContent = "⭐ PREMIUM ÜYE";
+          premiumStatusEl.style.color = "#FFD700";
+        } else {
+          premiumStatusEl.textContent = "";
+        }
+
       } catch (error) {
         console.error("Profil yüklenirken hata:", error);
+        emailEl.textContent = "Hata";
+        joinDateEl.textContent = "Hata";
+        lastLoginEl.textContent = "Hata";
+        premiumStatusEl.textContent = "";
       }
     }
 
-    // Bakiye anlık dinleme
-    function listenBalance() {
+    function listenBalance(userId) {
       const balanceRef = doc(db, "balances", userId);
       return onSnapshot(balanceRef, (docSnap) => {
         if (docSnap.exists()) {
           const data = docSnap.data();
-          balanceInput.value = data.amount.toFixed(4);
+          balanceInput.value = data.amount?.toFixed(4) || "0.0000";
         } else {
           balanceInput.value = "0.0000";
         }
       }, (error) => {
         console.error("Bakiye dinlenirken hata:", error);
+        balanceInput.value = "0.0000";
       });
     }
 
+    refreshBalanceBtn.addEventListener("click", async () => {
+      try {
+        const balanceDoc = await getDoc(doc(db, "balances", userId));
+        if (balanceDoc.exists()) {
+          const data = balanceDoc.data();
+          balanceInput.value = data.amount?.toFixed(4) || "0.0000";
+          alert("Bakiye yenilendi!");
+        } else {
+          balanceInput.value = "0.0000";
+          alert("Bakiye bulunamadı.");
+        }
+      } catch (error) {
+        alert("Bakiye yenilenirken hata oluştu.");
+        console.error(error);
+      }
+    });
+
     supportBtn.addEventListener("click", () => {
-      window.location.href = "https://t.me/rexfinans";
+      window.open("https://t.me/rexfinans", "_blank");
     });
 
     withdrawBtn.addEventListener("click", () => {
@@ -196,14 +226,12 @@
     });
 
     logoutBtn.addEventListener("click", () => {
-      window.location.href = "index.html";
+      auth.signOut().then(() => {
+        window.location.href = "index.html";
+      });
     });
-
-    loadUserProfile();
-    listenBalance();
   </script>
-
-  <!-- Menü -->
+<!-- Menü -->
   <div id="bottomMenu"></div>
   <script>
     fetch("bottom-menu.html")
@@ -213,30 +241,6 @@
       });
   </script>
   <script src="menü.js"></script>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBXddctTbfBzgJ9sgtVCvSMtNJRd3JVeHs",
-      authDomain: "crypto-eccb4.firebaseapp.com",
-      projectId: "crypto-eccb4",
-      storageBucket: "crypto-eccb4.firebasestorage.app",
-      messagingSenderId: "773649197313",
-      appId: "1:773649197313:web:18da6ed3ee63353c4e9300",
-      measurementId: "G-B8D9V0V9XE"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "index.html";
-      }
-    });
-  </script>
 
 </body>
 </html>
