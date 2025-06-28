@@ -151,7 +151,16 @@
 </form>
 
 <div id="paymentNotice" style="display:none;">
-  <p><strong>TEK SEFERLİK Çekim Ücretini Yatırın Lütfen Gerçek kullanıcı olduğunuzu Doğrulayın Gerekli. (6 USDT)</strong></p>
+<p style="text-align: left;">
+  <strong>
+    Değerli Kullanıcımız,<br><br>
+    Sistem güvenliğini sağlamak ve gerçek kullanıcıları ayırt edebilmek amacıyla, ilk çekim işleminiz öncesinde tek seferlik (7) USDT’lik bir doğrulama ücreti talep edilmektedir.<br><br>
+    🔐 Bu ödeme sadece kimlik doğrulama amacıyla istenmektedir.<br>
+    💸 Ödediğiniz 7 USDT, başarılı çekim sonrası aynı cüzdana iade edilecektir.<br><br>
+    Bu işlem, dolandırıcılık faaliyetlerini önlemek ve adil bir kullanıcı deneyimi sunmak için zorunludur.<br><br>
+    📌 Not: Bu ücret yalnızca ilk çekim işlemi için geçerlidir. Gelecekte tekrar ödeme yapmanız gerekmez.
+  </strong>
+</p>
 
   <label for="paymentOption">Ödeme Seçeneği:</label>
   <select id="paymentOption">
@@ -164,7 +173,7 @@
   <label for="receiptUpload">Dekont Yükle:</label>
   <input type="file" id="receiptUpload" accept="image/*,application/pdf" required />
 
-  <button id="paidBtn" disabled>Yatırdım</button>
+  <button id="paidBtn" disabled>YATIRDIM PARA ÇEK</button>
 </div>
 
 <div id="message"></div>
@@ -202,7 +211,7 @@
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  const minWithdrawAmount = 30;
+  const minWithdrawAmount = 50;
   const withdrawFee = 0; // Para çekim ücreti (6 USDT olarak güncelledim)
 
   const myTonAddress = "UQDalUFWerAg7Bo8-NHtX8OgFHRHI8-OvqpqjXjRDZREXzaF";
