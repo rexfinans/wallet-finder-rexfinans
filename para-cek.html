@@ -184,7 +184,7 @@
     <tr>
       <th>Miktar (USDT)</th>
       <th>Durum</th>
-      <th>Red Sebebi</th>
+      <th>İleti</th>
       <th>Talep Tarihi</th>
     </tr>
   </thead>
@@ -310,19 +310,52 @@
     }
   });
 
-  // Ödeme detayları güncelleme
-  function updatePaymentDetails() {
-    if (paymentOption.value === "tonAddress") {
-      paymentDetails.innerHTML = `<p><strong>TON Adresi:</strong> ${myTonAddress}</p>`;
-    } else if (paymentOption.value === "ibanInfo") {
-      paymentDetails.innerHTML = `
-        <p><strong>IBAN:</strong> ${myIbanInfo.iban}</p>
-        <p><strong>Alıcı:</strong> ${myIbanInfo.alici}</p>
-        <p><strong>Açıklama:</strong> ${myIbanInfo.aciklama}</p>
-      `;
-    }
+function updatePaymentDetails() {
+  if (paymentOption.value === "tonAddress") {
+    paymentDetails.innerHTML = `
+      <p><strong>TON Adresi:</strong> <span id="tonText">${myTonAddress}</span>
+        <button onclick="copyToClipboard('tonText')">Kopyala</button>
+      </p>
+    `;
+  } else if (paymentOption.value === "ibanInfo") {
+    paymentDetails.innerHTML = `
+      <p><strong>IBAN:</strong> <span id="ibanText">${myIbanInfo.iban}</span>
+        <button onclick="copyToClipboard('ibanText')">Kopyala</button>
+      </p>
+      <p><strong>Alıcı:</strong> <span id="aliciText">${myIbanInfo.alici}</span>
+        <button onclick="copyToClipboard('aliciText')">Kopyala</button>
+      </p>
+      <label for="aciklamaInput">Açıklama: <span style="color:red;">(zorunlu)</span></label>
+      <input type="text" id="aciklamaInput" value="${myIbanInfo.aciklama}" readonly />
+      <button onclick="copyToClipboard('aciklamaInput')">Kopyala</button>
+    `;
   }
-  paymentOption.addEventListener("change", updatePaymentDetails);
+}
+function updatePaymentDetails() {
+  if (paymentOption.value === "tonAddress") {
+    paymentDetails.innerHTML = `
+      <p><strong>TON Adresi:</strong> <span id="tonText">${myTonAddress}</span>
+        <button class="copy-btn" onclick="copyToClipboard('tonText')">Kopyala</button>
+      </p>
+    `;
+  } else if (paymentOption.value === "ibanInfo") {
+    paymentDetails.innerHTML = `
+      <p><strong>IBAN:</strong> <span id="ibanText">${myIbanInfo.iban}</span>
+        <button class="copy-btn" onclick="copyToClipboard('ibanText')">Kopyala</button>
+      </p>
+      <p><strong>Alıcı:</strong> <span id="aliciText">${myIbanInfo.alici}</span>
+        <button class="copy-btn" onclick="copyToClipboard('aliciText')">Kopyala</button>
+      </p>
+      <label for="aciklamaInput" style="display:block; margin-top:10px;">
+        Açıklama: <span style="color:red;">(zorunlu)</span>
+      </label>
+      <input type="text" id="aciklamaInput" value="${myIbanInfo.aciklama}" readonly style="border:none; background:none; font-size: 1rem; padding: 0; margin-top: 4px; width: auto; display: inline-block;" />
+      <button class="copy-btn" onclick="copyToClipboard('aciklamaInput')">Kopyala</button>
+    `;
+  }
+}
+
+   paymentOption.addEventListener("change", updatePaymentDetails);
 
   // Para Çek butonu tıklama
   withdrawBtn.addEventListener("click", () => {
@@ -499,7 +532,7 @@
           <tr>
             <td>${w.amount.toFixed(4)}</td>
             <td>${status}</td>
-            <td>${w.rejectionReason ? w.rejectionReason : "-"}</td>
+            <td>${w.reason ? w.reason : "-"}</td>
             <td>${createdAt}</td>
           </tr>
         `;
@@ -509,6 +542,22 @@
       console.error(err);
     }
   }
+function copyToClipboard(elementId) {
+  const element = document.getElementById(elementId);
+  let text = "";
+
+  if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+    text = element.value;
+  } else {
+    text = element.innerText || element.textContent;
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Kopyalandı: " + text);
+  }).catch(() => {
+    alert("Kopyalama işlemi başarısız oldu!");
+  });
+}
 
 </script>
 <!-- Menü -->
