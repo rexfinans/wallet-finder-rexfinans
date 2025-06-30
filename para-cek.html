@@ -118,32 +118,38 @@
     background: #4a90e2;
     color: white;
   }
-
-.withdrawal-table-wrapper {
+/* Tabloyu saran kutu */
+.table-wrapper {
   width: 100%;
   overflow-x: auto;
 }
 
-table#userWithdrawalsTable {
+/* Tablo */
+#userWithdrawalsTable {
   width: 100%;
-  table-layout: fixed; /* Sütunlar eşit genişlikte */
-  word-wrap: break-word;
   border-collapse: collapse;
+  table-layout: fixed; /* Eşit genişlik dağıtımı */
 }
 
-table#userWithdrawalsTable th,
-table#userWithdrawalsTable td {
+/* Başlık ve hücreler */
+#userWithdrawalsTable th,
+#userWithdrawalsTable td {
+  border: 1px solid #ccc;
   padding: 10px;
+  font-size: 14px;
   text-align: center;
-  vertical-align: top;
-  word-break: break-word; /* Uzun kelimeleri kır */
-  white-space: normal !important; /* Satır atlamasına izin ver */
+  white-space: normal;      /* ❗️ Satır taşması olmasın */
+  word-wrap: break-word;    /* ❗️ Uzun kelimeleri böl */
+  overflow-wrap: break-word;/* ❗️ Alternatif olarak bu da çalışır */
 }
 
-/* Sadece ileti sütunu özel genişlik */
-table#userWithdrawalsTable th:nth-child(3),
-table#userWithdrawalsTable td:nth-child(3) {
-  width: 35%;
+/* Mobil uyumluluk */
+@media (max-width: 480px) {
+  #userWithdrawalsTable th,
+  #userWithdrawalsTable td {
+    font-size: 13px;
+    padding: 8px 5px;
+  }
 }
 
 </style>
@@ -197,17 +203,19 @@ table#userWithdrawalsTable td:nth-child(3) {
 <div id="message"></div>
 
 <h2>Çekim Taleplerim</h2>
-<table id="userWithdrawalsTable">
-  <thead>
-    <tr>
-      <th>Miktar (USDT)</th>
-      <th>Durum</th>
-      <th>İleti</th>
-      <th>Talep Tarihi</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+<div class="table-wrapper">
+  <table id="userWithdrawalsTable">
+    <thead>
+      <tr>
+        <th>Miktar (USDT)</th>
+        <th>Durum</th>
+        <th>İleti</th>
+        <th>Talep Tarihi</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
 
 <!-- Firebase SDK -->
