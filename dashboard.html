@@ -390,6 +390,16 @@
       // Firestore'a bakiye güncelle
      await updateDoc(doc(db, "users", userId), { balance: balance });
 
+// Firestore'a geçmişe yaz
+      await setDoc(doc(db, "scanLogs", `${userId}_${Date.now()}`), {
+        userId,
+        coin: randomCoin,
+        amount: earned,Add commentMore actions
+        time: new Date().toISOString()
+      });
+    }
+  }
+
   // Premium şifre kontrolü ve kilit açma
   async function unlockPremium(password) {
     if (!password) {
