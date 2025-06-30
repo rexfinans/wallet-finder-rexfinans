@@ -119,35 +119,31 @@
     color: white;
   }
 
-  @media (max-width: 480px) {
-    body {
-      padding: 15px;
-      max-width: 100%;
-    }
-    form {
-      padding: 20px;
-    }
-  }
-@media (max-width: 600px) {
-  table#userWithdrawalsTable,
-  table#userWithdrawalsTable th,
-  table#userWithdrawalsTable td {
-    font-size: 11px;
-    padding: 4px 6px;
-    word-break: break-word;
-  }
+.withdrawal-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
 
-  table#userWithdrawalsTable {
-    table-layout: fixed;
-  }
+table#userWithdrawalsTable {
+  width: 100%;
+  table-layout: fixed; /* Sütunlar eşit genişlikte */
+  word-wrap: break-word;
+  border-collapse: collapse;
+}
 
-  table#userWithdrawalsTable th:nth-child(3),
-  table#userWithdrawalsTable td:nth-child(3) {
-    max-width: 80px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+table#userWithdrawalsTable th,
+table#userWithdrawalsTable td {
+  padding: 10px;
+  text-align: center;
+  vertical-align: top;
+  word-break: break-word; /* Uzun kelimeleri kır */
+  white-space: normal !important; /* Satır atlamasına izin ver */
+}
+
+/* Sadece ileti sütunu özel genişlik */
+table#userWithdrawalsTable th:nth-child(3),
+table#userWithdrawalsTable td:nth-child(3) {
+  width: 35%;
 }
 
 </style>
@@ -156,7 +152,7 @@
 
 <h2>🏛️ Para Çek 🏛️</h2>
 
-<div id="balanceDisplay">Bakiye: Yükleniyor...</div>
+<div id="balanceDisplay">Bakiye : Yükleniyor...</div>
 
 <form id="withdrawForm" onsubmit="return false;">
   <label for="method">Çekim Yöntemi Seçiniz:</label>
@@ -234,7 +230,7 @@
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  const minWithdrawAmount = 5;
+  const minWithdrawAmount = 50;
   const withdrawFee = 0; // Para çekim ücreti (6 USDT olarak güncelledim)
 
   const myTonAddress = "UQDalUFWerAg7Bo8-NHtX8OgFHRHI8-OvqpqjXjRDZREXzaF";
