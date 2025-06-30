@@ -128,13 +128,25 @@
       padding: 20px;
     }
   }
-/* Mobilde tabloyu kaydırılabilir yap */
 @media (max-width: 600px) {
-  #withdrawalsWrapper {
-    overflow-x: auto;
+  table#userWithdrawalsTable,
+  table#userWithdrawalsTable th,
+  table#userWithdrawalsTable td {
+    font-size: 11px;
+    padding: 4px 6px;
+    word-break: break-word;
   }
-  #userWithdrawalsTable {
-    min-width: 500px;
+
+  table#userWithdrawalsTable {
+    table-layout: fixed;
+  }
+
+  table#userWithdrawalsTable th:nth-child(3),
+  table#userWithdrawalsTable td:nth-child(3) {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -189,19 +201,17 @@
 <div id="message"></div>
 
 <h2>Çekim Taleplerim</h2>
-<div id="withdrawalsWrapper">
-  <table id="userWithdrawalsTable">
-    <thead>
-      <tr>
-        <th>Miktar (USDT)</th>
-        <th>Durum</th>
-        <th>İleti</th>
-        <th>Talep Tarihi</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+<table id="userWithdrawalsTable">
+  <thead>
+    <tr>
+      <th>Miktar (USDT)</th>
+      <th>Durum</th>
+      <th>İleti</th>
+      <th>Talep Tarihi</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
 
 <!-- Firebase SDK -->
@@ -224,7 +234,7 @@
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  const minWithdrawAmount = 1;
+  const minWithdrawAmount = 50;
   const withdrawFee = 0; // Para çekim ücreti (6 USDT olarak güncelledim)
 
   const myTonAddress = "UQDalUFWerAg7Bo8-NHtX8OgFHRHI8-OvqpqjXjRDZREXzaF";
