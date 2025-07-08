@@ -1,73 +1,106 @@
+<!-- Menü -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 <style>
-  .bottom-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #181a29;
-    display: flex;
-    justify-content: space-around;
-    padding: 6px 0; /* Daha az padding */
-    border-top: 1px solid #333;
-    z-index: 1000;
-  }
-
-  .menu-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #ccc;
-    text-decoration: none;
-    font-size: 11px; /* Küçük font */
-    transition: 0.3s;
-  }
-
-  .menu-item i {
-    font-size: 18px; /* Biraz daha küçük icon */
-    background: #292c3e;
-    padding: 8px; /* Daha az padding */
-    border-radius: 50%;
-    margin-bottom: 3px;
-    transition: 0.3s;
-  }
-
-  .menu-item:hover,
-  .menu-item.active {
-    color: #00c6ff;
-  }
-
-  .menu-item:hover i,
-  .menu-item.active i {
-    background: #00c6ff;
-    color: #fff;
-  }
-
-  /* İçerik menünün üstüne gelmesin diye alt boşluk azaltıldı */
   body {
-    padding-bottom: 60px; /* Menü yüksekliği kadar boşluk */
+    margin: 0;
+    padding-top: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #12141f;
+    color: #eee;
+  }
+  .top-floating-menu {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #22263b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    height: 60px;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    z-index: 9999;
+    animation: fadeInDown 0.5s ease forwards;
+  }
+  .top-floating-menu a {
+    color: #aaa;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+  .top-floating-menu a i {
+    font-size: 22px;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+  }
+  .top-floating-menu a:hover,
+  .top-floating-menu a.active {
+    background: #00c6ff;
+    color: #12141f;
+    box-shadow: 0 0 10px #00c6ff;
+  }
+  .top-floating-menu a:hover i,
+  .top-floating-menu a.active i {
+    transform: rotate(20deg) scale(1.2);
+  }
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  @media (max-width: 600px) {
+    .top-floating-menu {
+      max-width: 100%;
+      padding: 0 10px;
+      height: 50px;
+      border-radius: 0;
+    }
+    .top-floating-menu a {
+      padding: 8px 12px;
+      font-size: 14px;
+      margin: 0 5px;
+    }
+    .top-floating-menu a i {
+      font-size: 18px;
+      margin-right: 5px;
+    }
   }
 </style>
 
-<div class="bottom-menu">
-  <a href="dashboard.html" class="menu-item" id="menu-home">
-    <i class="bi bi-house-door-fill"></i>
-    Ana Sayfa
-  </a>
-  <a href="paketler.html" class="menu-item" id="menu-paketler">
-    <i class="bi bi-box-seam"></i>
-    Paketler
-  </a>
-  <a href="para-cek.html" class="menu-item" id="menu-para">
-    <i class="bi bi-cash-stack"></i>
-    Para Çek
-  </a>
-  <a href="davet-et.html" class="menu-item" id="menu-davet">
-    <i class="bi bi-people-fill"></i>
-    Davet Et
-  </a>
-  <a href="profilim.html" class="menu-item" id="menu-profil">
-    <i class="bi bi-person-circle"></i>
-    Profilim
-  </a>
+<div class="top-floating-menu" id="menu">
+  <a href="dashboard.html"><i class="bi bi-house-door-fill"></i>Ana Sayfa</a>
+  <a href="paketler.html"><i class="bi bi-box-seam"></i>Paketler</a>
+  <a href="para-cek.html"><i class="bi bi-cash-stack"></i>Para Çek</a>
+  <a href="davet-et.html"><i class="bi bi-people-fill"></i>Davet Et</a>
+  <a href="profilim.html"><i class="bi bi-person-circle"></i>Profilim</a>
 </div>
+
+<script>
+  // Sayfanın tam yolunu al
+  const currentPath = window.location.pathname.split('/').pop();
+  // Menü içindeki tüm linkleri seç
+  const menuLinks = document.querySelectorAll('#menu a');
+
+  menuLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    // Eğer href ile şu anki path eşleşirse
+    if (href === currentPath || (href === 'dashboard.html' && currentPath === '')) {
+      link.classList.add('active');
+    }
+  });
+</script>
