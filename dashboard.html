@@ -235,93 +235,78 @@
   </style>
 </head>
 <body>
-<!-- Duyuru Bandı -->
+<!-- DUYURU BANDI -->
 <div id="duyuru-bandi" style="
-  position: fixed; top: 0; left: 0; right: 0;
-  height: 32px; line-height: 32px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  color: #ffffff; font-weight: 700; font-size: 15px;
-  padding: 0 20px;
-  white-space: nowrap; overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-  border-radius: 0 0 8px 8px;
-  z-index: 99999;
-  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #4b6cb7, #182848);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  z-index: 9999;
 ">
-  <span id="duyuru-text" style="display: inline-block; padding-left: 100%;"></span>
+  <div id="duyuru-text" style="display: inline-block; padding-left: 100%;">
+    📢 Duyuru: 2x Tarama Yapan Kullanıcılar Min. 20 Davet Getirmek Zorundadır. Aksi Halde Bakiyeniz Kaydedilmez. Yeni çekim sistemi aktif! Minimum çekim tutarı 40 USDT. Detaylar için Para Çek Menüsüne Git!
+  </div>
 </div>
 
-<!-- İyi Dilek Mesajı -->
-<div id="iyimesaj" style="
-  display: none;
-  position: fixed; top: 0; left: 0; right: 0;
-  height: 32px; line-height: 32px;
-  background: #28a745;
-  color: #fff;
-  font-weight: 700; font-size: 15px;
-  padding: 0 20px; text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-  border-radius: 0 0 8px 8px;
-  z-index: 99999;
-  opacity: 1;
-  transition: opacity 1s ease;
-  user-select: none;
-"></div>
-
 <style>
-  body { padding-top: 32px; margin: 0; }
+  body {
+    padding-top: 36px; /* Duyuru bandı yüksekliği kadar boşluk */
+  }
   @media (max-width: 600px) {
-    #duyuru-bandi, #iyimesaj {
-      font-size: 13px !important;
-      height: 28px !important;
-      line-height: 28px !important;
-      padding: 0 15px !important;
+    #duyuru-bandi {
+      font-size: 12px;
+      padding: 4px 8px;
     }
-    body { padding-top: 28px !important; }
   }
 </style>
 
 <script>
-  (function(){
-    const duyuruText = document.getElementById('duyuru-text');
-    const duyuruBand = document.getElementById('duyuru-bandi');
-    const iyiMesaj = document.getElementById('iyimesaj');
-    const text = "📢 Duyuru: 2x Tarama yapanlar minimum 20 davet getirmek zorundadır! Yeni çekim sistemi aktif. Minimum çekim tutarı 50 USDT.";
-    const speed = 2; // px per frame (60fps)
+  const duyuruText = document.getElementById('duyuru-text');
+  const duyuruBandi = document.getElementById('duyuru-bandi');
+  let repeatCount = 0;
 
-    duyuruText.textContent = text;
+  function animateSlide() {
+    duyuruText.style.transition = 'none';
+    duyuruText.style.transform = 'translateX(100%)';
 
-    let pos = window.innerWidth;
-    let count = 0;
-    const maxCount = 3;
+    setTimeout(() => {
+      duyuruText.style.transition = 'transform 25s linear';
+      duyuruText.style.transform = 'translateX(-100%)';
+    }, 50);
 
-    function animate() {
-      pos -= speed;
-      if (pos < -duyuruText.offsetWidth) {
-        pos = window.innerWidth;
-        count++;
-        if(count >= maxCount) {
-          duyuruBand.style.display = 'none';
-          iyiMesaj.textContent = 'İyi taramalar! Bizi takip etmeyi unutmayın.';
-          iyiMesaj.style.display = 'block';
-          setTimeout(() => { iyiMesaj.style.opacity = '0'; }, 3000);
+    setTimeout(() => {
+      repeatCount++;
+      if (repeatCount < 3) {
+        animateSlide();
+      } else {
+        duyuruText.style.transition = 'none';
+        duyuruText.style.transform = 'translateX(0)';
+        duyuruText.style.paddingLeft = '0';
+        duyuruText.textContent = "🎉 Bol kazançlar! Teşekkürler! 🙏";
+
+        setTimeout(() => {
+          duyuruBandi.style.transition = 'opacity 1.5s ease';
+          duyuruBandi.style.opacity = '0';
+
           setTimeout(() => {
-            iyiMesaj.style.display = 'none';
-            iyiMesaj.style.opacity = '1';
-            document.body.style.paddingTop = '0';
-          }, 4500);
-          return;
-        }
+            duyuruBandi.style.display = 'none';
+          }, 1500);
+        }, 3000);
       }
-      duyuruText.style.transform = `translateX(${pos}px)`;
-      requestAnimationFrame(animate);
-    }
+    }, 25000);
+  }
 
-    animate();
-  })();
+  animateSlide();
 </script>
+
 
 <header>
   <h1 class="blinking-title">wallet Finder REX🚀</h1>
