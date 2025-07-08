@@ -235,6 +235,93 @@
   </style>
 </head>
 <body>
+<!-- Duyuru Bandı -->
+<div id="duyuru-bandi" style="
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 32px; line-height: 32px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  color: #ffffff; font-weight: 700; font-size: 15px;
+  padding: 0 20px;
+  white-space: nowrap; overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  border-radius: 0 0 8px 8px;
+  z-index: 99999;
+  user-select: none;
+">
+  <span id="duyuru-text" style="display: inline-block; padding-left: 100%;"></span>
+</div>
+
+<!-- İyi Dilek Mesajı -->
+<div id="iyimesaj" style="
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 32px; line-height: 32px;
+  background: #28a745;
+  color: #fff;
+  font-weight: 700; font-size: 15px;
+  padding: 0 20px; text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  border-radius: 0 0 8px 8px;
+  z-index: 99999;
+  opacity: 1;
+  transition: opacity 1s ease;
+  user-select: none;
+"></div>
+
+<style>
+  body { padding-top: 32px; margin: 0; }
+  @media (max-width: 600px) {
+    #duyuru-bandi, #iyimesaj {
+      font-size: 13px !important;
+      height: 28px !important;
+      line-height: 28px !important;
+      padding: 0 15px !important;
+    }
+    body { padding-top: 28px !important; }
+  }
+</style>
+
+<script>
+  (function(){
+    const duyuruText = document.getElementById('duyuru-text');
+    const duyuruBand = document.getElementById('duyuru-bandi');
+    const iyiMesaj = document.getElementById('iyimesaj');
+    const text = "📢 Duyuru: 2x Tarama yapanlar minimum 20 davet getirmek zorundadır! Yeni çekim sistemi aktif. Minimum çekim tutarı 50 USDT.";
+    const speed = 2; // px per frame (60fps)
+
+    duyuruText.textContent = text;
+
+    let pos = window.innerWidth;
+    let count = 0;
+    const maxCount = 3;
+
+    function animate() {
+      pos -= speed;
+      if (pos < -duyuruText.offsetWidth) {
+        pos = window.innerWidth;
+        count++;
+        if(count >= maxCount) {
+          duyuruBand.style.display = 'none';
+          iyiMesaj.textContent = 'İyi taramalar! Bizi takip etmeyi unutmayın.';
+          iyiMesaj.style.display = 'block';
+          setTimeout(() => { iyiMesaj.style.opacity = '0'; }, 3000);
+          setTimeout(() => {
+            iyiMesaj.style.display = 'none';
+            iyiMesaj.style.opacity = '1';
+            document.body.style.paddingTop = '0';
+          }, 4500);
+          return;
+        }
+      }
+      duyuruText.style.transform = `translateX(${pos}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
+</script>
 
 <header>
   <h1 class="blinking-title">wallet Finder REX🚀</h1>
@@ -553,6 +640,161 @@ if (userSnap.exists()) {
       window.location.href = "index.html";
     }
   });
+</script>
+<!-- Destek Butonu -->
+<a href="https://t.me/parakazanrex" target="_blank"
+   style="position: fixed; bottom: 70px; right: 20px;
+          width: 50px; height: 50px;
+          background: #0088cc; color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          text-decoration: none;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          z-index: 9999;
+          opacity: 0.9;
+          transition: background 0.3s, opacity 0.3s;">
+  📩
+</a>
+
+<style>
+  a:hover {
+    background: #005f99;
+    opacity: 1;
+  }
+</style>
+<style>
+  #crypto-widget {
+    max-width: 360px;
+    margin: 20px auto;
+    background: #1e1e2f;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+  #crypto-widget h2 {
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .coin-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    font-size: 1.1em;
+  }
+  .coin-row:last-child {
+    border-bottom: none;
+  }
+  .coin-name {
+    font-weight: 600;
+  }
+  .coin-price {
+    font-weight: 700;
+  }
+  .price-up {
+    color: #4caf50;
+  }
+  .price-down {
+    color: #f44336;
+  }
+  .loading {
+    text-align: center;
+    color: #888;
+    padding: 10px 0;
+  }
+  #last-updated {
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 8px;
+    color: #999;
+  }
+  @media(max-width: 400px) {
+    #crypto-widget {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div id="crypto-widget">
+  <h2>Canlı Kripto Fiyatları</h2>
+  <div id="coins-container">
+    <div class="loading">Yükleniyor...</div>
+  </div>
+  <div id="last-updated"></div>
+</div>
+
+<script>
+  const coins = [
+    { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin' },
+    { id: 'ethereum', symbol: 'ETH', name: 'Ethereum' },
+    { id: 'binancecoin', symbol: 'BNB', name: 'Binance Coin' },
+    { id: 'ripple', symbol: 'XRP', name: 'Ripple' },
+    { id: 'cardano', symbol: 'ADA', name: 'Cardano' }
+  ];
+
+  async function fetchPrices() {
+    const container = document.getElementById('coins-container');
+    const updatedDiv = document.getElementById('last-updated');
+
+    try {
+      const ids = coins.map(c => c.id).join(',');
+      const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+      const data = await res.json();
+
+      container.innerHTML = ''; // Temizle
+
+      coins.forEach(coin => {
+        const price = data[coin.id].usd;
+        const change = data[coin.id].usd_24h_change;
+
+        const row = document.createElement('div');
+        row.classList.add('coin-row');
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'coin-name';
+        nameDiv.textContent = `${coin.symbol} - ${coin.name}`;
+
+        const priceDiv = document.createElement('div');
+        priceDiv.className = 'coin-price';
+        priceDiv.textContent = `$${price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+        // Araya boşluk koyduk
+        priceDiv.textContent += ' ';
+
+        if (change >= 0) {
+          priceDiv.classList.add('price-up');
+          priceDiv.classList.remove('price-down');
+          priceDiv.textContent += `▲ ${change.toFixed(2)}%`;
+        } else {
+          priceDiv.classList.add('price-down');
+          priceDiv.classList.remove('price-up');
+          priceDiv.textContent += `▼ ${change.toFixed(2)}%`;
+        }
+
+        row.appendChild(nameDiv);
+        row.appendChild(priceDiv);
+        container.appendChild(row);
+      });
+
+      const now = new Date();
+      updatedDiv.textContent = `Son güncelleme: ${now.toLocaleTimeString()}`;
+    } catch (err) {
+      container.innerHTML = `<div class="loading">Fiyatlar alınırken hata oluştu.</div>`;
+      updatedDiv.textContent = '';
+      console.error(err);
+    }
+  }
+
+  fetchPrices();
+  setInterval(fetchPrices, 30000); // 30 saniyede bir yenile
 </script>
 
 </body>
