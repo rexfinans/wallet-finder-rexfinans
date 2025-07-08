@@ -1,152 +1,74 @@
-<!-- Üstte Hover Neon Menü -->
+<!-- bottom-menu.html -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-
 <style>
-  body {
-    margin: 0;
-    padding-top: 100px; /* Menü yüksekliği kadar üst boşluk */
-    background: #121212 url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Poppins', sans-serif;
-    color: #eee;
-  }
-
-  .top-floating-menu {
+  .bottom-menu {
     position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 900px;
-    background: rgba(13, 17, 23, 0.6); /* yarı saydam koyu arka plan */
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 30px rgba(0, 229, 255, 0.5);
-    border-radius: 15px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #181a29;
     display: flex;
     justify-content: space-around;
-    padding: 15px 0;
-    z-index: 10000;
-    user-select: none;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+    z-index: 1000;
   }
 
   .menu-item {
-    flex: 1;
-    color: #aaa;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccc;
     text-decoration: none;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    position: relative;
+    font-size: 12px;
+    transition: 0.3s;
   }
 
   .menu-item i {
-    font-size: 28px;
-    display: block;
-    margin: 0 auto 6px;
-    padding: 14px;
+    font-size: 20px;
+    background: #292c3e;
+    padding: 10px;
     border-radius: 50%;
-    background: linear-gradient(145deg, #222831, #151a23);
-    box-shadow:
-      0 0 7px #00e5ff66,
-      inset 0 0 15px #00e5ff88;
-    color: #aaa;
-    transition: all 0.4s ease;
+    margin-bottom: 5px;
+    transition: 0.3s;
   }
 
   .menu-item:hover,
   .menu-item.active {
-    color: #00e5ff;
+    color: #fff;
   }
 
   .menu-item:hover i,
   .menu-item.active i {
-    color: #00e5ff;
-    background: linear-gradient(145deg, #00e5ffcc, #00b0ffcc);
-    box-shadow:
-      0 0 25px #00e5ff,
-      0 0 45px #00e5ff,
-      inset 0 0 35px #00e5ff;
-    transform: scale(1.3) rotate(10deg);
-    animation: pulseGlow 2s infinite alternate;
+    background: #00c6ff;
+    color: #fff;
   }
 
-  .menu-item.active::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 4px;
-    border-radius: 20px;
-    background: #00e5ff;
-    box-shadow: 0 0 15px #00e5ffaa, 0 0 30px #00e5ffaa;
-    animation: pulseGlow 2s infinite alternate;
-  }
-
-  @keyframes pulseGlow {
-    0% {
-      box-shadow:
-        0 0 25px #00e5ff,
-        0 0 45px #00e5ff;
-    }
-    100% {
-      box-shadow:
-        0 0 8px #00e5ff,
-        0 0 20px #00e5ff;
-    }
-  }
-
-  .menu-item span {
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    user-select: none;
-  }
-
-  @media (max-width: 600px) {
-    .top-floating-menu {
-      width: 98%;
-      padding: 10px 0;
-    }
-    .menu-item i {
-      font-size: 22px;
-      padding: 11px;
-    }
-    .menu-item span {
-      font-size: 12px;
-    }
+  /* İçerik menünün üstüne gelmesin diye alt boşluk ekleniyor */
+  body {
+    padding-bottom: 100px; /* Menü yüksekliği kadar boşluk */
   }
 </style>
 
-<div class="top-floating-menu" role="navigation" aria-label="Üst Menü">
-  <a href="dashboard.html" class="menu-item" id="menu-home" aria-label="Ana Sayfa">
+<div class="bottom-menu">
+  <a href="dashboard.html" class="menu-item" id="menu-home">
     <i class="bi bi-house-door-fill"></i>
-    <span>Ana Sayfa</span>
+    Ana Sayfa
   </a>
-  <a href="paketler.html" class="menu-item" id="menu-paketler" aria-label="Paketler">
-    <i class="bi bi-gem"></i>
-    <span>Paketler</span>
+  <a href="paketler.html" class="menu-item" id="menu-paketler">
+    <i class="bi bi-box-seam"></i>
+    Paketler
   </a>
-  <a href="para-cek.html" class="menu-item" id="menu-para" aria-label="Para Çek">
+  <a href="para-cek.html" class="menu-item" id="menu-para">
     <i class="bi bi-cash-stack"></i>
-    <span>Para Çek</span>
+    Para Çek
   </a>
-  <a href="davet-et.html" class="menu-item" id="menu-davet" aria-label="Davet Et">
+  <a href="davet-et.html" class="menu-item" id="menu-davet">
     <i class="bi bi-people-fill"></i>
-    <span>Davet Et</span>
+    Davet Et
   </a>
-  <a href="profilim.html" class="menu-item" id="menu-profil" aria-label="Profilim">
+  <a href="profilim.html" class="menu-item" id="menu-profil">
     <i class="bi bi-person-circle"></i>
-    <span>Profilim</span>
+    Profilim
   </a>
 </div>
-
-<script>
-  const currentPage = window.location.pathname.split("/").pop() || "dashboard.html";
-  document.querySelectorAll(".top-floating-menu .menu-item").forEach(item => {
-    if (item.getAttribute("href") === currentPage) {
-      item.classList.add("active");
-    }
-  });
-</script>
