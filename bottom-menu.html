@@ -1,4 +1,3 @@
-<!-- bottom-menu.html -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 <style>
   .bottom-menu {
@@ -9,7 +8,7 @@
     background: #181a29;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 6px 0; /* Daha az padding */
     border-top: 1px solid #333;
     z-index: 1000;
   }
@@ -20,22 +19,22 @@
     align-items: center;
     color: #ccc;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 11px; /* Küçük font */
     transition: 0.3s;
   }
 
   .menu-item i {
-    font-size: 20px;
+    font-size: 18px; /* Biraz daha küçük icon */
     background: #292c3e;
-    padding: 10px;
+    padding: 8px; /* Daha az padding */
     border-radius: 50%;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     transition: 0.3s;
   }
 
   .menu-item:hover,
   .menu-item.active {
-    color: #fff;
+    color: #00c6ff;
   }
 
   .menu-item:hover i,
@@ -44,9 +43,9 @@
     color: #fff;
   }
 
-  /* İçerik menünün üstüne gelmesin diye alt boşluk ekleniyor */
+  /* İçerik menünün üstüne gelmesin diye alt boşluk azaltıldı */
   body {
-    padding-bottom: 100px; /* Menü yüksekliği kadar boşluk */
+    padding-bottom: 60px; /* Menü yüksekliği kadar boşluk */
   }
 </style>
 
