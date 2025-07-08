@@ -244,18 +244,59 @@
 body {
   font-family: 'Montserrat', sans-serif;
 }
+.header-wrapper {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.logo {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+  animation: blink 1.5s infinite;
+  word-break: break-word;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 8px;
+  color: #fff;
+}
+
+.subtitle {
+  color: #00e5ffcc;
+  font-size: 1rem;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Mobil uyum */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+}
+
   </style>
 </head>
 <body>
-<div class="logo">WALLET FINDER</div>
-<div class="title">RexFinans</div>
-<div class="subtitle" style="color:#00e5ffcc; font-size: 1rem; margin-bottom: 20px; text-align:center; font-weight: 500;">
-  Ücretsiz Kripto Kazanmanın En Kolay Yolu
+<div class="header-wrapper">
+  <div class="logo">WALLET FINDER</div>
+  <div class="title">RexFinans</div>
+  <div class="subtitle">Ücretsiz Kripto Kazanmanın En Kolay Yolu</div>
 </div>
-
-
-
-
   <div class="highlight-box">
     <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br />
       Gelişmiş tarama algoritmalarımızla yüzlerce blockchain ağında cüzdanları analiz ederek aktif bakiyeleri tespit ediyoruz. Size sadece çekmek kalıyor.
