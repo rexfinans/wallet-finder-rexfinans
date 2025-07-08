@@ -313,6 +313,245 @@ body {
   </style>
 </head>
 <body>
+<!-- Wallet Finder Yardım Asistanı (Mobil uyumlu, kapatma uyarılı) -->
+
+<div id="walletHelper" role="region" aria-label="Wallet Finder Yardım Asistanı">
+  <button id="helperToggle" aria-expanded="false" aria-controls="helperPanel" aria-label="Yardım Asistanını Aç/Kapat" tabindex="0">🧠</button>
+  <section id="helperPanel" role="dialog" aria-modal="true" aria-labelledby="helperTitle" tabindex="-1" hidden>
+    <header>
+      <h2 id="helperTitle">Asistan</h2>
+      <button id="helperClose" aria-label="Yardım Asistanını Kapat">✕</button>
+    </header>
+    <div id="helperContent" tabindex="0">
+      <div id="helperText" aria-live="polite"></div>
+      <nav aria-label="Hazır Sorular">
+        <button class="questionBtn" data-index="0">Sistem nasıl çalışıyor?</button>
+        <button class="questionBtn" data-index="1">Nasıl bakiye kazanırım?</button>
+        <button class="questionBtn" data-index="2">Premium ne işe yarar?</button>
+        <button class="questionBtn" data-index="3">Çekim limiti nedir?</button>
+        <button class="questionBtn" data-index="4">Cüzdan tarama nasıl yapılır?</button>
+        <button class="questionBtn" data-index="5">Wallet Finder nedir?</button>
+      </nav>
+    </div>
+  </section>
+</div>
+
+<style>
+  #walletHelper {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 10000;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  #helperToggle {
+    font-size: 34px;
+    background: linear-gradient(135deg, #004080, #00aaff);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00aaffcc;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: floatBounce 3s ease-in-out infinite;
+    transition: background 0.3s ease;
+  }
+  #helperToggle:hover,
+  #helperToggle:focus {
+    background: #007acc;
+    outline: none;
+  }
+  #helperPanel {
+    background: #f0faff;
+    width: 280px;
+    max-height: 380px;
+    border-radius: 14px;
+    box-shadow: 0 0 25px #00aaff88;
+    padding: 18px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-size: 0.95rem;
+    color: #003366;
+  }
+  #helperPanel[hidden] {
+    display: none;
+  }
+  #helperPanel header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  #helperPanel h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #004080;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  #helperClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #d93025;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: background 0.3s ease;
+    z-index: 10;
+  }
+  #helperClose:hover,
+  #helperClose:focus {
+    background: #a22a1f;
+    outline: none;
+  }
+  #helperContent {
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #helperText {
+    min-height: 70px;
+    font-weight: 600;
+    white-space: pre-wrap;
+    margin-bottom: 14px;
+  }
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .questionBtn {
+    background: #007acc;
+    border: none;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  .questionBtn:hover,
+  .questionBtn:focus {
+    background: #005b99;
+    outline: none;
+  }
+  @keyframes floatBounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+  @media (max-width: 480px) {
+    #helperPanel {
+      width: 90vw;
+      max-height: 60vh;
+      font-size: 0.9rem;
+      padding: 14px 16px 16px 16px;
+    }
+    .questionBtn {
+      font-size: 0.85rem;
+      padding: 9px 12px;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const toggleBtn = document.getElementById('helperToggle');
+    const panel = document.getElementById('helperPanel');
+    const closeBtn = document.getElementById('helperClose');
+    const helperText = document.getElementById('helperText');
+    const questions = document.querySelectorAll('.questionBtn');
+
+    const answers = [
+      "Wallet Finder blockchain cüzdanlarını hızlı ve güvenli şekilde tarar, bakiyeleri ve işlemleri analiz eder. Kaybolan kriptolarınızı bulabilirsiniz.",
+      "Kayıp cüzdanlar ve unutulan varlıklar taranır. Günlük görevleri tamamlayarak ve referans paylaşarak bakiye kazanabilirsiniz.",
+      "Premium üyeler hızlı tarama, daha fazla sonuç ve özel özelliklerden faydalanır.",
+      "Çekim limiti minimum 40 USDT'dir. 40 USDT ve üzerindeki bakiye için çekim talebi oluşturabilirsiniz.",
+      "Cüzdan tarama; blockchain ağlarında cüzdan bakiyelerini ve işlem geçmişlerini otomatik kontrol etmektir.",
+      "Wallet Finder, kayıp kripto varlıklarınızı bulmanızı sağlayan gelişmiş bir blockchain tarama platformudur."
+    ];
+
+    let typingInterval = null;
+
+    let closeClicks = 0;
+
+    function typeText(text) {
+      clearInterval(typingInterval);
+      helperText.textContent = "";
+      let i = 0;
+      typingInterval = setInterval(() => {
+        if (i < text.length) {
+          helperText.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, 30);
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = !panel.hasAttribute('hidden');
+      if (isOpen) {
+        panel.setAttribute('hidden', '');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        helperText.textContent = "";
+        closeClicks = 0;
+      } else {
+        panel.removeAttribute('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        typeText("Merhaba! Sorularını seç veya bana yazabilirsin.");
+        panel.focus();
+        closeClicks = 0;
+      }
+    });
+
+    closeBtn.addEventListener('click', () => {
+      closeClicks++;
+      if (closeClicks === 1) {
+        typeText("Beni kapatma, sana bir şey söyleyeceğim!");
+      } else if (closeClicks === 2) {
+        typeText("Neden kapatıyorsun ki? Buradayım!");
+      } else {
+        panel.setAttribute('hidden', '');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        helperText.textContent = "";
+        closeClicks = 0;
+        toggleBtn.focus();
+      }
+    });
+
+    questions.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        typeText(answers[idx]);
+      });
+    });
+  })();
+</script>
+
 <div class="header-wrapper">
   <div class="logo">WALLET FINDER</div>
   <div class="title">RexFinans</div>
