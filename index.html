@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -240,11 +241,17 @@
       color: white;
       box-shadow: 0 0 8px #00bcd4;
     }
+body {
+  font-family: 'Montserrat', sans-serif;
+}
   </style>
 </head>
 <body>
-   <div class="logo">REX FİNANS</div>
-  <div class="title">WALLET FINDER</div>
+  <div class="logo">WALLET FINDER</div>
+  <div class="title">RexFinans</div>
+<div class="subtitle" style="color:#00e5ffcc; font-size: 1rem; margin-bottom: 20px; text-align:center; font-weight: 500;">
+  Ücretsiz Kripto Kazanmanın En Kolay Yolu
+</div>
 
   <div class="highlight-box">
     <p><strong>Unutulmuş Kayıp Kripto Cüzdanlarını Bulun!</strong><br />
@@ -282,6 +289,81 @@
       <li>🛡️ Gizlilik ve güvenlik odaklı sistem altyapısı</li>
     </ul>
   </div>
+<style>
+  .info-table {
+    margin: 30px auto;
+    max-width: 600px;
+    width: 90%;
+    border-collapse: collapse;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border-radius: 15px;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 198, 255, 0.5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  .info-table caption {
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 15px 0;
+    text-shadow: 0 0 10px #00e5ff;
+  }
+
+  .info-table th,
+  .info-table td {
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .info-table th {
+    background: rgba(255, 255, 255, 0.15);
+    font-weight: 700;
+  }
+
+  .info-table td strong {
+    color: #ffff66;
+    font-weight: 700;
+    text-shadow: 0 0 7px #ffff66;
+  }
+
+  /* Son satırın alt çizgisini kaldır */
+  .info-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  @media (max-width: 480px) {
+    .info-table caption {
+      font-size: 1.4rem;
+    }
+    .info-table th,
+    .info-table td {
+      padding: 10px 12px;
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<table class="info-table" aria-label="Canlı İstatistikler">
+  <caption>🚀 Canlı İstatistikler</caption>
+  <tbody>
+    <tr>
+      <th>📊 Toplam Tarama</th>
+      <td><strong>12,345</strong></td>
+    </tr>
+    <tr>
+      <th>👥 Aktif Kullanıcı</th>
+      <td><strong>1,234</strong></td>
+    </tr>
+    <tr>
+      <th>💰 Toplam Ödeme</th>
+      <td><strong>123,456 USDT</strong></td>
+    </tr>
+  </tbody>
+</table>
 
   <button class="telegram-btn" onclick="window.open('https://t.me/rexfinans', '_blank')">📲 Telegram Destek</button>
 
