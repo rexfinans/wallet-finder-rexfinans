@@ -321,12 +321,11 @@
 
 <div>
   <select id="speedSelect">
-    <option value="1" selected>2x (Ücretsiz)</option>
-    <option value="2">3x (Ücretsiz)</option>
-    <option value="3">4x (Ücretsiz)</option>
-    <option value="4">5x (Ücretsiz)</option>
+    <option value="2" selected>2x (Ücretsiz)</option>
+    <option value="3">3x (Ücretsiz)</option>
+    <option value="4">4x (Ücretsiz)</option>
+    <option value="5">5x (Ücretsiz)</option>
     <option value="locked-6">6x 🔒 (Premium)</option>
-    <option value="locked-7">7x 🔒 (Premium)</option>
     <option value="locked-10">10x 🔒 (Premium)</option>
     <option value="locked-20">20x 🔒 (Premium)</option>
     <option value="locked-30">30x 🔒 (Premium)</option>
@@ -338,43 +337,40 @@
 <script>
   const select = document.getElementById("speedSelect");
 
-  // Kullanıcı seçim yaptığında
   select.addEventListener("change", function () {
     const value = this.value;
 
     if (value.startsWith("locked")) {
-      alert("🔒 Bu hıza erişmek için premium şifre gerekiyor.");
+      alert("⚠️ Bu hız Premium kullanıcılar için! Lütfen şifre girin.");
       this.selectedIndex = 0; // Geri 2x'e döner
-    } else {
-      console.log("Seçilen hız:", value + "x");
     }
   });
 
-  // Premium şifre kontrolüyle kilitleri kaldır
+  // Şifre girildiğinde kilitli hızları açar
   function premiumSifreGir(sifre) {
-    const dogruSifre = "rex123"; // Şifren buraya
+    const dogruSifre = "rex123";
     if (sifre === dogruSifre) {
       for (let option of select.options) {
         if (option.value.startsWith("locked")) {
-          const yeniDeger = option.value.split("-")[1];
-          option.value = yeniDeger;
-          option.textContent = yeniDeger + "x (Premium Açık)";
+          const newVal = option.value.split("-")[1];
+          option.value = newVal;
+          option.textContent = newVal + "x (Premium Açık)";
         }
       }
-      alert("✅ Premium hızlar açıldı!");
+      alert("✅ Premium hızlar başarıyla açıldı!");
     } else {
-      alert("❌ Şifre yanlış!");
+      alert("❌ Şifre hatalı!");
     }
   }
 
-  // Örnek kullanım:
+  // Şifreyi test etmek için örnek:
   // premiumSifreGir("rex123");
 </script>
 
 <style>
   select option[value^="locked"] {
-    color: #999;
-    background-color: #f2f2f2;
+    color: gray;
+    background-color: #eee;
   }
 </style>
 
