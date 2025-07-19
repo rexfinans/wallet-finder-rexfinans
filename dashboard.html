@@ -320,26 +320,37 @@
 </div>
 
 
-<div>
+<h3>Tarama Hızı Seç</h3>
+
   <select id="speedSelect">
     <option value="1" selected>2x (Ücretsiz)</option>
-    <option value="2">3x</option>
-    <option value="3">4x</option>
-    <option value="4">5x</option>
-    <option value="5" disabled>6x 🔒</option>
-    <option value="6" disabled>7x 🔒</option>
-    <option value="7" disabled>8x 🔒</option>
-    <option value="8" disabled>9x 🔒</option>
-    <option value="9" disabled>10x 🔒</option>
-    <option value="10" disabled>15x 🔒</option>
-    <option value="11" disabled>20x 🔒</option>
-    <option value="12" disabled>25x 🔒</option>
-    <option value="13" disabled>30x 🔒</option>
-    <option value="14" disabled>40x 🔒</option>
-    <option value="15" disabled>50x 🔒</option>
+    <option value="2">3x (Ücretsiz)</option>
+    <option value="3">4x (Ücretsiz)</option>
+    <option value="4">5x (Ücretsiz)</option>
+    <option value="5" disabled>6x 🔒 (Premium)</option>
+    <option value="6" disabled>7x 🔒 (Premium)</option>
+    <option value="7" disabled>8x 🔒 (Premium)</option>
+    <option value="8" disabled>9x 🔒 (Premium)</option>
+    <option value="9" disabled>10x 🔒 (Premium)</option>
+    <option value="10" disabled>15x 🔒 (Premium)</option>
+    <option value="11" disabled>20x 🔒 (Premium)</option>
+    <option value="12" disabled>25x 🔒 (Premium)</option>
+    <option value="13" disabled>30x 🔒 (Premium)</option>
+    <option value="14" disabled>40x 🔒 (Premium)</option>
+    <option value="15" disabled>50x 🔒 (Premium)</option>
   </select>
-</div>
 
+  <!-- Premium aktif edici JS -->
+  <script>
+    function unlockPremiumSpeeds() {
+      const select = document.getElementById("speedSelect");
+      for (let option of select.options) {
+        if (parseInt(option.value) >= 5) {
+          option.disabled = false;
+          option.textContent = option.textContent.replace("🔒 ", "").replace(" (Premium)", "") + " (Premium Açık)";
+        }
+      }
+    }
 
 <div id="coinContainer"></div>
 
