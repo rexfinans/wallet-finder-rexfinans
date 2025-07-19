@@ -322,23 +322,45 @@
 
 <h3>Tarama Hızı Seç</h3>
 
-  <select id="speedSelect">
-    <option value="1" selected>2x (Ücretsiz)</option>
-    <option value="2">3x (Ücretsiz)</option>
-    <option value="3">4x (Ücretsiz)</option>
-    <option value="4">5x (Ücretsiz)</option>
-    <option value="5" disabled>6x 🔒 (Premium)</option>
-    <option value="6" disabled>7x 🔒 (Premium)</option>
-    <option value="7" disabled>8x 🔒 (Premium)</option>
-    <option value="8" disabled>9x 🔒 (Premium)</option>
-    <option value="9" disabled>10x 🔒 (Premium)</option>
-    <option value="10" disabled>15x 🔒 (Premium)</option>
-    <option value="11" disabled>20x 🔒 (Premium)</option>
-    <option value="12" disabled>25x 🔒 (Premium)</option>
-    <option value="13" disabled>30x 🔒 (Premium)</option>
-    <option value="14" disabled>40x 🔒 (Premium)</option>
-    <option value="15" disabled>50x 🔒 (Premium)</option>
-  </select>
+<select id="speedSelect">
+  <option value="1">2x (Ücretsiz)</option>
+  <option value="2">3x (Ücretsiz)</option>
+  <option value="3">4x (Ücretsiz)</option>
+  <option value="4">5x (Ücretsiz)</option>
+  <option value="locked-6">6x 🔒 (Premium)</option>
+  <option value="locked-7">7x 🔒 (Premium)</option>
+  <option value="locked-8">8x 🔒 (Premium)</option>
+  <option value="locked-9">9x 🔒 (Premium)</option>
+  <option value="locked-10">10x 🔒 (Premium)</option>
+  <option value="locked-15">15x 🔒 (Premium)</option>
+  <option value="locked-20">20x 🔒 (Premium)</option>
+  <option value="locked-25">25x 🔒 (Premium)</option>
+  <option value="locked-30">30x 🔒 (Premium)</option>
+  <option value="locked-40">40x 🔒 (Premium)</option>
+  <option value="locked-50">50x 🔒 (Premium)</option>
+</select>
+
+<script>
+  document.getElementById("speedSelect").addEventListener("change", function () {
+    const val = this.value;
+
+    if (val.startsWith("locked")) {
+      // Kullanıcı kilitli seçeneğe bastı → yönlendir
+      window.location.href = "paketler.html";
+    } else {
+      // Gerçek seçim yapıldı → burada hız ayarı vs. yapabilirsin
+      console.log("Seçilen hız:", val + "x");
+    }
+  });
+</script>
+
+<style>
+  select option[value^="locked"] {
+    color: #999;
+    background-color: #f2f2f2;
+  }
+</style>
+
 
 
 <div id="coinContainer"></div>
