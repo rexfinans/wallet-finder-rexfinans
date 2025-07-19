@@ -321,61 +321,59 @@
 
 
 <div>
+  <h3>Tarama Hızı Seç</h3>
   <select id="speedSelect">
-    <option value="1" selected>2x (Ücretsiz)</option>
-    <option value="2">3x (Ücretsiz)</option>
-    <option value="locked-6">6x 🔒 (Premium)</option>
-    <option value="locked-7">7x 🔒 (Premium)</option>
-    <option value="locked-10">10x 🔒 (Premium)</option>
-    <option value="locked-20">20x 🔒 (Premium)</option>
-    <option value="locked-30">30x 🔒 (Premium)</option>
-    <option value="locked-40">40x 🔒 (Premium)</option>
-    <option value="locked-50">50x 🔒 (Premium)</option>
+    <option value="2" selected>2x (Ücretsiz)</option>
+    <option value="3">3x (Ücretsiz)</option>
+    <option value="4">4x (Ücretsiz)</option>
+    <option value="5">5x (Ücretsiz)</option>
+
+    <!-- Premium seçenekler -->
+    <option value="6" class="premium" disabled>6x 🔒 (Premium)</option>
+    <option value="10" class="premium" disabled>10x 🔒 (Premium)</option>
+    <option value="20" class="premium" disabled>20x 🔒 (Premium)</option>
+    <option value="30" class="premium" disabled>30x 🔒 (Premium)</option>
+    <option value="40" class="premium" disabled>40x 🔒 (Premium)</option>
+    <option value="50" class="premium" disabled>50x 🔒 (Premium)</option>
   </select>
 </div>
 
 <script>
+  // Örnek: Premium şifre daha önce girildiyse localStorage'a kaydedilir
+  const premiumAcildi = localStorage.getItem("premium") === "true";
+
   const select = document.getElementById("speedSelect");
+  const premiumOptions = document.querySelectorAll("option.premium");
 
-  // Kullanıcı seçim yaptığında
-  select.addEventListener("change", function () {
-    const value = this.value;
+  if (premiumAcildi) {
+    // Select menüsünü aktif et
+    select.disabled = false;
 
-    if (value.startsWith("locked")) {
-      alert("🔒 Bu hıza erişmek için premium şifre gerekiyor.");
-      this.selectedIndex = 0; // Geri 2x'e döner
-    } else {
-      console.log("Seçilen hız:", value + "x");
-    }
-  });
+    // Tüm premium seçenekleri aktif hale getir
+    premiumOptions.forEach(opt => {
+      opt.disabled = false;
+      opt.textContent = `${opt.value}x (Premium Açık)`;
+    });
+  } else {
+    // Premium aktif değilse select menüsü sadece 5x'e kadar aktif
+    select.disabled = false;
 
-  // Premium şifre kontrolüyle kilitleri kaldır
-  function premiumSifreGir(sifre) {
-    const dogruSifre = "rex123"; // Şifren buraya
-    if (sifre === dogruSifre) {
-      for (let option of select.options) {
-        if (option.value.startsWith("locked")) {
-          const yeniDeger = option.value.split("-")[1];
-          option.value = yeniDeger;
-          option.textContent = yeniDeger + "x (Premium Açık)";
-        }
+    premiumOptions.forEach(opt => {
+      opt.disabled = true;
+      opt.textContent = `${opt.value}x 🔒 (Premium)`;
+    });
+
+    // Tıklanınca şifre isteyen yönlendirme
+    select.addEventListener("change", function () {
+      if (select.options[select.selectedIndex].classList.contains("premium")) {
+        alert("🔒 Bu hız sadece Premium kullanıcılar içindir. Premium satın almak için yönlendiriliyorsunuz.");
+        window.location.href = "paketler.html";
+        select.selectedIndex = 0; // İlk seçeneğe geri döner
       }
-      alert("✅ Premium hızlar açıldı!");
-    } else {
-      alert("❌ Şifre yanlış!");
-    }
+    });
   }
-
-  // Örnek kullanım:
-  // premiumSifreGir("rex123");
 </script>
 
-<style>
-  select option[value^="locked"] {
-    color: #999;
-    background-color: #f2f2f2;
-  }
-</style>
 
 
 <div id="coinContainer"></div>
