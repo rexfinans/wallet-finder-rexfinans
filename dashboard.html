@@ -340,17 +340,6 @@
     <option value="15" disabled>50x 🔒 (Premium)</option>
   </select>
 
-  <!-- Premium aktif edici JS -->
-  <script>
-    function unlockPremiumSpeeds() {
-      const select = document.getElementById("speedSelect");
-      for (let option of select.options) {
-        if (parseInt(option.value) >= 5) {
-          option.disabled = false;
-          option.textContent = option.textContent.replace("🔒 ", "").replace(" (Premium)", "") + " (Premium Açık)";
-        }
-      }
-    }
 
 <div id="coinContainer"></div>
 
